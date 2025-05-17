@@ -4,7 +4,7 @@ import React from 'react'
 import { motion } from 'framer-motion'
 // Layout
 import LayoutPages from '../layouts/LayoutPages'
-
+import CardFasilitas from '../components/CardFasilitas'
 // image
 import fileThumb from '../assets/icons/file_thumb.png'
 import thumbnailProfile from '../assets/thumbnails/thumbnail_profile.png'
@@ -33,12 +33,12 @@ const Profile = () => {
 
 const SectionThumbnail = () => {
     return (
-        <div className='w-full h-[45vh] bg-primary-blue flex flex-col justify-center items-start px-6 pt-12 relative overflow-hidden'>
+        <div className='w-full min-h-[45vh] bg-primary-blue flex flex-col justify-center items-start px-6 pt-[30%] pb-[10%] relative overflow-hidden'>
             <div className='flex flex-col justify-center items-start gap-3 z-10'>
                 <div className='w-full flex flex-col justify-start items-start'>
-                    <p className='text-2xl text-white font-semibold'>Pondok Pesantren</p>
-                    <p className='text-2xl text-white font-semibold'>Muhammadiyah Al-Amin</p>
-                    <p className='w-[80%] text-2xl text-primary-yellow font-semibold'>Seputih Banyak - Lampung Tengah</p>
+                    <p className='text-xl text-white font-semibold'>Pondok Pesantren</p>
+                    <p className='text-xl text-white font-semibold'>Muhammadiyah Al-Amin</p>
+                    <p className='w-[80%] text-xl text-primary-yellow font-semibold'>Seputih Banyak - Lampung Tengah</p>
                 </div>
                 <p className='w-[70%] text-xs text-white font-[300]'>
                     Pesantren ini berdiri sebagai salah satu upaya Muhammadiyah untuk
@@ -49,9 +49,9 @@ const SectionThumbnail = () => {
             <motion.div
                 animate={{ y: [0, 20, 0] }}
                 transition={{ duration: 4, repeat: Infinity, repeatType: 'reverse', ease: 'easeInOut' }}
-                className='absolute z-0 -right-20 top-44'
+                className='absolute z-0 -right-20 top-[35%]'
             >
-                <img src={fileThumb} alt="logo sipontren" className='w-[12rem]' />
+                <img src={fileThumb} alt="logo sipontren" className='w-[12rem] opacity-60' />
             </motion.div>
         </div>
     )
@@ -75,7 +75,7 @@ const SectionSejarah = () => {
 
 const SectionVisiMisi = () => {
     return (
-        <div className='w-full min-h-2.5h-[100vh] bg-primary-blue flex flex-col justify-start items-center py-12 px-6 gap-12'>
+        <div className='w-full min-h-[100vh] bg-primary-blue flex flex-col justify-start items-center py-12 px-6 gap-12'>
             <p className='text-3xl font-semibold text-white relative before:absolute before:w-full before:h-[3px] before:bg-primary-yellow before:-bottom-2 before:left-0'>Visi & Misi</p>
             <div className='w-full flex flex-col justify-start items-end gap-4'>
                 <p className='text-primary-blue py-3 px-14 bg-white text-xl font-semibold rounded-xl'>Visi</p>
@@ -95,15 +95,14 @@ const SectionVisiMisi = () => {
                     <li>Menyelengarakan pendidikan yang kreatif, komunikatif, Humanistik dan Menyenangkan.</li>
                 </ol>
             </div>
-
-            <div className='w-full h-[22rem] flex flex-col justify-end items-center rounded-4xl overflow-hidden'>
-                <div className='w-[85%] h-[17rem] flex flex-col justify-center items-center bg-primary-yellow rounded-4xl relative'>
+            <div className='w-full h-[18rem] flex flex-col justify-end items-center rounded-4xl overflow-hidden'>
+                <div className='w-[90%] h-[13rem] flex flex-col justify-center items-center bg-primary-yellow rounded-3xl relative'>
                     <motion.div
                         animate={{ y: [0, 20, 0] }}
                         transition={{ duration: 4, repeat: Infinity, repeatType: 'reverse', ease: 'easeInOut' }}
-                        className='absolute -top-20 w-[125%]'
+                        className='w-[120%] h-[100%]'
                     >
-                        <img src={thumbnailProfile} alt="logo sipontren" className='w-[100%]' />
+                        <img src={thumbnailProfile} alt="logo sipontren" className='w-[100%] absolute bottom-0' />
                     </motion.div>
                 </div>
             </div>
@@ -118,11 +117,11 @@ const SectionVisiMisi = () => {
 
 const SectionProgramUnggulan = () => {
     return (
-        <div className='w-full h-[50vh] bg-white flex flex-col justify-start items-start py-12 px-6 gap-10' style={{ backgroundImage: `url(${frameKonten})`, backgroundPosition: 'center', backgroundSize: 'cover' }}>
+        <div className='w-full min-h-[40vh] bg-white flex flex-col justify-start items-start py-12 px-6 gap-10 ' style={{ backgroundImage: `url(${frameKonten})`, backgroundPosition: 'center', backgroundSize: 'cover' }}>
             <p className='text-2xl font-semibold text-primary-blue relative before:absolute before:w-[5rem] before:h-[3px] before:bg-primary-yellow before:-bottom-2 before:left-0'>
                 Program Unggulan
             </p>
-            <p className='text-md text-primary-blue font-[300]'>
+            <p className='text-sm text-primary-blue font-[300]'>
                 Ada bebrapa program unggulan di Pontren Mu seperti Tahfidz Al-Quran, Bahasa Inggris, Bahasa Arab, Desain Grafis, Movie Maker, dan Bidang Pelajaran Pilihan. Namun yang paling mendominasi ialah Tahfidz Al-Quran. Proses pembelajaran Tahfidz Al-Quran ada beberapa cara salah satunya kami membuka kelas khusus untuk Tahfidz, sehingga santri-santri yang memilki keinginan lebih untuk menambah haflan bisa mengikuti kelas khusus Tahfidz Quran.
             </p>
         </div>
@@ -137,16 +136,17 @@ const SectionProgramUnggulan = () => {
 const SectionFasilitas = () => {
     const [emblaRef] = useEmblaCarousel({ loop: false });
     return (
-        <div className='w-full h-[50vh] bg-white flex flex-col justify-start items-start py-12 px-6 gap-10' style={{ backgroundImage: `url(${frameKonten})`, backgroundPosition: 'center', backgroundSize: 'cover' }}>
-            <p className='text-2xl font-semibold text-primary-blue relative before:absolute before:w-[5rem] before:h-[3px] before:bg-primary-yellow before:-bottom-2 before:left-0'>
+        <div className='w-full min-h-[50vh] bg-white flex flex-col justify-start items-start pt-2 pb-12  gap-10' style={{ backgroundImage: `url(${frameKonten})`, backgroundPosition: 'center', backgroundSize: 'cover' }}>
+            <p className='text-2xl font-semibold text-primary-blue relative before:absolute before:w-[5rem] before:h-[3px] before:bg-primary-yellow before:-bottom-2 before:left-6 px-6'>
                 Fasilitas
             </p>
-            <div className="overflow-hidden w-full px-4 py-12" ref={emblaRef}>
+            <div className="overflow-hidden w-full px-4 pb-12 pt-1" ref={emblaRef}>
                 <div className="flex gap-4">
-                    {dataEkstrakulikuler.map((item) => (
-                        <CardEkstrakulikuler key={item.id} logo={item.logo} person={item.person} title={item.title} ket={item.ket} subJudul={item.subJudul} bg={item.bg} iconSize={item.iconSize} id={item.id} />
-
-                    ))}
+                    <CardFasilitas />
+                    <CardFasilitas />
+                    <CardFasilitas />
+                    <CardFasilitas />
+                    <CardFasilitas />
                 </div>
             </div>
         </div>

@@ -34,13 +34,13 @@ const index = ({ logo, person, title, ket, subJudul, bg, iconSize = '55%', id })
         logo3: logo3,
     }), [])
     return (
-        <div className='w-[24rem] h-[20rem] bg-white rounded-xl shadow-xl flex flex-col justify-between items-center overflow-hidden shrink-0'>
+        <div className='w-[100%] h-[18rem] bg-white rounded-xl shadow-xl flex flex-col justify-between items-center overflow-hidden shrink-0'>
             <div className={`w-full h-[65%] flex flex-row justify-between items-center bg-cover overflow-hidden`} style={{ backgroundImage: `url(${images[bg]})` }}>
                 {id === 2 ? (
                     <>
                         <div className='w-[80%] h-full flex flex-row justify-end items-center pt-4 relative'>
                             <img src={images[person]} alt="logo" width={'55%'} className='absolute left-5' />
-                            <img src={person3} alt="logo" width={'55%'} className='mt-4 absolute right-4' />
+                            <img src={person3} alt="logo" width={'55%'} className='mt-4 absolute right-4 bottom-0' />
                         </div>
                         <div className='w-[50%] h-full flex justify-center items-center'>
                             <img src={images[logo]} alt="logo" width={iconSize} />
@@ -51,15 +51,15 @@ const index = ({ logo, person, title, ket, subJudul, bg, iconSize = '55%', id })
                         <div className='w-[50%] h-full flex justify-center items-center'>
                             <img src={images[logo]} alt="logo" width={iconSize} />
                         </div>
-                        <div className='w-[50%] h-full flex justify-end items-center pt-4'>
-                            <img src={images[person]} alt="logo" width={'85%'} />
+                        <div className='w-[50%] h-full flex justify-end items-center pt-4 relative'>
+                            <img src={images[person]} alt="logo" width={'85%'} className='absolute bottom-0' />
                         </div>
                     </>
 
                 ) : id === 5 ? (
                     <>
-                        <div className='w-[65%] h-full flex justify-start items-center pt-8 pl-2'>
-                            <img src={images[person]} alt="logo" width={'100%'} />
+                        <div className='w-[65%] h-full flex justify-start items-center pt-8 pl-2 relative'>
+                            <img src={images[person]} alt="logo" width={'100%'} className='absolute bottom-0' />
                         </div>
                         <div className='w-[35%] h-full flex justify-start items-center'>
                             <img src={images[logo]} alt="logo" width={iconSize} />

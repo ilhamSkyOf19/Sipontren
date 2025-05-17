@@ -23,6 +23,7 @@ import frameKonten from '../assets/frame/frame_konten.png'
 import dataEkstrakulikuler from '../jsons/dataEkstrakulikuler.json'
 import CardBeritaLarge from '../fragments/CardBerita/CardBeritaLarge';
 import CardBeritaSmall from '../fragments/CardBerita/CardBeritaSmall';
+import useWindowSize from '../hook/UseWindowSize';
 
 
 
@@ -57,7 +58,7 @@ const Home = () => {
 
 const SectionOne = memo(() => {
   return (
-    <div className='flex flex-col justify-start items-center w-screen h-[100vh] pt-32 bg-primary-blue gap-2 overflow-hidden'>
+    <div className='flex flex-col justify-start items-center w-screen min-h-[100vh] pt-32 pb-12 bg-primary-blue gap-2 overflow-hidden'>
       <div className='flex flex-col justify-center items-center w-screen gap-3'>
         <IconArab width='40%' position={'center'} />
         <div className='flex flex-col justify-center items-center w-full gap-2 mb-3'>
@@ -107,12 +108,12 @@ const SectionTwo = memo(() => {
 
 const SectionThree = memo(() => {
   return (
-    <div className='w-screen h-[75vh] bg-primary-blue flex flex-col justify-start items-center pt-6 overflow-hidden'>
+    <div className='w-screen min-h-[75vh] bg-primary-blue flex flex-col justify-start items-center py-6 overflow-hidden '>
       <p className='text-4xl font-semibold text-white py-5'>Tujuan</p>
-      <p className='text-md font-[300] text-white text-center px-11 mb-12'>
+      <p className='text-sm font-[300] text-white text-center px-11 mb-12'>
         Terselenggaranya lembaga pendidikan Muhammadiyah yang berkualitas dalam membentuk kader utama, pemimpin, dan pendidik yang mendukung gerak langkah dan tujuan Muhammadiyah.
       </p>
-      <div className='w-screen h-[50%] flex justify-center items-center'>
+      <div className='w-screen h-[20rem] flex justify-center items-center'>
         <ImgSlider />
       </div>
     </div>
@@ -128,7 +129,7 @@ const SectionFour = () => {
 
   const [emblaRef] = useEmblaCarousel({ loop: false });
   return (
-    <div className='w-screen h-[70vh] pt-12 flex flex-col justify-start items-center overflow-hidden' style={{ backgroundImage: `url(${frameKonten})`, backgroundPosition: 'center', backgroundSize: 'contain' }}>
+    <div className='w-screen min-h-[70vh] pt-12 pb-2 flex flex-col justify-start items-center overflow-hidden' style={{ backgroundImage: `url(${frameKonten})`, backgroundPosition: 'center', backgroundSize: 'contain' }}>
       <HeaderSection judul={'Kegiatan Santri'} ket={'Wadah Pengembangan Bakat dan Karakter Santri'} />
       <div className="overflow-hidden w-full px-4 py-12" ref={emblaRef}>
         <div className="flex gap-4">
@@ -148,14 +149,20 @@ const SectionFour = () => {
 // =================
 
 const SectionFive = () => {
+  const [emblaRef] = useEmblaCarousel({ loop: false, align: 'start' });
 
   return (
-    <div className='w-screen min-h-[80vh] py-12 flex flex-col justify-start items-center overflow-hidden px-8' style={{ backgroundImage: `url(${frameKonten})`, backgroundPosition: 'top', backgroundSize: 'contain' }}>
+    <div className='w-screen min-h-[80vh] py-12 flex flex-col justify-start items-center overflow-hidden' style={{ backgroundImage: `url(${frameKonten})`, backgroundPosition: 'top', backgroundSize: 'contain' }}>
       <HeaderSection judul={'Berita Terkini'} ket={'Informasi Terkait Pondok Persantren Muhammadiyah Al-Amin Seputih Banyak'} />
-      <CardBeritaLarge />
-      <div className='w-full flex flex-row justify-between items-start flex-wrap gap-x-4'>
-        <CardBeritaSmall />
-        <CardBeritaSmall />
+      <div className='w-full px-8'>
+        <CardBeritaLarge />
+      </div>
+      <div className="overflow-hidden w-full px-4 py-2" ref={emblaRef}>
+        <div className="flex gap-4">
+          <CardBeritaSmall />
+          <CardBeritaSmall />
+          <CardBeritaSmall />
+        </div>
       </div>
       <div className='w-full flex justify-center items-center'>
         <ButtonMore />
@@ -171,7 +178,7 @@ const SectionFive = () => {
 
 const SectionMaps = () => {
   return (
-    <div className='w-screen h-[40vh] flex justify-center items-center px-8' style={{ backgroundImage: `url(${frameKonten})`, backgroundPosition: 'center', backgroundSize: 'contain' }}>
+    <div className='w-full min-h-[40vh] flex justify-center items-center px-3 py-8' style={{ backgroundImage: `url(${frameKonten})`, backgroundPosition: 'center', backgroundSize: 'contain' }}>
       <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3975.563039920363!2d105.4426229!3d-4.8448278!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e3f60508043822d%3A0xb1dad378b9958f66!2sPonpes%20Al-Amin!5e0!3m2!1sid!2sid!4v1747380711868!5m2!1sid!2sid"
         width="400"
         height="300"
