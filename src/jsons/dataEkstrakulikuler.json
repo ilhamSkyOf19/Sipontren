@@ -1,0 +1,52 @@
+[
+    {
+        "id": 1,
+        "subJudul": "SubJudul",
+        "title": "Lorem ipsum dolor sit amet",
+        "ket": "lorem ipsum",
+        "logo": "logo1",
+        "person": "person5",
+        "bg": "bg5",
+        "iconSize": "55%"
+    },
+    {
+        "id": 2,
+        "subJudul": "SubJudul",
+        "title": "Lorem ipsum dolor sit amet",
+        "ket": "lorem ipsum",
+        "logo": "logo3",
+        "person": "person1",
+        "bg": "bg1",
+        "iconSize": "45%"
+    },
+    {
+        "id": 3,
+        "subJudul": "SubJudul",
+        "title": "Lorem ipsum dolor sit amet",
+        "ket": "lorem ipsum",
+        "logo": "",
+        "person": "person4",
+        "bg": "bg3",
+        "iconSize": ""
+    },
+    {
+        "id": 4,
+        "subJudul": "SubJudul",
+        "title": "Lorem ipsum dolor sit amet",
+        "ket": "lorem ipsum",
+        "logo": "",
+        "person": "person2",
+        "bg": "bg4",
+        "iconSize": ""
+    },
+    {
+        "id": 5,
+        "subJudul": "SubJudul",
+        "title": "Lorem ipsum dolor sit amet",
+        "ket": "lorem ipsum",
+        "logo": "logo2",
+        "person": "person6",
+        "bg": "bg4",
+        "iconSize": "90%"
+    }
+]
