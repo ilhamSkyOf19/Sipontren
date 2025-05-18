@@ -11,9 +11,12 @@ import thumbnailProfile from '../assets/thumbnails/thumbnail_profile.png'
 import frameKonten from '../assets/frame/frame_konten.png'
 import useEmblaCarousel from 'embla-carousel-react'
 
-// jason
-import dataEkstrakulikuler from '../jsons/dataEkstrakulikuler.json'
-import CardEkstrakulikuler from '../fragments/CardEkstrakulikuler'
+// component
+import SubJudulLeft from '../components/SubJudulLeft'
+import SubJudulCenter from '../components/SubJudulCenter'
+
+// fragments
+import CardPrestasi from '../fragments/CardPrestasi'
 const Profile = () => {
     return (
         <LayoutPages>
@@ -22,6 +25,7 @@ const Profile = () => {
             <SectionVisiMisi />
             <SectionProgramUnggulan />
             <SectionFasilitas />
+            <SectionPrestasi />
         </LayoutPages>
     )
 }
@@ -95,7 +99,7 @@ const SectionVisiMisi = () => {
                     <li>Menyelengarakan pendidikan yang kreatif, komunikatif, Humanistik dan Menyenangkan.</li>
                 </ol>
             </div>
-            <div className='w-full h-[18rem] flex flex-col justify-end items-center rounded-4xl overflow-hidden'>
+            <div className='w-full h-[40vh] flex flex-col justify-end items-center rounded-4xl overflow-hidden'>
                 <div className='w-[90%] h-[13rem] flex flex-col justify-center items-center bg-primary-yellow rounded-3xl relative'>
                     <motion.div
                         animate={{ y: [0, 20, 0] }}
@@ -118,9 +122,7 @@ const SectionVisiMisi = () => {
 const SectionProgramUnggulan = () => {
     return (
         <div className='w-full min-h-[40vh] bg-white flex flex-col justify-start items-start py-12 px-6 gap-10 ' style={{ backgroundImage: `url(${frameKonten})`, backgroundPosition: 'center', backgroundSize: 'cover' }}>
-            <p className='text-2xl font-semibold text-primary-blue relative before:absolute before:w-[5rem] before:h-[3px] before:bg-primary-yellow before:-bottom-2 before:left-0'>
-                Program Unggulan
-            </p>
+            <SubJudulLeft title={'Program Unggulan'} />
             <p className='text-sm text-primary-blue font-[300]'>
                 Ada bebrapa program unggulan di Pontren Mu seperti Tahfidz Al-Quran, Bahasa Inggris, Bahasa Arab, Desain Grafis, Movie Maker, dan Bidang Pelajaran Pilihan. Namun yang paling mendominasi ialah Tahfidz Al-Quran. Proses pembelajaran Tahfidz Al-Quran ada beberapa cara salah satunya kami membuka kelas khusus untuk Tahfidz, sehingga santri-santri yang memilki keinginan lebih untuk menambah haflan bisa mengikuti kelas khusus Tahfidz Quran.
             </p>
@@ -136,10 +138,8 @@ const SectionProgramUnggulan = () => {
 const SectionFasilitas = () => {
     const [emblaRef] = useEmblaCarousel({ loop: false });
     return (
-        <div className='w-full min-h-[50vh] bg-white flex flex-col justify-start items-start pt-2 pb-12  gap-10' style={{ backgroundImage: `url(${frameKonten})`, backgroundPosition: 'center', backgroundSize: 'cover' }}>
-            <p className='text-2xl font-semibold text-primary-blue relative before:absolute before:w-[5rem] before:h-[3px] before:bg-primary-yellow before:-bottom-2 before:left-6 px-6'>
-                Fasilitas
-            </p>
+        <div className='w-full min-h-[50vh] bg-white flex flex-col justify-start items-start pt-2 pb-8  gap-10' style={{ backgroundImage: `url(${frameKonten})`, backgroundPosition: 'center', backgroundSize: 'cover' }}>
+            <SubJudulLeft title="Fasilitas" px={6} />
             <div className="overflow-hidden w-full px-4 pb-12 pt-1" ref={emblaRef}>
                 <div className="flex gap-4">
                     <CardFasilitas />
@@ -148,6 +148,25 @@ const SectionFasilitas = () => {
                     <CardFasilitas />
                     <CardFasilitas />
                 </div>
+            </div>
+        </div>
+    )
+}
+
+
+// ================
+// Section Prestasi
+// ================
+
+const SectionPrestasi = () => {
+    return (
+        <div className='w-full min-h-[40vh] bg-transparent flex flex-col justify-start items-center pb-8 px-6 gap-10 '>
+            <SubJudulCenter title="Prestasi Santri" />
+            <div className='w-full flex flex-row justify-between items-center gap-6 flex-wrap'>
+                <CardPrestasi tingkat={'Internasional'} jumlah={2} />
+                <CardPrestasi tingkat={'Nasional'} jumlah={5} />
+                <CardPrestasi tingkat={'Provinsi'} jumlah={12} />
+                <CardPrestasi tingkat={'Kabupaten'} jumlah={23} />
             </div>
         </div>
     )
