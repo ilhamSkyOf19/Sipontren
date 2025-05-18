@@ -8,7 +8,7 @@ import useEmblaCarousel from 'embla-carousel-react';
 // Component
 import IconArab from '../components/IconArab';
 import TextMedium from '../components/text/TextMedium';
-import CardLayanan from '../components/CardLayanan';
+import CardLayanan from '../fragments/CardLayanan';
 import ImgSlider from '../components/ImgSlider';
 import ButtonMore from '../components/ButtonMore';
 // fragment
@@ -23,7 +23,7 @@ import frameKonten from '../assets/frame/frame_konten.png'
 import dataEkstrakulikuler from '../jsons/dataEkstrakulikuler.json'
 import CardBeritaLarge from '../fragments/CardBerita/CardBeritaLarge';
 import CardBeritaSmall from '../fragments/CardBerita/CardBeritaSmall';
-import useWindowSize from '../hook/UseWindowSize';
+import ScrollX from '../layouts/ScrollX';
 
 
 
@@ -127,18 +127,16 @@ const SectionThree = memo(() => {
 
 const SectionFour = () => {
 
-  const [emblaRef] = useEmblaCarousel({ loop: false });
   return (
     <div className='w-screen min-h-[70vh] pt-12 pb-2 flex flex-col justify-start items-center overflow-hidden' style={{ backgroundImage: `url(${frameKonten})`, backgroundPosition: 'center', backgroundSize: 'contain' }}>
       <HeaderSection judul={'Kegiatan Santri'} ket={'Wadah Pengembangan Bakat dan Karakter Santri'} />
-      <div className="overflow-hidden w-full px-4 py-12" ref={emblaRef}>
-        <div className="flex gap-4">
-          {dataEkstrakulikuler.map((item) => (
-            <CardEkstrakulikuler key={item.id} logo={item.logo} person={item.person} title={item.title} ket={item.ket} subJudul={item.subJudul} bg={item.bg} iconSize={item.iconSize} id={item.id} />
+      <ScrollX>
+        {dataEkstrakulikuler.map((item) => (
+          <CardEkstrakulikuler key={item.id} logo={item.logo} person={item.person} title={item.title} ket={item.ket} subJudul={item.subJudul} bg={item.bg} iconSize={item.iconSize} id={item.id} />
 
-          ))}
-        </div>
-      </div>
+        ))}
+      </ScrollX>
+
 
     </div>
   )
@@ -157,13 +155,11 @@ const SectionFive = () => {
       <div className='w-full px-8'>
         <CardBeritaLarge />
       </div>
-      <div className="overflow-hidden w-full px-4 py-2" ref={emblaRef}>
-        <div className="flex gap-4">
-          <CardBeritaSmall />
-          <CardBeritaSmall />
-          <CardBeritaSmall />
-        </div>
-      </div>
+      <ScrollX>
+        <CardBeritaSmall />
+        <CardBeritaSmall />
+        <CardBeritaSmall />
+      </ScrollX>
       <div className='w-full flex justify-center items-center'>
         <ButtonMore />
       </div>

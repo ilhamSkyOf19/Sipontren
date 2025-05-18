@@ -1,7 +1,7 @@
 import React from 'react'
 const CardBeritaSmall = () => {
     return (
-        <div className='w-[10rem] h-[23rem] flex flex-col justify-start items-start overflow-hidden gap-4 shrink-0'>
+        <div className='w-[10rem] h-[21rem] flex flex-col justify-start items-start overflow-hidden gap-4 shrink-0'>
             <div className='w-full h-[8rem] bg-black rounded-2xl overflow-hidden shrink-0'>
                 <img src="/berita/5.jpg" alt="" className='w-full h-full object-cover' />
             </div>

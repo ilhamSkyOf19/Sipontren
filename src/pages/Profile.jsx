@@ -4,7 +4,7 @@ import React from 'react'
 import { motion } from 'framer-motion'
 // Layout
 import LayoutPages from '../layouts/LayoutPages'
-import CardFasilitas from '../components/CardFasilitas'
+import ScrollX from '../layouts/ScrollX'
 // image
 import fileThumb from '../assets/icons/file_thumb.png'
 import thumbnailProfile from '../assets/thumbnails/thumbnail_profile.png'
@@ -17,6 +17,8 @@ import SubJudulCenter from '../components/SubJudulCenter'
 
 // fragments
 import CardPrestasi from '../fragments/CardPrestasi'
+import CardFasilitas from '../fragments/CardFasilitas'
+import CardProfileUstad from '../fragments/CardProfileUstad'
 const Profile = () => {
     return (
         <LayoutPages>
@@ -26,6 +28,7 @@ const Profile = () => {
             <SectionProgramUnggulan />
             <SectionFasilitas />
             <SectionPrestasi />
+            <SectionProfleUstad />
         </LayoutPages>
     )
 }
@@ -140,15 +143,12 @@ const SectionFasilitas = () => {
     return (
         <div className='w-full min-h-[50vh] bg-white flex flex-col justify-start items-start pt-2 pb-8  gap-10' style={{ backgroundImage: `url(${frameKonten})`, backgroundPosition: 'center', backgroundSize: 'cover' }}>
             <SubJudulLeft title="Fasilitas" px={6} />
-            <div className="overflow-hidden w-full px-4 pb-12 pt-1" ref={emblaRef}>
-                <div className="flex gap-4">
-                    <CardFasilitas />
-                    <CardFasilitas />
-                    <CardFasilitas />
-                    <CardFasilitas />
-                    <CardFasilitas />
-                </div>
-            </div>
+            <ScrollX>
+                <CardFasilitas />
+                <CardFasilitas />
+                <CardFasilitas />
+                <CardFasilitas />
+            </ScrollX>
         </div>
     )
 }
@@ -168,6 +168,28 @@ const SectionPrestasi = () => {
                 <CardPrestasi tingkat={'Provinsi'} jumlah={12} />
                 <CardPrestasi tingkat={'Kabupaten'} jumlah={23} />
             </div>
+        </div>
+    )
+}
+
+
+
+// ===========
+// Section Profile Ustad
+// ===========
+
+const SectionProfleUstad = () => {
+    return (
+        <div className='w-full min-h-[40vh] bg-white flex flex-col justify-start items-start py-12 gap-10 '>
+            <SubJudulLeft title="Profile Asatid/Ustadzah" px={6} />
+            <ScrollX>
+                <CardProfileUstad nama={'Ust. Inan Aditya febriana'} jabatan={'Direktur'} />
+                <CardProfileUstad nama={'Ust. Inan Aditya febriana'} jabatan={'Direktur'} />
+                <CardProfileUstad nama={'Ust. Inan Aditya febriana'} jabatan={'Direktur'} />
+                <CardProfileUstad nama={'Ust. Inan Aditya febriana'} jabatan={'Direktur'} />
+                <CardProfileUstad nama={'Ust. Inan Aditya febriana'} jabatan={'Direktur'} />
+                <CardProfileUstad nama={'Ust. Inan Aditya febriana'} jabatan={'Direktur'} />
+            </ScrollX>
         </div>
     )
 }
