@@ -19,6 +19,7 @@ import SubJudulCenter from '../components/SubJudulCenter'
 import CardPrestasi from '../fragments/CardPrestasi'
 import CardFasilitas from '../fragments/CardFasilitas'
 import CardProfileUstad from '../fragments/CardProfileUstad'
+import CardAlumni from '../fragments/CardAlumni'
 const Profile = () => {
     return (
         <LayoutPages>
@@ -29,6 +30,7 @@ const Profile = () => {
             <SectionFasilitas />
             <SectionPrestasi />
             <SectionProfleUstad />
+            <SectionAlumni />
         </LayoutPages>
     )
 }
@@ -139,15 +141,15 @@ const SectionProgramUnggulan = () => {
 // =================
 
 const SectionFasilitas = () => {
-    const [emblaRef] = useEmblaCarousel({ loop: false });
     return (
-        <div className='w-full min-h-[50vh] bg-white flex flex-col justify-start items-start pt-2 pb-8  gap-10' style={{ backgroundImage: `url(${frameKonten})`, backgroundPosition: 'center', backgroundSize: 'cover' }}>
+        <div className='w-full min-h-[50vh] bg-white flex flex-col justify-start items-start pt-2 pb-8 gap-10' style={{ backgroundImage: `url(${frameKonten})`, backgroundPosition: 'center', backgroundSize: 'cover' }}>
             <SubJudulLeft title="Fasilitas" px={6} />
             <ScrollX>
-                <CardFasilitas />
-                <CardFasilitas />
-                <CardFasilitas />
-                <CardFasilitas />
+                <CardFasilitas img={'masjid.png'} nama={'Masjid'} deskripsi={'Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat, accusantium.'} />
+                <CardFasilitas img={'masjid.png'} nama={'Masjid'} deskripsi={'Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat, accusantium.'} />
+                <CardFasilitas img={'masjid.png'} nama={'Masjid'} deskripsi={'Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat, accusantium.'} />
+                <CardFasilitas img={'masjid.png'} nama={'Masjid'} deskripsi={'Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat, accusantium.'} />
+
             </ScrollX>
         </div>
     )
@@ -180,15 +182,36 @@ const SectionPrestasi = () => {
 
 const SectionProfleUstad = () => {
     return (
-        <div className='w-full min-h-[40vh] bg-white flex flex-col justify-start items-start py-12 gap-10 '>
-            <SubJudulLeft title="Profile Asatid/Ustadzah" px={6} />
+        <div className='w-full min-h-[40vh] bg-white flex flex-col justify-start items-center py-12 gap-14'>
+            <SubJudulCenter title="Profile Asatid/Ustadzah" />
             <ScrollX>
-                <CardProfileUstad nama={'Ust. Inan Aditya febriana'} jabatan={'Direktur'} />
-                <CardProfileUstad nama={'Ust. Inan Aditya febriana'} jabatan={'Direktur'} />
-                <CardProfileUstad nama={'Ust. Inan Aditya febriana'} jabatan={'Direktur'} />
-                <CardProfileUstad nama={'Ust. Inan Aditya febriana'} jabatan={'Direktur'} />
-                <CardProfileUstad nama={'Ust. Inan Aditya febriana'} jabatan={'Direktur'} />
-                <CardProfileUstad nama={'Ust. Inan Aditya febriana'} jabatan={'Direktur'} />
+                <CardProfileUstad img={'sample.jpg'} nama={'Ust. Inan Aditya febriana'} jabatan={'Direktur'} />
+                <CardProfileUstad img={'sample.jpg'} nama={'Ust. Inan Aditya febriana'} jabatan={'Direktur'} />
+                <CardProfileUstad img={'sample.jpg'} nama={'Ust. Inan Aditya febriana'} jabatan={'Direktur'} />
+                <CardProfileUstad img={'sample.jpg'} nama={'Ust. Inan Aditya febriana'} jabatan={'Direktur'} />
+            </ScrollX>
+        </div>
+    )
+}
+
+
+
+
+// ===========
+// Section Alumni
+// ===========
+
+
+const SectionAlumni = () => {
+    return (
+        <div className='w-full min-h-[40vh] bg-white flex flex-col justify-start items-center py-12 gap-14'>
+            <SubJudulCenter title="Apa Kata Lulusan" />
+            <ScrollX>
+                <CardAlumni img={'sample.jpg'} nama={'Khoirul Farid'} angkatan={'1'} deskripsi={'Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat, accusantium lorem ipsum dolor sit amet.'} />
+                <CardAlumni img={'sample.jpg'} nama={'Khoirul Farid'} angkatan={'1'} deskripsi={'Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat, accusantium lorem ipsum dolor sit amet.'} />
+                <CardAlumni img={'sample.jpg'} nama={'Khoirul Farid'} angkatan={'1'} deskripsi={'Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat, accusantium lorem ipsum dolor sit amet.'} />
+                <CardAlumni img={'sample.jpg'} nama={'Khoirul Farid'} angkatan={'1'} deskripsi={'Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat, accusantium lorem ipsum dolor sit amet.'} />
+                <CardAlumni img={'sample.jpg'} nama={'Khoirul Farid'} angkatan={'1'} deskripsi={'Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat, accusantium lorem ipsum dolor sit amet.'} />
             </ScrollX>
         </div>
     )

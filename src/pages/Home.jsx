@@ -153,12 +153,13 @@ const SectionFive = () => {
     <div className='w-screen min-h-[80vh] py-12 flex flex-col justify-start items-center overflow-hidden' style={{ backgroundImage: `url(${frameKonten})`, backgroundPosition: 'top', backgroundSize: 'contain' }}>
       <HeaderSection judul={'Berita Terkini'} ket={'Informasi Terkait Pondok Persantren Muhammadiyah Al-Amin Seputih Banyak'} />
       <div className='w-full px-8'>
-        <CardBeritaLarge />
+        <CardBeritaLarge img={'5.jpg'} jenis={'Berita'} judul={'Pondok Pesantren Muhammadiyah Al-Amin Seputih Banyak Lampung Tengah Provinsi Lampung'} deskripsi={'lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat, accusantium lorem ipsum dolor sit amet. lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat, accusantium lorem ipsum dolor sit amet.'} />
       </div>
       <ScrollX>
-        <CardBeritaSmall />
-        <CardBeritaSmall />
-        <CardBeritaSmall />
+        <CardBeritaSmall img={'5.jpg'} jenis={'Berita'} judul={'Pondok Pesantren Muhammadiyah Al-Amin Seputih Banyak'} deskripsi={'lorem ipsum dolor sit amet consectetur'} />
+        <CardBeritaSmall img={'5.jpg'} jenis={'Berita'} judul={'Pondok Pesantren Muhammadiyah Al-Amin Seputih Banyak'} deskripsi={'lorem ipsum dolor sit amet consectetur'} />
+        <CardBeritaSmall img={'5.jpg'} jenis={'Berita'} judul={'Pondok Pesantren Muhammadiyah Al-Amin Seputih Banyak'} deskripsi={'lorem ipsum dolor sit amet consectetur'} />
+        <CardBeritaSmall img={'5.jpg'} jenis={'Berita'} judul={'Pondok Pesantren Muhammadiyah Al-Amin Seputih Banyak'} deskripsi={'lorem ipsum dolor sit amet consectetur'} />
       </ScrollX>
       <div className='w-full flex justify-center items-center'>
         <ButtonMore />
