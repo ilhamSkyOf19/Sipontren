@@ -2,17 +2,15 @@
 // Import
 // =================
 import React, { memo } from 'react'
-import LayoutPages from '../layouts/LayoutPages';
 import useEmblaCarousel from 'embla-carousel-react';
 
 // Component
 import IconArab from '../components/IconArab';
-import TextMedium from '../components/text/TextMedium';
-import CardLayanan from '../fragments/CardLayanan';
 import ImgSlider from '../components/ImgSlider';
 import ButtonMore from '../components/ButtonMore';
 // fragment
 import HeaderSection from '../fragments/HeaderSection';
+import CardLayanan from '../fragments/CardLayanan';
 import CardEkstrakulikuler from '../fragments/CardEkstrakulikuler';
 // Img
 import thumbnailProfile from '../assets/thumbnails/thumbnail_profile.png'
@@ -24,6 +22,11 @@ import dataEkstrakulikuler from '../jsons/dataEkstrakulikuler.json'
 import CardBeritaLarge from '../fragments/CardBerita/CardBeritaLarge';
 import CardBeritaSmall from '../fragments/CardBerita/CardBeritaSmall';
 import ScrollX from '../layouts/ScrollX';
+
+// Layouts
+import LayoutPages from '../layouts/LayoutPages';
+import LayoutSectionBg from '../layouts/LayoutSectionBg';
+
 
 
 
@@ -63,8 +66,8 @@ const SectionOne = memo(() => {
         <IconArab width='40%' position={'center'} />
         <div className='flex flex-col justify-center items-center w-full gap-2 mb-3'>
           <p className='text-md font-roboto weight-[100] text-white'>Update Informasi Terkait</p>
-          <TextMedium text={'PENERIMAAN SANTRI BARU'} />
-          <TextMedium text={'TAHUN AJARAN 2025/2026'} />
+          <p class="text-xl text-white font-semibold">PENERIMAAN SANTRI BARU</p>
+          <p class="text-xl text-white font-semibold">TAHUN AJARAN 2025/2026</p>
         </div>
         <p className='text-lg font-poppins font-[600] text-white bg-primary-yellow py-2 px-5 text-center rounded-sm mb-8'>Jenjang SMP/SMA</p>
       </div>
@@ -86,7 +89,7 @@ const SectionOne = memo(() => {
 
 const SectionTwo = memo(() => {
   return (
-    <div className='min-h-[100vh] flex flex-col justify-start items-center py-16 overflow-hidden' style={{ backgroundImage: `url(${frameKonten})`, backgroundPosition: 'center', backgroundSize: 'contain' }}>
+    <LayoutSectionBg pt={12} pb={12}>
       <HeaderSection judul={'Layanan Pendidikan'} ket={'Pilihan Pendidikan Berkualitas Pondok Pesantren Modern, Sekolah Menengah Pertama, dan Sekolah Menengah Atas Kami Hadir Untuk Mendukung Masa Depan Cemerlang Anda'} />
 
       <div className={`
@@ -97,7 +100,7 @@ const SectionTwo = memo(() => {
         <CardLayanan textOne={'Sekolah Menengah'} textTwo={'Pertama'} textKet={'SMP Muhammadiyah Al-Amin seputih Banyak - Lampung tengah'} />
         <CardLayanan textOne={'Sekolah Menengah'} textTwo={'Atas'} textKet={'SMA Muhammadiyah Al-Amin seputih Banyak - Lampung tengah'} />
       </div>
-    </div>
+    </LayoutSectionBg>
   )
 })
 
@@ -128,7 +131,7 @@ const SectionThree = memo(() => {
 const SectionFour = () => {
 
   return (
-    <div className='w-screen min-h-[70vh] pt-12 pb-2 flex flex-col justify-start items-center overflow-hidden' style={{ backgroundImage: `url(${frameKonten})`, backgroundPosition: 'center', backgroundSize: 'contain' }}>
+    <LayoutSectionBg minH={'70vh'} pt={12} pb={12}>
       <HeaderSection judul={'Kegiatan Santri'} ket={'Wadah Pengembangan Bakat dan Karakter Santri'} />
       <ScrollX>
         {dataEkstrakulikuler.map((item) => (
@@ -136,9 +139,9 @@ const SectionFour = () => {
 
         ))}
       </ScrollX>
+    </LayoutSectionBg>
 
 
-    </div>
   )
 }
 
@@ -147,10 +150,10 @@ const SectionFour = () => {
 // =================
 
 const SectionFive = () => {
-  const [emblaRef] = useEmblaCarousel({ loop: false, align: 'start' });
 
   return (
-    <div className='w-screen min-h-[80vh] py-12 flex flex-col justify-start items-center overflow-hidden' style={{ backgroundImage: `url(${frameKonten})`, backgroundPosition: 'top', backgroundSize: 'contain' }}>
+    <LayoutSectionBg pb={12} minH={'80vh'}>
+
       <HeaderSection judul={'Berita Terkini'} ket={'Informasi Terkait Pondok Persantren Muhammadiyah Al-Amin Seputih Banyak'} />
       <div className='w-full px-8'>
         <CardBeritaLarge img={'5.jpg'} jenis={'Berita'} judul={'Pondok Pesantren Muhammadiyah Al-Amin Seputih Banyak Lampung Tengah Provinsi Lampung'} deskripsi={'lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat, accusantium lorem ipsum dolor sit amet. lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat, accusantium lorem ipsum dolor sit amet.'} />
@@ -164,7 +167,7 @@ const SectionFive = () => {
       <div className='w-full flex justify-center items-center'>
         <ButtonMore />
       </div>
-    </div>
+    </LayoutSectionBg>
   )
 }
 
