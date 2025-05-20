@@ -143,7 +143,7 @@ const Footer = () => {
                 </p>
             </div>
             <div className='flex flex-col gap-7'>
-                <PusatBantuan title={'Bantuan'} link={['', '', '', '']} text={['FAQ', 'Hubungi Kami', '+62 822-7821-9515']} />
+                <PusatBantuan title={'Bantuan'} link={['faq', '', '', '']} text={['FAQ', 'Hubungi Kami', '+62 822-7821-9515']} />
                 <PusatBantuan title={'Layanan Kami'} link={['', '', '', '']} text={['Profil Pesantren', 'Penerimaan Santri Baru', 'Berita Terkini']} />
                 <PusatBantuan title={'Informasi Penting'} link={['', '', '', '']} text={['Jam Kerja', 'Biaya Pendidikan', 'Pendaftaran']} />
             </div>

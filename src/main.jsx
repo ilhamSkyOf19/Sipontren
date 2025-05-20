@@ -6,6 +6,7 @@ import './index.css'
 import Home from './pages/Home.jsx'
 import Profile from './pages/Profile.jsx'
 import Psb from './pages/Psb.jsx'
+import Faq from './pages/Faq.jsx'
 // module
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
   {
     path: "/psb",
     element: <Psb />,
+  },
+  {
+    path: "/faq",
+    element: <Faq />,
   },
 ]);
 
