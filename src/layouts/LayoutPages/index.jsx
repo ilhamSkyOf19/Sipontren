@@ -235,8 +235,7 @@ const NavbarListComponent = ({ valueTop, showNavbarList, navbarListRef }) => {
             style={{ top: valueTop }}>
             <ButtonNavigasi label={'HOME'} url={'/'} />
             <ButtonNavigasi label={'PROFILE'} url={'/profile'} />
-            <ButtonNavigasi label={`KEMA'HADAN`} url={'/'} />
-            <ButtonNavigasi label={`EKTRAKULIKULER`} url={'/'} />
+            <ButtonNavigasi label={`KEMA'HADAN`} url={'/kemahadan'} />
             <ButtonNavigasi label={`PSB ( Penerimaan Siswa Baru)`} url={'/psb'} />
         </div>
     )

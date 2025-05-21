@@ -7,6 +7,7 @@ import Home from './pages/Home.jsx'
 import Profile from './pages/Profile.jsx'
 import Psb from './pages/Psb.jsx'
 import Faq from './pages/Faq.jsx'
+import Kemahadan from './pages/Kemahadan.jsx'
 // module
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
   {
     path: "/faq",
     element: <Faq />,
+  },
+  {
+    path: "/kemahadan",
+    element: <Kemahadan />,
   },
 ]);
 
