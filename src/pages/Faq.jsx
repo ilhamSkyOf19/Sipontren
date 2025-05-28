@@ -9,9 +9,13 @@ import SubJudulCenter from '../components/SubJudulCenter'
 
 // fragments
 import HeaderPage from '../fragments/HeaderPage'
+import { useEffect } from 'react'
 
 
 const Faq = () => {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     return (
         <LayoutPages>
             <HeaderPage whiteText1={'FAQ'} whiteText2={''} YellowText={'Sistem Pondok Pesantren Sipontren'} deskripsi={'SIPONTREN (Sistem Informasi Pondok Pesantren) adalah platform berbasis web yang dirancang untuk mempermudah pengelola administrasi dan komunikasi antara pondok pesantren, santri, orang tua, serta masyarakat umum.'} />

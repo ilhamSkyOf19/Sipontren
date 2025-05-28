@@ -1,9 +1,7 @@
 // =================
 // Import
 // =================
-import React, { memo } from 'react'
-import useEmblaCarousel from 'embla-carousel-react';
-
+import React, { memo, useState, useEffect } from 'react'
 // Component
 import IconArab from '../components/IconArab';
 import ImgSlider from '../components/ImgSlider';
@@ -19,6 +17,10 @@ import frameKonten from '../assets/frame/frame_konten.png'
 
 // Json
 import dataEkstrakulikuler from '../jsons/dataEkstrakulikuler.json'
+import dataBerita from '../jsons/dataBerita.json'
+
+
+// fragment
 import CardBeritaLarge from '../fragments/CardBerita/CardBeritaLarge';
 import CardBeritaSmall from '../fragments/CardBerita/CardBeritaSmall';
 import ScrollX from '../layouts/ScrollX';
@@ -27,6 +29,13 @@ import ScrollX from '../layouts/ScrollX';
 import LayoutPages from '../layouts/LayoutPages';
 import LayoutSectionBg from '../layouts/LayoutSectionBg';
 import { Link } from 'react-router-dom';
+import useWindowSize from '../hook/UseWindowSize';
+import { AnimatePresence, motion } from 'framer-motion';
+
+
+// hooks
+import useIndexFade from '../hook/UseIndexFade';
+
 
 
 
@@ -35,7 +44,7 @@ import { Link } from 'react-router-dom';
 
 
 const Home = () => {
-
+  const { window } = useWindowSize().width;
 
 
 
@@ -48,9 +57,9 @@ const Home = () => {
       <SectionOne />
       <SectionTwo />
       <SectionThree />
-      <SectionFour />
+      <SectionFour width={window} />
       <SectionFive />
-      <SectionMaps />
+      <SectionMaps width={window} />
     </LayoutPages>
   )
 }
@@ -63,19 +72,19 @@ const Home = () => {
 const SectionOne = memo(() => {
   return (
     <div className='flex flex-col justify-start items-center w-screen min-h-[100vh] pt-32 pb-12 bg-primary-blue gap-2 overflow-hidden'>
-      <div className='flex flex-col justify-center items-center w-screen gap-3'>
-        <IconArab width='40%' position={'center'} />
+      <div className='flex flex-col justify-center items-center w-screen gap-3 md:gap-6'>
+        <IconArab width='35%' position={'center'} />
         <div className='flex flex-col justify-center items-center w-full gap-2 mb-3'>
-          <p className='text-md font-roboto weight-[100] text-white'>Update Informasi Terkait</p>
-          <p class="text-xl text-white font-semibold">PENERIMAAN SANTRI BARU</p>
-          <p class="text-xl text-white font-semibold">TAHUN AJARAN 2025/2026</p>
+          <p className='text-md font-roboto weight-[100] text-white md:text-2xl'>Update Informasi Terkait</p>
+          <p className="text-xl text-white font-semibold md:text-3xl">PENERIMAAN SANTRI BARU</p>
+          <p className="text-xl text-white font-semibold md:text-3xl">TAHUN AJARAN 2025/2026</p>
         </div>
-        <p className='text-lg font-poppins font-[600] text-white bg-primary-yellow py-2 px-5 text-center rounded-sm mb-8'>Jenjang SMP/SMA</p>
+        <p className='text-lg font-poppins font-[600] text-white bg-primary-yellow py-2 px-5 text-center rounded-sm mb-8 md:text-2xl md:py-4 md:px-10'>Jenjang SMP/SMA</p>
       </div>
       <div className='w-[90%] h-[1px] bg-white'></div>
       <div className='flex flex-col justify-center items-center w-screen'>
-        <img src={thumbnailProfile} alt="thumbnail profile" className='w-[25rem]' />
-        <Link to={'/formulir'} className='text-xl font-poppins font-semibold bg-slate-100 py-2 px-14 text-center rounded-lg text-primary-blue hover:scale-110 transition ease-in-out duration-200'>Daftar Sekarang</Link>
+        <img src={thumbnailProfile} alt="thumbnail profile" className='w-[25rem] md:w-[32rem]' />
+        <Link to={'/formulir'} className='text-xl font-poppins font-semibold bg-slate-100 py-2 px-14 text-center rounded-lg text-primary-blue hover:scale-110 transition ease-in-out duration-200 md:text-2xl md:py-3 md:px-20'>Daftar Sekarang</Link>
       </div>
     </div>
   )
@@ -92,7 +101,6 @@ const SectionTwo = memo(() => {
   return (
     <LayoutSectionBg pt={12} pb={12}>
       <HeaderSection judul={'Layanan Pendidikan'} ket={'Pilihan Pendidikan Berkualitas Pondok Pesantren Modern, Sekolah Menengah Pertama, dan Sekolah Menengah Atas Kami Hadir Untuk Mendukung Masa Depan Cemerlang Anda'} />
-
       <div className={`
       w-screen flex flex-col justify-center items-center gap-7
       md:flex-row flex-wrap
@@ -113,11 +121,11 @@ const SectionTwo = memo(() => {
 const SectionThree = memo(() => {
   return (
     <div className='w-screen min-h-[75vh] bg-primary-blue flex flex-col justify-start items-center py-6 overflow-hidden '>
-      <p className='text-4xl font-semibold text-white py-5'>Tujuan</p>
-      <p className='text-sm font-[300] text-white text-center px-11 mb-12'>
+      <p className='text-4xl font-semibold text-white py-5 md:text-[2.5rem]'>Tujuan</p>
+      <p className='text-sm font-[300] text-white text-center px-11 mb-12 md:text-lg'>
         Terselenggaranya lembaga pendidikan Muhammadiyah yang berkualitas dalam membentuk kader utama, pemimpin, dan pendidik yang mendukung gerak langkah dan tujuan Muhammadiyah.
       </p>
-      <div className='w-screen h-[20rem] flex justify-center items-center'>
+      <div className='w-screen h-[20rem] flex justify-center items-center md:h-[30rem]'>
         <ImgSlider />
       </div>
     </div>
@@ -129,10 +137,10 @@ const SectionThree = memo(() => {
 // Section Four
 // =================
 
-const SectionFour = () => {
+const SectionFour = ({ width }) => {
 
   return (
-    <LayoutSectionBg minH={'70vh'} pt={12} pb={12}>
+    <LayoutSectionBg minH={width < 760 ? '70' : '80'} pt={12} pb={12}>
       <HeaderSection judul={'Kegiatan Santri'} ket={'Wadah Pengembangan Bakat dan Karakter Santri'} />
       <ScrollX>
         {dataEkstrakulikuler.map((item) => (
@@ -151,19 +159,35 @@ const SectionFour = () => {
 // =================
 
 const SectionFive = () => {
+  const [data, setData] = useState([])
+
+  useEffect(() => {
+    setData(dataBerita);
+  }, [])
+
+  // useIndexFade
+  const index = useIndexFade({ data, duration: 4000 });
 
   return (
-    <LayoutSectionBg pb={12} minH={'80vh'}>
-
+    <LayoutSectionBg pb={12} minH={'100'}>
       <HeaderSection judul={'Berita Terkini'} ket={'Informasi Terkait Pondok Persantren Muhammadiyah Al-Amin Seputih Banyak'} />
       <div className='w-full px-8'>
-        <CardBeritaLarge img={'5.jpg'} jenis={'Berita'} judul={'Pondok Pesantren Muhammadiyah Al-Amin Seputih Banyak Lampung Tengah Provinsi Lampung'} deskripsi={'lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat, accusantium lorem ipsum dolor sit amet. lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat, accusantium lorem ipsum dolor sit amet.'} />
+        <AnimatePresence mode='wait'>
+          <motion.div
+            key={index}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1, ease: 'easeInOut' }}
+          >
+            <CardBeritaLarge img={data[index]?.img} jenis={data[index]?.jenis} judul={data[index]?.judul} deskripsi={data[index]?.deskripsi} />
+          </motion.div>
+        </AnimatePresence>
       </div>
-      <ScrollX>
-        <CardBeritaSmall img={'5.jpg'} jenis={'Berita'} judul={'Pondok Pesantren Muhammadiyah Al-Amin Seputih Banyak'} deskripsi={'lorem ipsum dolor sit amet consectetur'} />
-        <CardBeritaSmall img={'5.jpg'} jenis={'Berita'} judul={'Pondok Pesantren Muhammadiyah Al-Amin Seputih Banyak'} deskripsi={'lorem ipsum dolor sit amet consectetur'} />
-        <CardBeritaSmall img={'5.jpg'} jenis={'Berita'} judul={'Pondok Pesantren Muhammadiyah Al-Amin Seputih Banyak'} deskripsi={'lorem ipsum dolor sit amet consectetur'} />
-        <CardBeritaSmall img={'5.jpg'} jenis={'Berita'} judul={'Pondok Pesantren Muhammadiyah Al-Amin Seputih Banyak'} deskripsi={'lorem ipsum dolor sit amet consectetur'} />
+      <ScrollX slidesToScroll={2}>
+        {data.slice(0, 5).map((item, index) => (
+          <CardBeritaSmall key={index} img={item.img} jenis={item.jenis} judul={item.judul} deskripsi={item.deskripsi} />
+        ))}
       </ScrollX>
       <div className='w-full flex justify-center items-center'>
         <ButtonMore />
@@ -177,11 +201,11 @@ const SectionFive = () => {
 // Section Maps
 // =================
 
-const SectionMaps = () => {
+const SectionMaps = ({ width }) => {
   return (
-    <div className='w-full min-h-[40vh] flex justify-center items-center px-3 py-8' style={{ backgroundImage: `url(${frameKonten})`, backgroundPosition: 'center', backgroundSize: 'contain' }}>
+    <div className='w-full min-h-[40vh] flex justify-center items-center px-7 py-8' style={{ backgroundImage: `url(${frameKonten})`, backgroundPosition: width < 760 ? 'contain' : 'center', backgroundSize: 'contain' }}>
       <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3975.563039920363!2d105.4426229!3d-4.8448278!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e3f60508043822d%3A0xb1dad378b9958f66!2sPonpes%20Al-Amin!5e0!3m2!1sid!2sid!4v1747380711868!5m2!1sid!2sid"
-        width="400"
+        width='100%'
         height="300"
         allowFullScreen=""
         loading="lazy"

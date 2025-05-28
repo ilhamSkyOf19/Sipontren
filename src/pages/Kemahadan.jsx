@@ -56,8 +56,6 @@ const GallerySantri = () => {
     const [indexImg, setIndexImg] = useState(0);
     const [gallery, setGallery] = useState([]);
 
-    console.log(indexImg)
-    console.log(gallery.length)
     // UseEffect
     useEffect(() => {
         setGallery(dataGallery)
@@ -71,6 +69,7 @@ const GallerySantri = () => {
         }, 6000);
         return () => clearInterval(interval);
     }, [gallery])
+
     return (
         <div className='w-full min-h-[60vh] bg-primary-blue flex flex-col justify-start items-center px-6 gap-10 pt-6 pb-14'>
             <SubJudulCenter title={'Gallery Santri'} color={'#fff'} />

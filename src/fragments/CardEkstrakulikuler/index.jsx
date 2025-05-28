@@ -16,7 +16,6 @@ import logo3 from '../../assets/icons/logo-3.png'
 import { useMemo } from 'react'
 import { memo } from 'react'
 const index = ({ logo, person, title, ket, subJudul, bg, iconSize = '55%', id }) => {
-    console.log('render')
     const images = useMemo(() => ({
         bg1: bg1,
         bg2: bg2,
@@ -34,7 +33,7 @@ const index = ({ logo, person, title, ket, subJudul, bg, iconSize = '55%', id })
         logo3: logo3,
     }), [])
     return (
-        <div className='w-[100%] h-[18rem] bg-white rounded-xl shadow-xl flex flex-col justify-between items-center overflow-hidden shrink-0'>
+        <div className='w-[100%] h-[18rem] bg-white rounded-xl shadow-xl flex flex-col justify-between items-center overflow-hidden shrink-0 md:w-[65%] md:h-[26rem] md:mt-12'>
             <div className={`w-full h-[65%] flex flex-row justify-between items-center bg-cover overflow-hidden`} style={{ backgroundImage: `url(${images[bg]})` }}>
                 {id === 2 ? (
                     <>
@@ -75,10 +74,10 @@ const index = ({ logo, person, title, ket, subJudul, bg, iconSize = '55%', id })
                     </>
                 )}
             </div>
-            <div className='w-full h-[30%] flex flex-col justify-end items-start pb-7 px-4'>
-                <p className='text-[0.7rem] px-4 py-1 bg-secondary-blue text-white rounded-sm'>{subJudul}</p>
-                <p className='text-md font-semibold'>{title}</p>
-                <p className='text-[0.6rem] font-[300]'>{ket}</p>
+            <div className='w-full h-[30%] flex flex-col justify-end items-start pb-7 px-4 md:gap-1'>
+                <p className='text-[0.7rem] px-4 py-1 bg-secondary-blue text-white rounded-sm md:text-lg'>{subJudul}</p>
+                <p className='text-md font-semibold md:text-lg'>{title}</p>
+                <p className='text-[0.6rem] font-[300] md:text-sm'>{ket}</p>
             </div>
         </div>
     )
