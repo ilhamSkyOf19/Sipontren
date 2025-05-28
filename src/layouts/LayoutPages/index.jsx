@@ -237,6 +237,7 @@ const NavbarListComponent = ({ valueTop, showNavbarList, navbarListRef }) => {
             <ButtonNavigasi label={'PROFILE'} url={'/profile'} />
             <ButtonNavigasi label={`KEMA'HADAN`} url={'/kemahadan'} />
             <ButtonNavigasi label={`PSB ( Penerimaan Siswa Baru)`} url={'/psb'} />
+            <ButtonNavigasi label={`Formulir Pendaftaran`} url={'/formulir'} />
         </div>
     )
 }

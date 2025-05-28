@@ -119,7 +119,7 @@ const SectionInfo = memo(() => {
                 <div className='w-[90%] h-[1px] bg-white'></div>
                 <div className='flex flex-col justify-center items-center w-screen'>
                     <img src={thumbnailProfile} alt="thumbnail profile" className='w-[18rem]' />
-                    <Link to={'/'} className='text-sm font-poppins font-semibold bg-slate-100 py-2 px-12 text-center rounded-lg text-primary-blue cursor-pointer hover:scale-110 transition ease-in-out duration-300'>Daftar Sekarang</Link>
+                    <Link to={'/formulir'} className='text-sm font-poppins font-semibold bg-slate-100 py-2 px-12 text-center rounded-lg text-primary-blue cursor-pointer hover:scale-110 transition ease-in-out duration-300'>Daftar Sekarang</Link>
                 </div>
             </div>
         </div>

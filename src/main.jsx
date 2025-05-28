@@ -12,6 +12,7 @@ import Kemahadan from './pages/Kemahadan.jsx'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Formulir from './pages/Formulir.jsx'
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
   {
     path: "/kemahadan",
     element: <Kemahadan />,
+  },
+  {
+    path: "/formulir",
+    element: <Formulir />,
   },
 ]);
 

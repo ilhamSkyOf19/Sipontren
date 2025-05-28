@@ -1,0 +1,29 @@
+import React from 'react'
+
+const InputSelectGender = ({ gender, setGender }) => {
+    return (
+        <div className='w-full flex flex-col justify-start items-start gap-2 relative mb-4'>
+            <label className="block text-md" htmlFor="gender">
+                Jenis Kelamin
+            </label>
+            <select
+                id="gender"
+                name="gender"
+                className="w-full py-2.5 px-4 rounded-lg border-[1.5px] text-sm appearance-none border-primary-blue focus:outline-none focus:ring-1 focus:ring-primary-blue focus:border-primary-blue"
+                value={gender}
+                onChange={setGender}
+            >
+                <option value="" className='text-slate-400 text-[0.5rem]'>Pilih jenis kelamin --</option>
+                <option value="male" className='text-[0.5rem]'>Laki-laki</option>
+                <option value="female" className='text-[0.5rem]'>Perempuan</option>
+            </select>
+            <div className="pointer-events-none absolute top-11 right-4 flex items-center ">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="#000000" className="size-6">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                </svg>
+            </div>
+        </div>
+    )
+}
+
+export default InputSelectGender
