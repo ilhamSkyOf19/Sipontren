@@ -12,7 +12,7 @@ const BoxInput = ({ tipe, placeholder, nameInput, value, handleChange, max, tipe
             id={nameInput}
             maxLength={max}
             required={true}
-            className="border px-4 py-2.5 w-full rounded-lg focus:outline-none focus:ring-1 focus:ring-primary-blue focus:border-primary-blue text-sm"
+            className="border px-4 py-2.5 w-full rounded-lg focus:outline-none focus:ring-1 focus:ring-primary-blue focus:border-primary-blue text-sm md:text-lg md:py-3"
             style={borderStyle}
         />
     )

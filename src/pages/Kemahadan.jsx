@@ -16,9 +16,12 @@ import SubJudulCenter from '../components/SubJudulCenter'
 
 // img
 import pamflet from '../assets/pamflet/pamflet-4.jpg'
-import img1 from '../assets/tujuanImgs/img_1.jpg'
 
 const Kemahadan = () => {
+    // scroll to top
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     return (
         <LayoutPages>
             <HeaderPage whiteText1={'Pondok Pesantren'} whiteText2={'Muhammadiyah Al-Amin'} YellowText={'Seputih Banyak - Lampung Tengah'} deskripsi={'Pesantren ini bersiri sebagai salah satu upaya Muhammadiyah untuk mencetak generasi muda yang berakhlak mulia, memiliki wawasan keislaman yang mendalam, serta mampu berkontribusi dalam pembangunan masyarakat.'} />
@@ -35,7 +38,7 @@ const Kemahadan = () => {
 const DailySantri = () => {
     return (
         <LayoutSectionBg minH={0} pb={12} pt={12} bg2={true}>
-            <div className='w-full flex flex-col justify-start items-center px-2 gap-16'>
+            <div className='w-full flex flex-col justify-start items-center px-2 gap-16 md:px-10'>
                 <SubJudulCenter title={'Daily Santri Pondok Pesantren Muhammadiyah Al-Amin Seputih Banyak - Lampung Tengah'} />
                 <div className='w-full px-3'>
                     <img src={pamflet} alt="" />
@@ -71,7 +74,7 @@ const GallerySantri = () => {
     }, [gallery])
 
     return (
-        <div className='w-full min-h-[60vh] bg-primary-blue flex flex-col justify-start items-center px-6 gap-10 pt-6 pb-14'>
+        <div className='w-full min-h-[60vh] bg-primary-blue flex flex-col justify-start items-center px-6 gap-10 pt-6 pb-14 md:px-10'>
             <SubJudulCenter title={'Gallery Santri'} color={'#fff'} />
             <div className='w-full h-[40vh] flex flex-row justify-between items-center gap-2 overflow-hidden'>
                 <div className='w-[50%] h-full flex flex-col justify-between items-center gap-2'>
@@ -128,7 +131,7 @@ const GallerySantri = () => {
                     </AnimatePresence>
                 </div>
             </div>
-            <p className='text-md font-semibold text-primary-blue w-full text-center py-2 bg-white cursor-pointer rounded-md'>
+            <p className='text-md font-semibold text-primary-blue w-full text-center py-2 bg-white cursor-pointer rounded-md border-1 border-primary-blue hover:bg-primary-blue hover:text-white hover:border-white md:text-2xl md:py-4'>
                 Selengkapnya
             </p>
         </div>

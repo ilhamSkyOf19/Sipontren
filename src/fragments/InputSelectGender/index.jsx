@@ -2,18 +2,18 @@ import React from 'react'
 
 const InputSelectGender = ({ gender, setGender }) => {
     return (
-        <div className='w-full flex flex-col justify-start items-start gap-2 relative mb-4'>
-            <label className="block text-md" htmlFor="gender">
+        <div className='w-full flex flex-col justify-start items-start gap-2 relative mb-4 md:flex-1/3'>
+            <label className="block text-md md:text-[1.25rem]" htmlFor="gender">
                 Jenis Kelamin
             </label>
             <select
                 id="gender"
                 name="gender"
-                className="w-full py-2.5 px-4 rounded-lg border-[1.5px] text-sm appearance-none border-primary-blue focus:outline-none focus:ring-1 focus:ring-primary-blue focus:border-primary-blue"
+                className="w-full py-2.5 px-4 rounded-lg border-[1.5px] text-sm appearance-none border-primary-blue focus:outline-none focus:ring-1 focus:ring-primary-blue focus:border-primary-blue md:py-3 md:text-lg"
                 value={gender}
                 onChange={setGender}
             >
-                <option value="" className='text-slate-400 text-[0.5rem]'>Pilih jenis kelamin --</option>
+                <option value="" className='text-slate-400 text-[0.5rem]'>-- Pilih jenis kelamin --</option>
                 <option value="male" className='text-[0.5rem]'>Laki-laki</option>
                 <option value="female" className='text-[0.5rem]'>Perempuan</option>
             </select>

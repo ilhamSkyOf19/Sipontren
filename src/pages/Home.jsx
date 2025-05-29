@@ -44,7 +44,7 @@ import useIndexFade from '../hook/UseIndexFade';
 
 
 const Home = () => {
-  const window = useWindowSize().width;
+  const widthDevice = useWindowSize().width;
 
   // ===============
   // Data Berita
@@ -56,6 +56,12 @@ const Home = () => {
   }, [])
 
 
+  // scroll to top
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  console.log(widthDevice)
 
 
 
@@ -65,9 +71,9 @@ const Home = () => {
       <SectionOne />
       <SectionTwo />
       <SectionThree />
-      <SectionFour width={window} />
-      <SectionFive width={window} data={data} />
-      <SectionMaps width={window} />
+      <SectionFour width={widthDevice} />
+      <SectionFive width={widthDevice} data={data} />
+      <SectionMaps width={widthDevice} />
     </LayoutPages>
   )
 }

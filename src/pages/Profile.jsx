@@ -35,8 +35,14 @@ const Profile = () => {
     }, [])
 
     // Window Size
-    const window = useWindowSize().width
+    const widthDevice = useWindowSize().width
 
+
+
+    // scroll to top
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     return (
         <LayoutPages>
             <LayoutSectionBg minH={100} pt={12} size={'contain'}>
@@ -46,7 +52,7 @@ const Profile = () => {
                 <SectionProgramUnggulan />
                 <SectionFasilitas />
                 <SectionPrestasi />
-                <SectionProfleUstad data={dataUstads} widthDevice={window} />
+                <SectionProfleUstad data={dataUstads} widthDevice={widthDevice} />
                 <SectionAlumni />
             </LayoutSectionBg>
         </LayoutPages>
@@ -93,7 +99,7 @@ const SectionVisiMisi = () => {
                 </div>
                 <div className='w-full flex flex-col justify-start items-start gap-4'>
                     <p className='text-primary-blue py-3 px-14 bg-white text-xl font-semibold rounded-xl md:text-2xl'>Misi</p>
-                    <ol className='list-decimal list-outside px-2 space-y-3 relative before:absolute before:w-[20%] before:h-[3px] before:bg-primary-yellow before:-bottom-2 before:left-0 text-white text-sm font-[300] md:text-xl'>
+                    <ol className='list-decimal list-outside px-5 space-y-3 relative before:absolute before:w-[20%] before:h-[3px] before:bg-primary-yellow before:-bottom-2 before:left-0 text-white text-sm font-[300] md:text-xl'>
                         <li>Menyelenggarakan pendidikan pesantren integrall dengan memadukan kurikulum pesantren dan kurikulum nasional.</li>
                         <li>Menyelenggarakan pendidikan yang berbasis Qur’an dan Hadist yang sesuai paham Muhammadiyah.</li>
                         <li>Menanamkan nilai-nilai keimanan dan keislaman untuk menyiapkan dan mencetak kader muhammadiyah yang cerdas Iman, Ilmu dan Akhlak.</li>

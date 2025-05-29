@@ -21,7 +21,7 @@ const HeaderPage = ({ whiteText1, whiteText2, YellowText, deskripsi }) => {
                 transition={{ duration: 4, repeat: Infinity, repeatType: 'reverse', ease: 'easeInOut' }}
                 className='absolute z-0 -right-20 top-[35%] md:inline-block md:right-8'
             >
-                <img src={fileThumb} alt="logo sipontren" className='w-[12rem] opacity-60 md:w-[14rem]' />
+                <img src={fileThumb} alt="logo sipontren" className='w-[12rem] opacity-60 md:w-[14rem] md:opacity-100' />
             </motion.div>
         </div>
     )

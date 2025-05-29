@@ -251,7 +251,7 @@ const NavbarListComponent = ({ valueTop, showNavbarList, navbarListRef }) => {
 
 const NavbarLinkTab = ({ link, text }) => {
     return (
-        <Link to={`/${link}`} className='text-xl text-white relative before:w-full before:h-[2px] before:bg-yellow-300 before:absolute before:bottom-0 before:left-0 before:origin-left before:scale-x-0 before:transition-all before:duration-300 hover:before:scale-x-100'>{text}</Link>
+        <Link to={`/${link}`} className='text-xl text-white relative before:w-full before:h-[4px] before:bg-yellow-300 before:absolute before:bottom-0 before:left-0 before:origin-left before:scale-x-0 before:transition-all before:duration-300 hover:before:scale-x-100'>{text}</Link>
     )
 }
 
