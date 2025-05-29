@@ -1,0 +1,74 @@
+[
+    {
+        "id": 1,
+        "img": "sample.jpg",
+        "nama": "Ust. Rizki Maulana Hidayat",
+        "jabatan": "Ketua Yayasan"
+    },
+    {
+        "id": 2,
+        "img": "sample.jpg",
+        "nama": "Ust. Fikri Ananda Saputra",
+        "jabatan": "Wakil Direktur"
+    },
+    {
+        "id": 3,
+        "img": "sample.jpg",
+        "nama": "Ust. Hanif Rasyid Albar",
+        "jabatan": "Kepala Pengajar"
+    },
+    {
+        "id": 4,
+        "img": "sample.jpg",
+        "nama": "Ust. Ihsan Ramadhan Fauzi",
+        "jabatan": "Sekretaris"
+    },
+    {
+        "id": 5,
+        "img": "sample.jpg",
+        "nama": "Ust. Farhan Ahmad Zulfikar",
+        "jabatan": "Bendahara"
+    },
+    {
+        "id": 6,
+        "img": "sample.jpg",
+        "nama": "Ust. Reza Maulana Qosim",
+        "jabatan": "Koordinator Tahfidz"
+    },
+    {
+        "id": 7,
+        "img": "sample.jpg",
+        "nama": "Ust. Ilham Yusuf Ramadhan",
+        "jabatan": "Pembina Santri"
+    },
+    {
+        "id": 8,
+        "img": "sample.jpg",
+        "nama": "Ust. Alif Nur Syahputra",
+        "jabatan": "Pengajar Hadits"
+    },
+    {
+        "id": 9,
+        "img": "sample.jpg",
+        "nama": "Ust. Dimas Akbar Thariq",
+        "jabatan": "Imam Masjid"
+    },
+    {
+        "id": 10,
+        "img": "sample.jpg",
+        "nama": "Ust. Hilmi Faiz Rahman",
+        "jabatan": "Penanggung Jawab Kajian"
+    },
+    {
+        "id": 11,
+        "img": "sample.jpg",
+        "nama": "Ust. Naufal Arifin Khalid",
+        "jabatan": "Koordinator Sosial"
+    },
+    {
+        "id": 12,
+        "img": "sample.jpg",
+        "nama": "Ust. Syamil Firdaus Luthfi",
+        "jabatan": "Pembimbing Akhlak"
+    }
+]

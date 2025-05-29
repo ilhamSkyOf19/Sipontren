@@ -5,8 +5,8 @@ import { motion } from 'framer-motion'
 import thumbnailProfile from '../../assets/thumbnails/thumbnail_profile.png'
 const AnimationThreeImg = ({ bg }) => {
     return (
-        <div className='w-full h-[40vh] flex flex-col justify-end items-center rounded-4xl overflow-hidden'>
-            <div className={`w-[90%] h-[13rem] flex flex-col justify-center items-center  rounded-3xl relative bg-${bg}`}>
+        <div className='w-full h-[40vh] flex flex-col justify-end items-center rounded-4xl overflow-hidden md:h-[65vh]'>
+            <div className={`w-[90%] h-[13rem] flex flex-col justify-center items-center  rounded-3xl relative bg-${bg} md:w-[80%] md:h-[28rem]`}>
                 <motion.div
                     animate={{ y: [0, 20, 0] }}
                     transition={{ duration: 4, repeat: Infinity, repeatType: 'reverse', ease: 'easeInOut' }}

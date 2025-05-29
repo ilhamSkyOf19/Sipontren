@@ -44,8 +44,16 @@ import useIndexFade from '../hook/UseIndexFade';
 
 
 const Home = () => {
-  const { window } = useWindowSize().width;
+  const window = useWindowSize().width;
 
+  // ===============
+  // Data Berita
+  // ===============
+  const [data, setData] = useState([])
+
+  useEffect(() => {
+    setData(dataBerita);
+  }, [])
 
 
 
@@ -58,7 +66,7 @@ const Home = () => {
       <SectionTwo />
       <SectionThree />
       <SectionFour width={window} />
-      <SectionFive />
+      <SectionFive width={window} data={data} />
       <SectionMaps width={window} />
     </LayoutPages>
   )
@@ -71,9 +79,9 @@ const Home = () => {
 
 const SectionOne = memo(() => {
   return (
-    <div className='flex flex-col justify-start items-center w-screen min-h-[100vh] pt-32 pb-12 bg-primary-blue gap-2 overflow-hidden'>
+    <div className='flex flex-col justify-start items-center w-screen min-h-[100vh] pt-28 pb-12 bg-primary-blue gap-2 overflow-hidden md:pt-32'>
       <div className='flex flex-col justify-center items-center w-screen gap-3 md:gap-6'>
-        <IconArab width='35%' position={'center'} />
+        <IconArab width='32%' position={'center'} />
         <div className='flex flex-col justify-center items-center w-full gap-2 mb-3'>
           <p className='text-md font-roboto weight-[100] text-white md:text-2xl'>Update Informasi Terkait</p>
           <p className="text-xl text-white font-semibold md:text-3xl">PENERIMAAN SANTRI BARU</p>
@@ -99,7 +107,7 @@ const SectionOne = memo(() => {
 
 const SectionTwo = memo(() => {
   return (
-    <LayoutSectionBg pt={12} pb={12}>
+    <LayoutSectionBg pt={12} pb={12} size={'cover'}>
       <HeaderSection judul={'Layanan Pendidikan'} ket={'Pilihan Pendidikan Berkualitas Pondok Pesantren Modern, Sekolah Menengah Pertama, dan Sekolah Menengah Atas Kami Hadir Untuk Mendukung Masa Depan Cemerlang Anda'} />
       <div className={`
       w-screen flex flex-col justify-center items-center gap-7
@@ -140,7 +148,7 @@ const SectionThree = memo(() => {
 const SectionFour = ({ width }) => {
 
   return (
-    <LayoutSectionBg minH={width < 760 ? '70' : '80'} pt={12} pb={12}>
+    <LayoutSectionBg minH={width < 760 ? '70' : '80'} pt={12} pb={12} bg2={true} size={'cover'}>
       <HeaderSection judul={'Kegiatan Santri'} ket={'Wadah Pengembangan Bakat dan Karakter Santri'} />
       <ScrollX>
         {dataEkstrakulikuler.map((item) => (
@@ -158,20 +166,16 @@ const SectionFour = ({ width }) => {
 // Section Five
 // =================
 
-const SectionFive = () => {
-  const [data, setData] = useState([])
+const SectionFive = memo(({ width, data }) => {
 
-  useEffect(() => {
-    setData(dataBerita);
-  }, [])
 
   // useIndexFade
   const index = useIndexFade({ data, duration: 4000 });
 
   return (
-    <LayoutSectionBg pb={12} minH={'100'}>
+    <LayoutSectionBg pb={12} minH={'100'} bg2={true} size={width < 760 ? 'contain' : 'cover'}>
       <HeaderSection judul={'Berita Terkini'} ket={'Informasi Terkait Pondok Persantren Muhammadiyah Al-Amin Seputih Banyak'} />
-      <div className='w-full px-8'>
+      <div className='w-full px-5'>
         <AnimatePresence mode='wait'>
           <motion.div
             key={index}
@@ -194,7 +198,7 @@ const SectionFive = () => {
       </div>
     </LayoutSectionBg>
   )
-}
+})
 
 
 // =================
@@ -203,7 +207,7 @@ const SectionFive = () => {
 
 const SectionMaps = ({ width }) => {
   return (
-    <div className='w-full min-h-[40vh] flex justify-center items-center px-7 py-8' style={{ backgroundImage: `url(${frameKonten})`, backgroundPosition: width < 760 ? 'contain' : 'center', backgroundSize: 'contain' }}>
+    <div className='w-full min-h-[40vh] flex justify-center items-center px-5 py-8'>
       <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3975.563039920363!2d105.4426229!3d-4.8448278!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e3f60508043822d%3A0xb1dad378b9958f66!2sPonpes%20Al-Amin!5e0!3m2!1sid!2sid!4v1747380711868!5m2!1sid!2sid"
         width='100%'
         height="300"

@@ -34,7 +34,7 @@ const Kemahadan = () => {
 
 const DailySantri = () => {
     return (
-        <LayoutSectionBg minH={0} pb={12} pt={12}>
+        <LayoutSectionBg minH={0} pb={12} pt={12} bg2={true}>
             <div className='w-full flex flex-col justify-start items-center px-2 gap-16'>
                 <SubJudulCenter title={'Daily Santri Pondok Pesantren Muhammadiyah Al-Amin Seputih Banyak - Lampung Tengah'} />
                 <div className='w-full px-3'>

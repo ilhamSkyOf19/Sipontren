@@ -152,9 +152,8 @@ const Navbar = ({ showNavbar, handleClick, ref, toggleButtonRef, showNavbarList,
 // =================
 
 const Footer = () => {
-    const { window } = useWindowSize().width;
     return (
-        <div className='w-screen min-h-[70vh] flex flex-col justify-start items-start bg-primary-blue pt-8 px-6 gap-6 pb-7] md:min-h-[100vh]'>
+        <div className='w-screen min-h-[70vh] flex flex-col justify-start items-start bg-primary-blue pt-8 px-6 gap-6 pb-7 md:min-h-[100vh]'>
             <IconArab width='32%' />
             <div className='flex flex-col gap-2'>
                 <p className='text-sm text-primary-yellow md:text-2xl'>Alamat</p>
