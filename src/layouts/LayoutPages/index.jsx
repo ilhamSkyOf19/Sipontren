@@ -6,6 +6,7 @@ import useWindowSize from '../../hook/UseWindowSize';
 import PusatBantuan from '../../fragments/PusatBantuan';
 import { FaFacebookF, FaInstagram, FaTiktok, FaYoutube } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
+import IconNavbar from '../../components/IconNavbar';
 const index = ({ children }) => {
     // ====================
     // State
@@ -97,12 +98,13 @@ const index = ({ children }) => {
 
 
 
+
     return (
         <div className='flex flex-col overflow-hidden '>
             <Navbar ref={elementTop} showNavbar={showNavbar} handleClick={handleClick} toggleButtonRef={toggleButtonRef} showNavbarList={showNavbarList} widthDevice={useWindowSize().width} />
             {<NavbarListComponent valueTop={valueTop} showNavbarList={showNavbarList} setShowNavbarList={setShowNavbarList} navbarListRef={navbarListRef} />}
             {children}
-            <Footer />
+            <Footer widthDevice={useWindowSize().width} />
         </div>
     )
 }
@@ -116,8 +118,11 @@ const index = ({ children }) => {
 const Navbar = ({ showNavbar, handleClick, ref, toggleButtonRef, showNavbarList, widthDevice }) => {
 
     return (
-        <div ref={ref} className={`flex flex-row justify-between items-center z-50 bg-secondary-blue w-full h-18 fixed transition duration-350 ease-in-out ${showNavbar ? 'translate-y-0' : '-translate-y-full'} px-4 md:h-24 md:px-8`}>
-            <IconArab width='18%' position='start' />
+        <div ref={ref} className={`flex flex-row justify-between items-center z-50 bg-secondary-blue w-full h-18 fixed transition duration-350 ease-in-out ${showNavbar ? 'translate-y-0' : '-translate-y-full'} px-4 md:h-18 md:px-8 lg:h-14`}>
+            {widthDevice < 400 && <IconArab width={90} />}
+            {widthDevice > 700 && widthDevice <= 1024 && <IconArab width={100} />}
+            {widthDevice > 1024 && <IconNavbar />}
+
             {widthDevice < 700 && <button
                 ref={toggleButtonRef}
                 onClick={handleClick}
@@ -133,13 +138,22 @@ const Navbar = ({ showNavbar, handleClick, ref, toggleButtonRef, showNavbarList,
                     />
                 </div>
             </button>}
-            {widthDevice > 700 &&
-                <div className='flex flex-row justify-end items-center gap-7'>
+            {widthDevice > 700 && widthDevice <= 1024 &&
+                <div className='flex flex-row justify-end items-center gap-9'>
                     <NavbarLinkTab link='' text='Home' />
                     <NavbarLinkTab link='profile' text='Profile' />
                     <NavbarLinkTab link='kemahadan' text={`Kema'hadan`} />
                     <NavbarLinkTab link='psb' text='PSB' />
                     <NavbarLinkTab link='formulir' text='Formulir' />
+                </div>
+            }
+            {widthDevice > 1024 &&
+                <div className='flex flex-row justify-end items-center gap-6'>
+                    <NavbarLinkTabDesktop link='' text='Home' />
+                    <NavbarLinkTabDesktop link='profile' text='Profile' />
+                    <NavbarLinkTabDesktop link='kemahadan' text={`Kema'hadan`} />
+                    <NavbarLinkTabDesktop link='psb' text='PSB' />
+                    <NavbarLinkTabDesktop link='formulir' text='Formulir' />
                 </div>
             }
 
@@ -151,44 +165,59 @@ const Navbar = ({ showNavbar, handleClick, ref, toggleButtonRef, showNavbarList,
 // Footer
 // =================
 
-const Footer = () => {
+const Footer = ({ widthDevice }) => {
     return (
-        <div className='w-screen min-h-[70vh] flex flex-col justify-start items-start bg-primary-blue pt-8 px-6 gap-6 pb-7 md:min-h-[100vh]'>
-            <IconArab width='32%' />
-            <div className='flex flex-col gap-2'>
-                <p className='text-sm text-primary-yellow md:text-2xl'>Alamat</p>
-                <p className='text-sm text-white font-[200] md:text-xl'>
-                    Jl. AR. Fakhrudin No.22 Desa Tanjung Harapan, Kecematan Seputih Banyak, Kabupaten Lampung Tengah 34156
-                </p>
-            </div>
-            <div className='flex flex-col gap-7 mb-4'>
-                <PusatBantuan title={'Bantuan'} link={['faq', '', '', '']} text={['FAQ', 'Hubungi Kami', '+62 822-7821-9515']} />
-                <PusatBantuan title={'Layanan Kami'} link={['', '', '', '']} text={['Profil Pesantren', 'Penerimaan Santri Baru', 'Berita Terkini']} />
-                <PusatBantuan title={'Informasi Penting'} link={['', '', '', '']} text={['Jam Kerja', 'Biaya Pendidikan', 'Pendaftaran']} />
+        <div className='w-screen min-h-[70vh] flex flex-col justify-start items-start bg-primary-blue pt-8 px-4 gap-6 pb-7 md:min-h-[100vh] lg:min-h-[40vh] lg:px-14 lg:pb-4 lg:pt-9'>
+            <div className='w-full flex flex-col justify-start items-start gap-6 lg:flex-row lg:justify-between'>
+                <div className='w-full flex flex-col justify-start items-start gap-6 lg:flex-1'>
+                    <IconArab width={widthDevice > 0 && widthDevice <= 760 ? 100 : widthDevice > 760 && widthDevice < 1024 ? 100 : widthDevice > 1024 ? 140 : 100} />
+                    <div className='flex flex-col gap-2'>
+                        <p className='text-sm text-primary-yellow md:text-2xl lg:text-sm'>Alamat</p>
+                        <p className='text-sm text-white font-[200] md:text-xl lg:text-sm'>
+                            Jl. AR. Fakhrudin No.22 Desa Tanjung Harapan, Kecematan Seputih Banyak, Kabupaten Lampung Tengah 34156
+                        </p>
+                    </div>
+                    {widthDevice < 1024 && <div className='flex flex-col gap-7 mb-4'>
+                        <PusatBantuan title={'Bantuan'} link={['faq', '', '', '']} text={['FAQ', 'Hubungi Kami', '+62 822-7821-9515']} />
+                        <PusatBantuan title={'Layanan Kami'} link={['', '', '', '']} text={['Profil Pesantren', 'Penerimaan Santri Baru', 'Berita Terkini']} />
+                        <PusatBantuan title={'Informasi Penting'} link={['', '', '', '']} text={['Jam Kerja', 'Biaya Pendidikan', 'Pendaftaran']} />
+                    </div>}
+
+
+                    {/* media social */}
+                    <div className='w-full flex flex-row justify-start items-center gap-3 lg:mb-1'>
+                        <MediaSocialComponent link={'https://www.facebook.com/profile.php?id=100011218575737'}>
+                            <FaFacebookF className='text-primary-blue text-xl md:text-3xl lg:text-lg' />
+                        </MediaSocialComponent>
+                        <MediaSocialComponent link={'https://www.instagram.com/alaminseputihbanyak?igsh=MzJwbnI5bDJmMDVq'}>
+                            <FaInstagram className='text-primary-blue text-xl md:text-3xl lg:text-lg' />
+                        </MediaSocialComponent>
+                        <MediaSocialComponent link={'https://www.tiktok.com/@pontrenmu.alamin?_t=ZS-8wjeNqqt9wF&_r=1'}>
+                            <FaTiktok className='text-primary-blue text-xl md:text-3xl lg:text-lg' />
+                        </MediaSocialComponent>
+                        <MediaSocialComponent link={'https://www.youtube.com/@alaminseputihbanyak'}>
+                            <FaYoutube className='text-primary-blue text-xl md:text-3xl lg:text-lg' />
+                        </MediaSocialComponent>
+
+                    </div>
+                </div>
+                {widthDevice > 1024 && <div className='flex flex-col gap-7 mb-4 lg:flex-1 lg:flex-row lg:justify-end'>
+                    <PusatBantuan title={'Bantuan'} link={['faq', '', '', '']} text={['FAQ', 'Hubungi Kami', '+62 822-7821-9515']} />
+                    <PusatBantuan title={'Layanan Kami'} link={['', '', '', '']} text={['Profil Pesantren', 'Penerimaan Santri Baru', 'Berita Terkini']} />
+                    <PusatBantuan title={'Informasi Penting'} link={['', '', '', '']} text={['Jam Kerja', 'Biaya Pendidikan', 'Pendaftaran']} />
+                </div>}
             </div>
 
-            {/* media social */}
-            <div className='w-full flex flex-row justify-start items-center gap-3 mb-10'>
-                <MediaSocialComponent link={'https://www.facebook.com/profile.php?id=100011218575737'}>
-                    <FaFacebookF className='text-primary-blue text-xl md:text-3xl' />
-                </MediaSocialComponent>
-                <MediaSocialComponent link={'https://www.instagram.com/alaminseputihbanyak?igsh=MzJwbnI5bDJmMDVq'}>
-                    <FaInstagram className='text-primary-blue text-xl md:text-3xl' />
-                </MediaSocialComponent>
-                <MediaSocialComponent link={'https://www.tiktok.com/@pontrenmu.alamin?_t=ZS-8wjeNqqt9wF&_r=1'}>
-                    <FaTiktok className='text-primary-blue text-xl md:text-3xl' />
-                </MediaSocialComponent>
-                <MediaSocialComponent link={'https://www.youtube.com/@alaminseputihbanyak'}>
-                    <FaYoutube className='text-primary-blue text-xl md:text-3xl' />
-                </MediaSocialComponent>
 
-            </div>
-            <div className='w-full flex flex-col justify-center items-start'>
-                <p className='text-sm text-white font-[200] md:text-lg'>
+            <div className='w-full flex flex-col justify-center items-start lg:flex-row lg:justify-between'>
+                <p className='text-sm text-white font-[200] md:text-lg lg:text-sm'>
                     &copy; 2024 Sipontren Inc. Copyright and all rights reserved
                 </p>
-                <p className='text-sm text-white font-[200] md:text-lg'>Terms and Conditions</p>
-                <p className='text-sm text-white font-[200] md:text-lg'>Privacy Policy</p>
+                <div className='flex flex-col justify-start items-start gap-0 lg:flex-row lg:gap-5'>
+                    <p className='text-sm text-white font-[200] md:text-lg lg:text-sm'>Terms and Conditions</p>
+                    {widthDevice > 1024 && <p className='text-sm text-white font-bold'>&middot;</p>}
+                    <p className='text-sm text-white font-[200] md:text-lg lg:text-sm'>Privacy Policy</p>
+                </div>
             </div>
         </div>
     )
@@ -202,11 +231,15 @@ const MediaSocialComponent = ({ link, children }) => {
     return (
         <a
             href={link}
-            target='_blank'
-            rel='noreferrer noopener'
-            className='w-[2.2rem] h-[2.2rem] bg-white rounded-full flex justify-center items-center md:w-[4rem] md:h-[4rem]'>
+            target="_blank"
+            rel="noreferrer noopener"
+            className="w-[2.2rem] h-[2.2rem] bg-white rounded-full flex justify-center items-center 
+             md:w-[4rem] md:h-[4rem] lg:w-[2rem] lg:h-[2rem] 
+             transform lg:hover:scale-120 transition duration-300 ease-in-out will-change-transform"
+        >
             {children}
         </a>
+
     )
 }
 
@@ -251,7 +284,17 @@ const NavbarListComponent = ({ valueTop, showNavbarList, navbarListRef }) => {
 
 const NavbarLinkTab = ({ link, text }) => {
     return (
-        <Link to={`/${link}`} className='text-xl text-white relative before:w-full before:h-[4px] before:bg-yellow-300 before:absolute before:bottom-0 before:left-0 before:origin-left before:scale-x-0 before:transition-all before:duration-300 hover:before:scale-x-100'>{text}</Link>
+        <Link to={`/${link}`} className='text-lg text-white relative before:w-full before:h-[4px] before:bg-yellow-300 before:absolute before:bottom-0 before:left-0 before:origin-left before:scale-x-0 before:transition-all before:duration-300 hover:before:scale-x-100'>{text}</Link>
+    )
+}
+
+// ====================
+// Navbar Link tab Desktop
+// ====================
+
+const NavbarLinkTabDesktop = ({ link, text }) => {
+    return (
+        <Link to={`/${link}`} className='text-lg text-white relative transition-all duration-500 ease-in-out hover:bg-primary-yellow  lg:text-xs lg:py-2 lg:px-4 lg:rounded-2xl'>{text}</Link>
     )
 }
 

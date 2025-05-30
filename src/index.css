@@ -40,3 +40,23 @@ input[type='number']::-webkit-outer-spin-button {
 input[type='number'] {
   -moz-appearance: textfield;
 }
+
+@layer utilities {
+  .scroll-thumb-only {
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: #0747A6 transparent; /* thumb warna biru, track transparan (Firefox) */
+  }
+
+  .scroll-thumb-only::-webkit-scrollbar {
+    height: 8px; /* untuk horizontal, ubah jadi width untuk vertical */
+  }
+
+  .scroll-thumb-only::-webkit-scrollbar-track {
+    background: transparent; /* membuat track transparan */
+  }
+
+  .scroll-thumb-only::-webkit-scrollbar-thumb {
+    background-color: #0747A6; /* warna thumb */
+    border-radius: 10px;
+  }
+}

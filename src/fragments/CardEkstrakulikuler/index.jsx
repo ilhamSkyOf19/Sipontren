@@ -15,6 +15,7 @@ import logo2 from '../../assets/icons/logo-2.png'
 import logo3 from '../../assets/icons/logo-3.png'
 import { useMemo } from 'react'
 import { memo } from 'react'
+import useWindowSize from '../../hook/UseWindowSize'
 const index = ({ logo, person, title, ket, subJudul, bg, iconSize = '55%', id }) => {
     const images = useMemo(() => ({
         bg1: bg1,
@@ -32,14 +33,16 @@ const index = ({ logo, person, title, ket, subJudul, bg, iconSize = '55%', id })
         logo2: logo2,
         logo3: logo3,
     }), [])
+
+    const window = useWindowSize().width
     return (
-        <div className='w-[100%] h-[18rem] bg-white rounded-xl shadow-xl flex flex-col justify-between items-center overflow-hidden shrink-0 md:w-[65%] md:h-[26rem] md:mt-12'>
+        <div className='w-[100%] h-[18rem] bg-white rounded-xl shadow-xl flex flex-col justify-between items-center overflow-hidden shrink-0 md:w-[65%] md:h-[26rem] md:mt-12 lg:w-[38%] lg:h-[20rem]'>
             <div className={`w-full h-[65%] flex flex-row justify-between items-center bg-cover overflow-hidden`} style={{ backgroundImage: `url(${images[bg]})` }}>
                 {id === 2 ? (
                     <>
                         <div className='w-[80%] h-full flex flex-row justify-end items-center pt-4 relative'>
-                            <img src={images[person]} alt="logo" width={'55%'} className='absolute left-5' />
-                            <img src={person3} alt="logo" width={'55%'} className='mt-4 absolute right-4 bottom-0' />
+                            <img src={images[person]} alt="logo" width={window > 1024 ? '45%' : '55%'} className='absolute left-5' />
+                            <img src={person3} alt="logo" width={window > 1024 ? '45%' : '55%'} className='mt-4 absolute right-4 bottom-0 lg:right-10' />
                         </div>
                         <div className='w-[50%] h-full flex justify-center items-center'>
                             <img src={images[logo]} alt="logo" width={iconSize} />
@@ -51,14 +54,14 @@ const index = ({ logo, person, title, ket, subJudul, bg, iconSize = '55%', id })
                             <img src={images[logo]} alt="logo" width={iconSize} />
                         </div>
                         <div className='w-[50%] h-full flex justify-end items-center pt-4 relative'>
-                            <img src={images[person]} alt="logo" width={'85%'} className='absolute bottom-0' />
+                            <img src={images[person]} alt="logo" width={window > 1024 ? '70%' : '85%'} className='absolute bottom-0' />
                         </div>
                     </>
 
                 ) : id === 5 ? (
                     <>
                         <div className='w-[65%] h-full flex justify-start items-center pt-8 pl-2 relative'>
-                            <img src={images[person]} alt="logo" width={'100%'} className='absolute bottom-0' />
+                            <img src={images[person]} alt="logo" width={window > 1024 ? '80%' : '100%'} className='absolute bottom-0' />
                         </div>
                         <div className='w-[35%] h-full flex justify-start items-center'>
                             <img src={images[logo]} alt="logo" width={iconSize} />
@@ -67,17 +70,17 @@ const index = ({ logo, person, title, ket, subJudul, bg, iconSize = '55%', id })
                 ) : (
                     <>
                         <div className='w-[60%] h-full flex justify-start items-center pt-4 pl-2'>
-                            <img src={images[person]} alt="logo" width={'90%'} />
+                            <img src={images[person]} alt="logo" width={window > 1024 ? '75%' : '90%'} />
                         </div>
                         <div className='w-[40%] h-full flex justify-center items-center'>
                         </div>
                     </>
                 )}
             </div>
-            <div className='w-full h-[30%] flex flex-col justify-end items-start pb-7 px-4 md:gap-1'>
-                <p className='text-[0.7rem] px-4 py-1 bg-secondary-blue text-white rounded-sm md:text-lg'>{subJudul}</p>
-                <p className='text-md font-semibold md:text-lg'>{title}</p>
-                <p className='text-[0.6rem] font-[300] md:text-sm'>{ket}</p>
+            <div className='w-full h-[30%] flex flex-col justify-end items-start pb-7 px-4 md:gap-2'>
+                <p className='text-[0.7rem] px-4 py-1 bg-secondary-blue text-white rounded-sm md:text-lg lg:text-xs'>{subJudul}</p>
+                <p className='text-md font-semibold md:text-lg lg:text-sm'>{title}</p>
+                <p className='text-[0.6rem] font-[300] md:text-sm lg:text-[0.6rem]'>{ket}</p>
             </div>
         </div>
     )
