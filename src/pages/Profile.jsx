@@ -51,8 +51,8 @@ const Profile = () => {
     }, []);
     return (
         <LayoutPages>
-            <LayoutSectionBg minH={100} pt={12} size={'contain'}>
-                <SectionThumbnail />
+            <LayoutSectionBg minH={100} pt={0} size={'contain'}>
+                <HeaderPage whiteText1={`Pondok Pesantren`} whiteText2="Muhammadiyah Al-Amin" YellowText="Seputih Banyak - Lampung Tengah" deskripsi="Pesantren ini berdiri sebagai salah satu upaya Muhammadiyah untuk mencetak generasi muda yang berakhlak mulia, memiliki wawasan keislaman yang mendalam, serta mampu berkontribusi dalam pembangunan masyarakat." />
                 <SectionSejarah />
                 <SectionVisiMisi widthDevice={widthDevice} />
                 <SectionProgramUnggulan />
@@ -72,7 +72,7 @@ const Profile = () => {
 
 const SectionThumbnail = () => {
     return (
-        <HeaderPage whiteText1={`Pondok Pesantren Muhammadiyah Al-Amin`} whiteText2="Muhammadiyah Al-Amin" YellowText="Seputih Banyak - Lampung Tengah" deskripsi="Pesantren ini berdiri sebagai salah satu upaya Muhammadiyah untuk mencetak generasi muda yang berakhlak mulia, memiliki wawasan keislaman yang mendalam, serta mampu berkontribusi dalam pembangunan masyarakat." profile={true} />
+        <HeaderPage whiteText1={`Pondok Pesantren`} whiteText2="Muhammadiyah Al-Amin" YellowText="Seputih Banyak - Lampung Tengah" deskripsi="Pesantren ini berdiri sebagai salah satu upaya Muhammadiyah untuk mencetak generasi muda yang berakhlak mulia, memiliki wawasan keislaman yang mendalam, serta mampu berkontribusi dalam pembangunan masyarakat." />
     )
 }
 

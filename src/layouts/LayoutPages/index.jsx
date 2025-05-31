@@ -5,7 +5,7 @@ import { FaBarsStaggered, FaXmark } from 'react-icons/fa6';
 import useWindowSize from '../../hook/UseWindowSize';
 import PusatBantuan from '../../fragments/PusatBantuan';
 import { FaFacebookF, FaInstagram, FaTiktok, FaYoutube } from 'react-icons/fa6';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import IconNavbar from '../../components/IconNavbar';
 const index = ({ children }) => {
     // ====================
@@ -117,6 +117,37 @@ const index = ({ children }) => {
 
 const Navbar = ({ showNavbar, handleClick, ref, toggleButtonRef, showNavbarList, widthDevice }) => {
 
+
+    const navbar = [
+        {
+            label: 'Home',
+            url: ''
+        },
+        {
+            label: 'Profile',
+            url: 'profile'
+        },
+        {
+            label: `Kema'hadan`,
+            url: 'kemahadan'
+        },
+        {
+            label: 'PSB',
+            url: 'psb'
+        },
+        {
+            label: 'Formulir',
+            url: 'formulir'
+        },
+    ]
+
+    // ==================
+    // Use Location 
+    // ==================
+    const location = useLocation();
+    const currentPath = location.pathname;
+
+
     return (
         <div ref={ref} className={`flex flex-row justify-between items-center z-50 bg-secondary-blue w-full h-18 fixed transition duration-350 ease-in-out ${showNavbar ? 'translate-y-0' : '-translate-y-full'} px-4 md:h-18 md:px-8 lg:h-14`}>
             {widthDevice < 400 && <IconArab width={90} />}
@@ -149,11 +180,10 @@ const Navbar = ({ showNavbar, handleClick, ref, toggleButtonRef, showNavbarList,
             }
             {widthDevice > 1024 &&
                 <div className='flex flex-row justify-end items-center gap-6'>
-                    <NavbarLinkTabDesktop link='' text='Home' />
-                    <NavbarLinkTabDesktop link='profile' text='Profile' />
-                    <NavbarLinkTabDesktop link='kemahadan' text={`Kema'hadan`} />
-                    <NavbarLinkTabDesktop link='psb' text='PSB' />
-                    <NavbarLinkTabDesktop link='formulir' text='Formulir' />
+                    {navbar.map((item, index) => (
+                        <NavbarLinkTabDesktop key={index} link={item.url} text={item.label} active={currentPath === `/${item.url}`} />
+                    ))}
+
                 </div>
             }
 
@@ -283,8 +313,9 @@ const NavbarListComponent = ({ valueTop, showNavbarList, navbarListRef }) => {
 // ====================
 
 const NavbarLinkTab = ({ link, text }) => {
+
     return (
-        <Link to={`/${link}`} className='text-lg text-white relative before:w-full before:h-[4px] before:bg-yellow-300 before:absolute before:bottom-0 before:left-0 before:origin-left before:scale-x-0 before:transition-all before:duration-300 hover:before:scale-x-100'>{text}</Link>
+        <Link to={`/${link}`} className={`text-lg text-white relative before:w-full before:h-[4px] before:bg-yellow-300 before:absolute before:bottom-0 before:left-0 before:origin-left before:scale-x-0 before:transition-all before:duration-300 hover:before:scale-x-100 `}>{text}</Link>
     )
 }
 
@@ -292,9 +323,9 @@ const NavbarLinkTab = ({ link, text }) => {
 // Navbar Link tab Desktop
 // ====================
 
-const NavbarLinkTabDesktop = ({ link, text }) => {
+const NavbarLinkTabDesktop = ({ link, text, active }) => {
     return (
-        <Link to={`/${link}`} className='text-lg text-white relative transition-all duration-500 ease-in-out hover:bg-primary-yellow  lg:text-xs lg:py-2 lg:px-4 lg:rounded-2xl'>{text}</Link>
+        <Link to={`/${link}`} className={`text-lg text-white relative transition-all duration-700 ease-in-out hover:bg-primary-yellow  lg:text-xs lg:py-2 lg:px-4 lg:rounded-2xl ${active ? 'bg-primary-yellow' : 'bg-transparent'}`}>{text}</Link>
     )
 }
 
