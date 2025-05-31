@@ -24,7 +24,7 @@ const Kemahadan = () => {
     }, []);
     return (
         <LayoutPages>
-            <HeaderPage whiteText1={'Pondok Pesantren'} whiteText2={'Muhammadiyah Al-Amin'} YellowText={'Seputih Banyak - Lampung Tengah'} deskripsi={'Pesantren ini bersiri sebagai salah satu upaya Muhammadiyah untuk mencetak generasi muda yang berakhlak mulia, memiliki wawasan keislaman yang mendalam, serta mampu berkontribusi dalam pembangunan masyarakat.'} />
+            <HeaderPage whiteText1={'Pondok Pesantren Muhammadiyah Al-Amin'} whiteText2={'Muhammadiyah Al-Amin'} YellowText={'Seputih Banyak - Lampung Tengah'} deskripsi={'Pesantren ini bersiri sebagai salah satu upaya Muhammadiyah untuk mencetak generasi muda yang berakhlak mulia, memiliki wawasan keislaman yang mendalam, serta mampu berkontribusi dalam pembangunan masyarakat.'} />
             <DailySantri />
             <GallerySantri />
         </LayoutPages>
