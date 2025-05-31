@@ -39,8 +39,10 @@ const DailySantri = () => {
     return (
         <LayoutSectionBg minH={0} pb={12} pt={12} bg2={true}>
             <div className='w-full flex flex-col justify-start items-center px-2 gap-16 md:px-10'>
-                <SubJudulCenter title={'Daily Santri Pondok Pesantren Muhammadiyah Al-Amin Seputih Banyak - Lampung Tengah'} />
-                <div className='w-full px-3'>
+                <div className='flex justify-center items-center w-full lg:w-[60%]'>
+                    <SubJudulCenter title={'Daily Santri Pondok Pesantren Muhammadiyah Al-Amin Seputih Banyak - Lampung Tengah'} />
+                </div>
+                <div className='w-full px-3 lg:w-[45%]'>
                     <img src={pamflet} alt="" />
                 </div>
             </div>
@@ -74,9 +76,9 @@ const GallerySantri = () => {
     }, [gallery])
 
     return (
-        <div className='w-full min-h-[60vh] bg-primary-blue flex flex-col justify-start items-center px-6 gap-10 pt-6 pb-14 md:px-10'>
+        <div className='w-full min-h-[60vh] bg-primary-blue flex flex-col justify-start items-center px-6 gap-10 pt-6 pb-14 md:px-10 lg:h-[120vh]'>
             <SubJudulCenter title={'Gallery Santri'} color={'#fff'} />
-            <div className='w-full h-[40vh] flex flex-row justify-between items-center gap-2 overflow-hidden'>
+            <div className='w-full h-[40vh] flex flex-row justify-between items-center gap-2 overflow-hidden lg:h-[90%] lg:w-[85%]'>
                 <div className='w-[50%] h-full flex flex-col justify-between items-center gap-2'>
                     <AnimatePresence mode='wait'>
                         <motion.img
@@ -131,7 +133,7 @@ const GallerySantri = () => {
                     </AnimatePresence>
                 </div>
             </div>
-            <p className='text-md font-semibold text-primary-blue w-full text-center py-2 bg-white cursor-pointer rounded-md border-1 border-primary-blue hover:bg-primary-blue hover:text-white hover:border-white md:text-2xl md:py-4'>
+            <p className='text-md font-semibold text-primary-blue w-full text-center py-2 bg-white cursor-pointer rounded-md border-1 border-primary-blue hover:bg-primary-blue hover:text-white hover:border-white md:text-2xl md:py-4 lg:w-[85%] lg:text-xl lg:py-2.5'>
                 Selengkapnya
             </p>
         </div>
