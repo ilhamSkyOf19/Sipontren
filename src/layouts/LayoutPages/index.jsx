@@ -203,9 +203,9 @@ const Footer = ({ widthDevice }) => {
                     <IconArab width={widthDevice > 0 && widthDevice <= 760 ? 100 : widthDevice > 760 && widthDevice < 1024 ? 100 : widthDevice > 1024 ? 140 : 100} />
                     <div className='flex flex-col gap-2'>
                         <p className='text-sm text-primary-yellow md:text-2xl lg:text-sm'>Alamat</p>
-                        <p className='text-sm text-white font-[200] md:text-xl lg:text-sm'>
+                        <a href='https://maps.app.goo.gl/QvT4tcbTzG6kppcq7' target='_blank' className='text-sm text-white font-[200] md:text-xl lg:text-sm lg:cursor-pointer lg:font-normal'>
                             Jl. AR. Fakhrudin No.22 Desa Tanjung Harapan, Kecematan Seputih Banyak, Kabupaten Lampung Tengah 34156
-                        </p>
+                        </a>
                     </div>
                     {widthDevice < 1024 && <div className='flex flex-col gap-7 mb-4'>
                         <PusatBantuan title={'Bantuan'} link={['faq', '', '', '']} text={['FAQ', 'Hubungi Kami', '+62 822-7821-9515']} />
@@ -325,7 +325,7 @@ const NavbarLinkTab = ({ link, text }) => {
 
 const NavbarLinkTabDesktop = ({ link, text, active }) => {
     return (
-        <Link to={`/${link}`} className={`text-lg text-white relative transition-all duration-700 ease-in-out hover:bg-primary-yellow  lg:text-xs lg:py-2 lg:px-4 lg:rounded-2xl ${active ? 'bg-primary-yellow' : 'bg-transparent'}`}>{text}</Link>
+        <Link to={`/${link}`} className={`text-lg text-white relative transition-all duration-700 ease-in-out hover:bg-primary-yellow  lg:text-xs lg:py-2 lg:px-4 lg:rounded-2xl lg:font-semibold ${active ? 'bg-primary-yellow' : 'bg-transparent'}`}>{text}</Link>
     )
 }
 
