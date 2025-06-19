@@ -42,9 +42,30 @@ input[type='number'] {
 }
 
 @layer utilities {
+
+   /* scroll bar global */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0.05); /* abu tipis */
+}
+
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(7, 71, 166, 0.4);
+    border-radius: 10px;
+  }
+
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(7, 71, 166, 0.4) transparent;
+  }
+
+  /* custom */
   .scroll-thumb-only {
     scrollbar-width: thin; /* Firefox */
-    scrollbar-color: #0747A6 transparent; /* thumb warna biru, track transparan (Firefox) */
+    scrollbar-color: rgba(0, 0, 0, 0.1) transparent; /* thumb warna biru, track transparan (Firefox) */
   }
 
   .scroll-thumb-only::-webkit-scrollbar {
@@ -56,7 +77,10 @@ input[type='number'] {
   }
 
   .scroll-thumb-only::-webkit-scrollbar-thumb {
-    background-color: #0747A6; /* warna thumb */
+    background-color: rgba(0, 0, 0, 0.1); /* warna thumb */
     border-radius: 10px;
   }
+
+
+ 
 }

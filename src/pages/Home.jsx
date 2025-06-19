@@ -98,7 +98,7 @@ const SectionOne = memo(({ width }) => {
         <p className='text-lg font-poppins font-[600] text-white bg-primary-yellow py-2 px-5 text-center rounded-sm mb-8 md:text-2xl md:py-4 md:px-10 lg:text-xl lg:py-2 lg:px-14 lg:mb-6'>Jenjang SMP/SMA</p>
         {width > 1024 &&
           <div className='flex flex-row justify-between items-center gap-1 border border-white rounded-lg'>
-            <p className='text-xs rounded-lg border-white border-r bg-white text-bg-primary-blue py-2.5 px-9 cursor-pointer hover:bg-primary-blue hover:text-white transition-all ease-in-out duration-300 font-semibold text-primary-blue'>Daftar Sekarang</p>
+            <Link to={'/formulir'} className='text-xs rounded-lg border-white border-r bg-white text-bg-primary-blue py-2.5 px-9 cursor-pointer hover:bg-primary-blue hover:text-white transition-all ease-in-out duration-300 font-semibold text-primary-blue'>Daftar Sekarang</Link>
             <p className='text-xs py-2.5 px-7 text-white font-semibold'>psb.pontrenmualamin</p>
           </div>
         }

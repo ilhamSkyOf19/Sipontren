@@ -11,7 +11,7 @@ const HeaderPage = ({ whiteText1, whiteText2, YellowText, deskripsi }) => {
     return (
         <div className='w-full min-h-[45vh] bg-primary-blue flex flex-col justify-center items-start px-6 pt-[30%] pb-[10%] relative overflow-hidden md:flex-row md:items-center md:pt-[20%] lg:pt-[10%] lg:min-h-[100vh] lg:px-8'>
             <div className='flex flex-col justify-center items-start gap-3 z-10 lg:pr-32 lg:gap-6'>
-                <div className='w-full flex flex-col justify-start items-start lg:gap-2'>
+                <div className='w-full flex flex-col justify-start items-start lg:gap-1'>
                     <p className={`text-xl text-white font-semibold md:text-3xl lg:text-5xl`}>
                         {window > 1024 ? <Typewriter
                             words={[whiteText1]}
