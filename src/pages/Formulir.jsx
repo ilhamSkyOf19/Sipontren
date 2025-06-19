@@ -235,15 +235,15 @@ const SectionFormulir = () => {
             <div className='w-full flex-col justify-center items-center mb-12'>
                 <SubJudulCenter title="Formulir Pendaftaran" />
             </div>
-            <div className="relative w-[93%]">
+            <div className="relative w-[93%] lg:w-[60%]">
                 {/* Tab Container */}
                 <div className="flex">
                     {tabs.map((tab) => (
                         <p
                             key={tab}
                             onClick={() => setSelected(tab)}
-                            className={`relative text-xl font-semibold z-10 py-4 text-center flex-1 ${selected === tab ? 'text-white' : 'text-black'
-                                } md:text-3xl`}
+                            className={`relative text-xl font-semibold z-10 py-4 text-center flex-1 cursor-pointer ${selected === tab ? 'text-white' : 'text-black'
+                                } md:text-3xl lg:text-lg`}
                         >
                             {tab.toUpperCase()}
                         </p>
@@ -252,14 +252,14 @@ const SectionFormulir = () => {
 
                 {/* Sliding Indicator */}
                 <motion.div
-                    className="absolute bottom-0 left-0 h-full w-1/3 bg-primary-blue z-0 rounded-t-xl "
-                    animate={{ x: `${index * 100}%` }}
+                    className="absolute bottom-0 left-0 h-full w-1/3 bg-primary-blue z-0 rounded-t-xl lg:rounded-full lg:w-1/6 lg:left-16"
+                    animate={{ x: `${index * 200}%` }}
                     transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                 />
 
             </div>
-            <div className='w-full flex flex-col justify-start items-center px-4 gap-2 pt-10 pb-12 md:flex-row md:flex-wrap md:gap-4'>
-                <p className='w-full text-sm text-slate-600 md:text-lg'>*Pilih sesuai jenis sekolah</p>
+            <div className='w-full flex flex-col justify-start items-center px-4 gap-2 pt-10 pb-12 md:flex-row md:flex-wrap md:gap-4 lg:flex-col lg:items-start lg:px-12 lg:gap-2'>
+                <p className='w-full text-sm text-slate-600 md:text-lg lg:text-sm'>*Pilih sesuai jenis sekolah</p>
                 {/* NISN */}
                 <InputFormulir ref={inputRef} value={value.nisn} handleChange={handleChange} placeholder={'Masukan nomor NISN'} nameInput={'nisn'} tipe={'text'} label={'NISN'} max={10} tipeKeyboard={'numeric'} borderStyle={borderStyle} triger={triger.nisn} />
                 {/* NIK */}
@@ -294,7 +294,7 @@ const SectionFormulir = () => {
                 <InputFormulir ref={inputRefNamaLengkapWali} value={value.namaLengkapWali} handleChange={handleChange} placeholder={`Masukan nama lengkap Wali`} nameInput={'namaLengkapWali'} tipe={'text'} label={`Nama Lengkap Wali`} tipeKeyboard={'text'} borderStyle={borderStyleNamaLengkapWali} triger={triger.namaLengkapWali} max={100} />
 
                 {/* Input File Foto Formal  */}
-                <div className='w-full flex flex-col justify-start items-start gap-6 mb-6 md:flex-row md:flex-wrap'>
+                <div className='w-full flex flex-col justify-start items-start gap-6 mb-6 md:flex-row md:flex-wrap  lg:flex-col'>
                     <InputFormulirFile label={'Foto Formal'} fileAction={handleFotoFormal} accept={'.jpg,.jpeg,.png'} />
 
                     {/* Input File Foto Akta Kelahiran */}
@@ -311,8 +311,8 @@ const SectionFormulir = () => {
                 </div>
 
                 <div className='w-full flex flex-col justify-start items-start gap-4'>
-                    <p className='text-xs md:text-lg'>*Pastikan data yang anda masukan sudah benar</p>
-                    <button type="submit" className="w-full py-3 bg-primary-blue text-white rounded-lg hover:bg-secondary-blue hover:duration-200 text-md md:text-2xl md:py-4.5">Kirim</button>
+                    <p className='text-xs md:text-lg lg:text-sm'>*Pastikan data yang anda masukan sudah benar</p>
+                    <button type="submit" className="w-full py-3 bg-primary-blue text-white rounded-lg hover:bg-secondary-blue hover:duration-200 text-md md:text-2xl md:py-4.5 cursor-pointer">Kirim</button>
                 </div>
             </div>
 
