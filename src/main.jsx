@@ -8,11 +8,12 @@ import Profile from './pages/Profile.jsx'
 import Psb from './pages/Psb.jsx'
 import Faq from './pages/Faq.jsx'
 import Kemahadan from './pages/Kemahadan.jsx'
+import Formulir from './pages/Formulir.jsx'
+import Login from './pages/Login.jsx'
 // module
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Formulir from './pages/Formulir.jsx'
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
     path: "/formulir",
     element: <Formulir />,
   },
+  {
+    path: "/login",
+    element: <Login />,
+  }
 ]);
 
 

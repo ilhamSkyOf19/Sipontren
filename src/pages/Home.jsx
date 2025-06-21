@@ -87,7 +87,7 @@ const Home = () => {
 
 const SectionOne = memo(({ width }) => {
   return (
-    <div className='flex flex-col justify-start items-center w-screen min-h-[100vh] pt-28 pb-12 bg-primary-blue gap-2 overflow-hidden md:pt-32 lg:flex-row lg:pt-12 lg:pb-0 lg:items-end'>
+    <div className='flex flex-col justify-start items-center w-screen min-h-[100vh] pt-28 pb-12 bg-primary-blue gap-2 overflow-hidden md:pt-32 lg:flex-row lg:pt-12 lg:pb-0 lg:items-end lg:max-h-[100vh]'>
       <div className='flex-1 flex flex-col justify-center items-center w-screen gap-3 md:gap-6 lg:items-start lg:pl-8 lg:gap-2 lg:min-h-[100vh]'>
         <IconArab width={width < 700 ? '25%' : width > 1024 ? '24%' : '20%'} position={width > 1024 ? 'start' : 'center'} />
         <div className='flex flex-col justify-center items-center w-full gap-2 mb-3 lg:items-start lg:mb-1 lg:mt-2 lg:gap-0'>
