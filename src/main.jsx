@@ -14,6 +14,7 @@ import Login from './pages/Login.jsx'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import HomeAdmin from './pages/dahsboard/HomeAdmin.jsx'
 
 const router = createBrowserRouter([
   {
@@ -43,7 +44,33 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
-  }
+  },
+  {
+    path: "/admin",
+    element: <HomeAdmin />,
+  },
+  {
+    path: "/admin/profile",
+    element: <Profile />,
+  },
+  {
+    path: "/admin/psb",
+    element: <Psb />,
+  },
+  {
+    path: "/admin/faq",
+    element: <Faq />,
+  },
+  {
+    path: "/admin/kemahadan",
+    element: <Kemahadan />,
+  },
+  {
+    path: "/admin/formulir",
+    element: <Formulir />,
+  },
+
+
 ]);
 
 

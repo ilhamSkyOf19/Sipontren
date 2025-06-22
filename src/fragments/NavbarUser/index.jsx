@@ -4,11 +4,11 @@
 
 import IconArab from '../../components/IconArab';
 import { FaBarsStaggered, FaXmark } from 'react-icons/fa6';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import IconNavbar from '../../components/IconNavbar';
 
 
-const Navbar = ({ showNavbar, handleClick, ref, toggleButtonRef, showNavbarList, widthDevice }) => {
+const NavbarUser = ({ showNavbar, handleClick, ref, toggleButtonRef, showNavbarList, widthDevice }) => {
 
 
     const navbar = [
@@ -84,5 +84,25 @@ const Navbar = ({ showNavbar, handleClick, ref, toggleButtonRef, showNavbarList,
     )
 }
 
+// ====================
+// Navbar Link tab
+// ====================
 
-export default Navbar
+const NavbarLinkTab = ({ link, text }) => {
+
+    return (
+        <Link to={`/${link}`} className={`text-lg text-white relative before:w-full before:h-[4px] before:bg-yellow-300 before:absolute before:bottom-0 before:left-0 before:origin-left before:scale-x-0 before:transition-all before:duration-300 hover:before:scale-x-100 `}>{text}</Link>
+    )
+}
+
+// ====================
+// Navbar Link tab Desktop
+// ====================
+
+const NavbarLinkTabDesktop = ({ link, text, active }) => {
+    return (
+        <Link to={`/${link}`} className={`text-lg text-white relative transition-all duration-700 ease-in-out hover:bg-primary-yellow  lg:text-xs lg:py-2 lg:px-4 lg:rounded-2xl lg:font-semibold ${active ? 'bg-primary-yellow' : 'bg-transparent'}`}>{text}</Link>
+    )
+}
+
+export default NavbarUser
