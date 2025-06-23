@@ -4,6 +4,7 @@
 
 
 
+
 @theme {
     --font-poppins: "Poppins", sans-serif; 
     --font-roboto: "Roboto", sans-serif;
@@ -42,6 +43,8 @@ input[type='number'] {
 }
 
 @layer utilities {
+ 
+
 
    /* scroll bar global */
   ::-webkit-scrollbar {
@@ -83,4 +86,10 @@ input[type='number'] {
 
 
  
+}
+/* Tambahkan paling bawah */
+.swiper-button-prev,
+.swiper-button-next {
+  color: white !important;
+  font-size: 0.5rem !important;
 }

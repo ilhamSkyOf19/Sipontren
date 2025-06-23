@@ -1,8 +1,9 @@
 import React from 'react'
+import { useEffect } from 'react';
 import { useState } from 'react';
 import { useRef } from 'react'
 
-const InputFormulirFile = ({ label, fileAction, accept }) => {
+const InputFormulirFile = ({ label, fileAction, accept, dataFile }) => {
     const fileInputRef = useRef();
     const [fileName, setFileName] = useState('');
 
@@ -18,6 +19,12 @@ const InputFormulirFile = ({ label, fileAction, accept }) => {
             fileAction(file);
         }
     }
+
+    useEffect(() => {
+        if (dataFile) {
+            setFileName(dataFile)
+        }
+    }, [dataFile])
 
     return (
         <div className="w-full flex flex-col justify-start items-start space-y-2 md:flex-1/3">

@@ -10,8 +10,8 @@ const Login = () => {
 
 
     return (
-        <div className='flex flex-col justify-start items-center w-full px-4 py-12 relative'>
-            <div className='w-[200%] absolute -top-60'>
+        <div className='flex flex-col justify-start items-center w-full px-4 py-12 relative max-h-[100vh]'>
+            <div className='w-[240%] absolute -top-100'>
                 <BlobSvg />
             </div>
 

@@ -10,12 +10,17 @@ import Faq from './pages/Faq.jsx'
 import Kemahadan from './pages/Kemahadan.jsx'
 import Formulir from './pages/Formulir.jsx'
 import Login from './pages/Login.jsx'
+import UpdateCalonSantri from './pages/dahsboard/CalonSantri/updateCalonSantri/index.jsx'
 // module
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import HomeAdmin from './pages/dahsboard/HomeAdmin.jsx'
+import CalonSantri from './pages/dahsboard/CalonSantri/index.jsx'
+import Modal from 'react-modal'
 
+
+Modal.setAppElement('#root')
 const router = createBrowserRouter([
   {
     path: "/",
@@ -68,6 +73,14 @@ const router = createBrowserRouter([
   {
     path: "/admin/formulir",
     element: <Formulir />,
+  },
+  {
+    path: "/admin/calon-santri",
+    element: <CalonSantri />,
+  },
+  {
+    path: "/admin/calon-santri/update/:id",
+    element: <UpdateCalonSantri />,
   },
 
 

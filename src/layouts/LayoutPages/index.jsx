@@ -32,6 +32,7 @@ const index = ({ children }) => {
     const lastScrollY = useRef(0)
     const elementTop = useRef(null)
     const navbarListRef = useRef(null);
+    const navbarAdminRef = useRef(null)
     const toggleButtonRef = useRef(null);
 
 
@@ -71,7 +72,7 @@ const index = ({ children }) => {
 
 
     // =============
-    // Use Effect Handle Click Outside
+    // Use Effect Handle Click Outside Navbar User
     // =============
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -93,6 +94,29 @@ const index = ({ children }) => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, [showNavbarList]);
+
+
+    // =============
+    // Use Effect Handle Click Outside Navbar Admin
+    // =============
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (
+                navbarAdminRef.current &&
+                !navbarAdminRef.current.contains(event.target)
+            ) {
+                setShowNavbarAdmin(false);
+            }
+        };
+
+        if (showNavbarAdmin) {
+            document.addEventListener("mousedown", handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [showNavbarAdmin]);
 
 
     // ====================
@@ -143,7 +167,7 @@ const index = ({ children }) => {
             <NavbarListComponent valueTop={valueTop} showNavbarList={showNavbarList} setShowNavbarList={setShowNavbarList} navbarListRef={navbarListRef} />
 
             {/* Navbar admin */}
-            <NavbarAdminComponent showNavbarAdmin={showNavbarAdmin} handleNavbarAdmin={handleNavbarAdmin} />
+            <NavbarAdminComponent showNavbarAdmin={showNavbarAdmin} handleNavbarAdmin={handleNavbarAdmin} navbarAdminRef={navbarAdminRef} />
             {children}
             <Footer widthDevice={useWindowSize().width} />
         </div>
@@ -276,7 +300,7 @@ const NavbarListComponent = ({ valueTop, showNavbarList, navbarListRef }) => {
 
 //
 
-const NavbarAdminComponent = ({ showNavbarAdmin, handleNavbarAdmin }) => {
+const NavbarAdminComponent = ({ showNavbarAdmin, handleNavbarAdmin, navbarAdminRef }) => {
 
     const [showUrl, setShowUrl] = useState(false)
 
@@ -290,7 +314,7 @@ const NavbarAdminComponent = ({ showNavbarAdmin, handleNavbarAdmin }) => {
 
 
     return (
-        <div className={`flex px-1.5 flex-col justify-start items-start fixed py-2 w-[70%] h-[100vh] bg-primary-blue transition duration-700 shadow-xs shadow-slate-400 z-50  ${showNavbarAdmin ? 'translate-x-0' : '-translate-x-full'}`}>
+        <div ref={navbarAdminRef} className={`flex px-1.5 flex-col justify-start items-start fixed py-2 w-[70%] h-[100vh] bg-primary-blue transition duration-500 shadow-xs shadow-slate-400 z-50  ${showNavbarAdmin ? 'translate-x-0' : '-translate-x-full'}`}>
             <div className='w-full flex flex-row justify-end items-center px-4 relative before:absolute before:w-[60%] before:h-0.5 before:left-3.5 before:bg-white'>
                 <IoClose className={`text-white text-5xl cursor-pointer transition duration-1000 py-2 px-2   ${showNavbarAdmin ? 'rotate-0 opacity-100' : '-rotate-90 opacity-0'}`} onClick={handleNavbarAdmin} />
             </div>

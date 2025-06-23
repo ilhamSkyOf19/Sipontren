@@ -44,6 +44,7 @@ const NavbarUser = ({ showNavbar, handleClick, ref, toggleButtonRef, showNavbarL
     return (
         <div ref={ref} className={`flex flex-row justify-between items-center z-50 bg-secondary-blue w-full h-18 fixed transition duration-350 ease-in-out ${showNavbar ? 'translate-y-0' : '-translate-y-full'} px-4 md:h-18 md:px-8 lg:h-14`}>
             {widthDevice < 400 && <IconArab width={90} />}
+            {widthDevice > 400 && <IconArab width={90} />}
             {widthDevice > 700 && widthDevice <= 1024 && <IconArab width={100} />}
             {widthDevice > 1024 && <IconNavbar />}
 
@@ -61,12 +62,13 @@ const NavbarUser = ({ showNavbar, handleClick, ref, toggleButtonRef, showNavbarL
                             } md:text-4xl`}
                     />
                 </div>
-            </button>}
+            </button>
+            }
             {widthDevice > 700 && widthDevice <= 1024 &&
                 <div className='flex flex-row justify-end items-center gap-9'>
                     <NavbarLinkTab link='' text='Home' />
                     <NavbarLinkTab link='profile' text='Profile' />
-                    <NavbarLinkTab link='kemahadan' text={`Kema'hadan`} />
+                    <NavbarLinkTab link='kemahadan' text={"Kema'hadan"} />
                     <NavbarLinkTab link='psb' text='PSB' />
                     <NavbarLinkTab link='formulir' text='Formulir' />
                 </div>
@@ -81,6 +83,7 @@ const NavbarUser = ({ showNavbar, handleClick, ref, toggleButtonRef, showNavbarL
             }
 
         </div>
+
     )
 }
 

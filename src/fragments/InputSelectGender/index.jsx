@@ -14,8 +14,8 @@ const InputSelectGender = ({ gender, setGender }) => {
                 onChange={setGender}
             >
                 <option value="" className='text-slate-400 text-[0.5rem] lg:text-sm'>-- Pilih jenis kelamin --</option>
-                <option value="male" className='text-[0.5rem] lg:text-sm'>Laki-laki</option>
-                <option value="female" className='text-[0.5rem] lg:text-sm'>Perempuan</option>
+                <option value="laki-laki" className='text-[0.5rem] lg:text-sm'>Laki-laki</option>
+                <option value="perempuan" className='text-[0.5rem] lg:text-sm'>Perempuan</option>
             </select>
             <div className="pointer-events-none absolute top-11 right-4 flex items-center lg:top-12">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="#000000" className="size-6">
