@@ -1,6 +1,6 @@
-# 🖥️ Sistem Informasi [Nama Aplikasi Kamu]
+# 🖥️ SIPONTREN (Sistem Informasi Pondok Pesantren) 
 
-Selamat datang di repository resmi **Sistem Informasi [Nama Aplikasi Kamu]**.  
+Selamat datang di repository resmi **Sistem Informasi Pondok Pesantren Muhammadiyah Al-Amin Seputih Banyak - Lampung Tengah**.  
 Sistem ini dibangun menggunakan arsitektur **Fullstack JavaScript** (React + Express), dan dirancang untuk memberikan antarmuka manajemen data yang modern, cepat, dan responsif.
 
 ---
