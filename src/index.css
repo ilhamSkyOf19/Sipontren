@@ -47,42 +47,34 @@ input[type='number'] {
 
 
    /* scroll bar global */
-  ::-webkit-scrollbar {
-    width: 8px;
-  }
-  
-  ::-webkit-scrollbar-track {
-  background-color: rgba(0, 0, 0, 0.05); /* abu tipis */
+/* Ukuran scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
 }
 
-  ::-webkit-scrollbar-thumb {
-    background-color: rgba(7, 71, 166, 0.4);
-    border-radius: 10px;
-  }
+/* Hilangkan track (jalurnya) */
+::-webkit-scrollbar-track {
+  background: transparent; /* track hilang */
+}
+
+/* Thumb tetap terlihat */
+::-webkit-scrollbar-thumb {
+  background-color: rgba(7, 71, 166, 0.4);
+  border-radius: 10px;
+}
+/* Hilangkan panah di ujung scrollbar */
+::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
 
   html {
     scrollbar-width: thin;
     scrollbar-color: rgba(7, 71, 166, 0.4) transparent;
   }
 
-  /* custom */
-  .scroll-thumb-only {
-    scrollbar-width: thin; /* Firefox */
-    scrollbar-color: rgba(0, 0, 0, 0.1) transparent; /* thumb warna biru, track transparan (Firefox) */
-  }
-
-  .scroll-thumb-only::-webkit-scrollbar {
-    height: 8px; /* untuk horizontal, ubah jadi width untuk vertical */
-  }
-
-  .scroll-thumb-only::-webkit-scrollbar-track {
-    background: transparent; /* membuat track transparan */
-  }
-
-  .scroll-thumb-only::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.1); /* warna thumb */
-    border-radius: 10px;
-  }
 
 
  

@@ -103,16 +103,16 @@ const SectionPamflet = () => {
         <div className='w-full flex flex-col justify-start items-center pt-4 pb-4 overflow-hidden'>
             <div className='w-full py-12 flex flex-col justify-center items-center gap-4 px-4 lg:grid lg:grid-cols-2 lg:grid-rows-2 lg:w-[70%]'>
                 <div className='flex-1 overflow-hidden'>
-                    <img src={pamflet1} alt="" className='w-full h-full object-contain' />
+                    <img src={pamflet1} alt="" className='w-full h-full object-contain' loading='lazy' />
                 </div>
                 <div className='flex-1 overflow-hidden'>
-                    <img src={pamflet2} alt="" className='w-full h-full object-contain' />
+                    <img src={pamflet2} alt="" className='w-full h-full object-contain' loading='lazy' />
                 </div>
                 <div className='flex-1 overflow-hidden'>
-                    <img src={pamflet3} alt="" className='w-full h-full object-contain' />
+                    <img src={pamflet3} alt="" className='w-full h-full object-contain' loading='lazy' />
                 </div>
                 <div className='flex-1 overflow-hidden'>
-                    <img src={pamflet4} alt="" className='w-full h-full object-contain' />
+                    <img src={pamflet4} alt="" className='w-full h-full object-contain' loading='lazy' />
                 </div>
             </div>
         </div>
@@ -127,7 +127,7 @@ const SectionPamflet = () => {
 
 const SectionInfo = memo(({ width }) => {
     return (
-        <div className='flex flex-col justify-start items-center w-screen min-h-[100vh] pt-28 pb-12 bg-primary-blue gap-2 overflow-hidden md:pt-32 lg:flex-row lg:pt-12 lg:pb-0 lg:items-end  lg:h-[90vh]'>
+        <div className='flex flex-col justify-start items-center w-[98%] min-h-[90vh] pt-28 pb-12 bg-primary-blue gap-2 overflow-hidden md:pt-32 lg:flex-row lg:pt-12 lg:pb-0 lg:items-end  lg:h-[90vh] mb-4 rounded-xl'>
             <div className='flex-1 flex flex-col justify-center items-center w-screen gap-3 md:gap-6 lg:items-start lg:pl-8 lg:gap-2 lg:min-h-[100vh]'>
                 <IconArab width={width < 700 ? '25%' : width > 1024 ? '24%' : '20%'} position={width > 1024 ? 'start' : 'center'} />
                 <div className='flex flex-col justify-center items-center w-full gap-2 mb-3 lg:items-start lg:mb-1 lg:mt-2 lg:gap-0'>
@@ -145,7 +145,7 @@ const SectionInfo = memo(({ width }) => {
             </div>
             <div className='w-[90%] h-[1px] bg-white lg:hidden'></div>
             <div className='flex-1 flex flex-col justify-center items-center w-screen lg:justify-end lg:items-start'>
-                <img src={thumbnailProfile} alt="thumbnail profile" className='w-[25rem] md:w-[32rem] lg:w-[35rem]' />
+                <img src={thumbnailProfile} alt="thumbnail profile" className='w-[25rem] md:w-[32rem] lg:w-[35rem]' loading='lazy' />
 
                 <Link to={'/formulir'} className='text-xl font-poppins font-semibold bg-slate-100 py-2 px-14 text-center rounded-lg text-primary-blue hover:scale-110 transition ease-in-out duration-200 md:text-2xl md:py-3 md:px-20 lg:hidden'>Daftar Sekarang</Link>
             </div>

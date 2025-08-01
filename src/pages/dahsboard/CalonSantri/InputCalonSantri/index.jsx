@@ -10,7 +10,7 @@ import { useParams } from 'react-router-dom';
 // json 
 import dataCalonSantri from '../../../../jsons/dataCalonSantri.json'
 import { useState } from 'react';
-const updateCalonSantri = () => {
+const InputCalonSantri = () => {
 
     const [data, setData] = useState(undefined)
     // params 
@@ -48,10 +48,10 @@ const updateCalonSantri = () => {
                         kembali
                     </p>
                 </div>
-                <TamplateFormulir tipe={'sma'} formulir={'update'} data={data} />
+                <TamplateFormulir formulir={'update'} data={data} />
             </div>
         </LayoutDataPages>
     )
 }
 
-export default updateCalonSantri
+export default InputCalonSantri;

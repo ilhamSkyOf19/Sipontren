@@ -22,7 +22,7 @@ const validationRules = {
     // Tambahkan sesuai kebutuhan
 };
 
-const TamplateFormulir = ({ tipe, formulir, data }) => {
+const TamplateFormulir = ({ formulir, data }) => {
 
     const [selected, setSelected] = useState('sd');
 
@@ -236,11 +236,13 @@ const TamplateFormulir = ({ tipe, formulir, data }) => {
 
     useEffect(() => {
         if (formulir === 'update') {
-            setSelected(tipe)
+            if (data) {
+                setSelected(data.tipe)
+            }
         } else {
             setSelected('sd')
         }
-    }, [tipe])
+    }, [data, formulir])
 
 
 
@@ -315,7 +317,7 @@ const TamplateFormulir = ({ tipe, formulir, data }) => {
                 {/* Nomor Telepon / WA */}
                 <InputFormulir ref={inputRefNomor} value={value.no_hp} handleChange={handleChange} placeholder={'Masukan nomor telepon aktif'} nameInput={'nomor'} tipe={'numeric'} label={'Nomor Telepon / WA'} tipeKeyboard={'numeric'} borderStyle={borderStyleNomor} triger={triger.nomor} max={13} />
                 {/* Asal Sekolah */}
-                <InputFormulir ref={inputRefAsalSekolah} value={value.asal_sekolah} handleChange={handleChange} placeholder={`Masukan asal sekolah *${selected}`} nameInput={'asalSekolah'} tipe={'text'} label={`Asal Sekolah *${selected.toUpperCase()}`} tipeKeyboard={'text'} borderStyle={borderStyleAsalSekolah} triger={triger.asalSekolah} max={100} />
+                <InputFormulir ref={inputRefAsalSekolah} value={value.asal_sekolah} handleChange={handleChange} placeholder={`Masukan asal sekolah *${selected}`} nameInput={'asalSekolah'} tipe={'text'} label={`Asal Sekolah *${selected?.toUpperCase()}`} tipeKeyboard={'text'} borderStyle={borderStyleAsalSekolah} triger={triger.asalSekolah} max={100} />
                 {/* Alamat Sekolah Asal */}
                 <InputFormulir ref={inputRefAlamatSekolahAsal} value={value.alamat_sekolah_asal} handleChange={handleChange} placeholder={`Masukan alamat sekolah asal`} nameInput={'alamatSekolahAsal'} tipe={'text'} label={`Alamat Sekolah Asal`} tipeKeyboard={'text'} borderStyle={borderStyleAlamatSekolahAsal} triger={triger.alamatSekolahAsal} max={100} />
                 {/* Nama Lengkap Ayah */}

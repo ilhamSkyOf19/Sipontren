@@ -43,7 +43,7 @@ const DailySantri = () => {
                     <SubJudulCenter title={'Daily Santri Pondok Pesantren Muhammadiyah Al-Amin Seputih Banyak - Lampung Tengah'} />
                 </div>
                 <div className='w-full px-3 lg:w-[45%]'>
-                    <img src={pamflet} alt="" />
+                    <img src={pamflet} alt="" loading='lazy' />
                 </div>
             </div>
         </LayoutSectionBg>

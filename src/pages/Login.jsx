@@ -10,13 +10,11 @@ const Login = () => {
 
 
     return (
-        <div className='flex flex-col justify-start items-center w-full px-4 py-12 relative max-h-[100vh]'>
+        <div className='flex flex-col justify-start items-center w-full px-4 py-12 relative max-h-[100vh] overflow-hidden'>
             <div className='w-[240%] absolute -top-100'>
                 <BlobSvg />
             </div>
-
             <Thumb />
-
             <ContainerForm />
 
 
@@ -35,7 +33,7 @@ const Thumb = () => {
             <div className='w-[90%] flex flex-col justify-center items-start'>
                 <div className='w-[100%] flex flex-row justify-start items-center gap-3 mb-2.5'>
                     <div className='w-[20%]'>
-                        <img src={logo} alt="" className='w-[100%] h-[100%]' />
+                        <img src={logo} alt="" className='w-[100%] h-[100%]' loading='lazy' />
                     </div>
                     <TextSpace text={'SIPONTREN'} custom={{ color: '#fff', fontWeight: 'bold', fontStyle: 'normal', fontSize: '2rem' }} />
                 </div>
@@ -92,7 +90,7 @@ const ContainerForm = () => {
 
             {/* logo small */}
             <div className='w-[100%] mt-6 flex justify-center items-center flex-row relative before:absolute before:bg-primary-yellow before:w-[20%] before:h-[0.7px] before:left-12 before:top-1/2 after:absolute after:bg-primary-yellow after:w-[20%] after:h-[0.7px] after:right-12 after:top-1/2'>
-                <img src={logo} alt="" className='w-[13%] h-[13%]' />
+                <img src={logo} alt="" className='w-[13%] h-[13%]' loading='lazy' />
             </div>
         </div>
     )

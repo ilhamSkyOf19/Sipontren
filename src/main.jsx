@@ -10,7 +10,6 @@ import Faq from './pages/Faq.jsx'
 import Kemahadan from './pages/Kemahadan.jsx'
 import Formulir from './pages/Formulir.jsx'
 import Login from './pages/Login.jsx'
-import UpdateCalonSantri from './pages/dahsboard/CalonSantri/updateCalonSantri/index.jsx'
 // module
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -18,6 +17,11 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import HomeAdmin from './pages/dahsboard/HomeAdmin.jsx'
 import CalonSantri from './pages/dahsboard/CalonSantri/index.jsx'
 import Modal from 'react-modal'
+import UstadUstadzah from './pages/dahsboard/UstadUstadzah'
+import Alumni from './pages/dahsboard/Alumni/index.jsx'
+import Berita from './pages/dahsboard/Berita/index.jsx'
+import InputCalonSantri from './pages/dahsboard/CalonSantri/InputCalonSantri/index.jsx'
+import InputUstadUstadzah from './pages/dahsboard/UstadUstadzah/InputUstadUstadzah/index.jsx'
 
 
 Modal.setAppElement('#root')
@@ -79,9 +83,34 @@ const router = createBrowserRouter([
     element: <CalonSantri />,
   },
   {
-    path: "/admin/calon-santri/update/:id",
-    element: <UpdateCalonSantri />,
+    path: "/admin/calon-santri/add",
+    element: <InputCalonSantri />,
   },
+  {
+    path: "/admin/calon-santri/update/:id",
+    element: <InputCalonSantri />,
+  },
+  // ustad ustadzah
+  {
+    path: "/admin/ustad-ustadzah",
+    element: <UstadUstadzah />,
+  },
+  {
+    path: "/admin/ustad-ustadzah/add",
+    element: <InputUstadUstadzah />,
+  },
+  {
+    path: "/admin/ustad-ustadzah/update/:id",
+    element: <InputUstadUstadzah />,
+  },
+  {
+    path: "/admin/alumni",
+    element: <Alumni />,
+  },
+  {
+    path: '/admin/berita',
+    element: <Berita />
+  }
 
 
 ]);

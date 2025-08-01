@@ -1,6 +1,6 @@
 import React from 'react'
 
-const InputSelectGender = ({ gender, setGender }) => {
+const InputSelectGender = ({ gender, setGender, nameInput }) => {
     return (
         <div className='w-full flex flex-col justify-start items-start gap-2 relative mb-4 md:flex-1/3 lg:w-[40%]'>
             <label className="block text-md md:text-[1.25rem] lg:text-lg" htmlFor="gender">
@@ -8,7 +8,7 @@ const InputSelectGender = ({ gender, setGender }) => {
             </label>
             <select
                 id="gender"
-                name="gender"
+                name={nameInput}
                 className="w-full py-2.5 px-4 rounded-lg border-[1.5px] text-sm appearance-none border-primary-blue focus:outline-none focus:ring-1 focus:ring-primary-blue focus:border-primary-blue md:py-3 md:text-sm"
                 value={gender}
                 onChange={setGender}

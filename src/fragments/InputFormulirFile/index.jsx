@@ -21,7 +21,11 @@ const InputFormulirFile = ({ label, fileAction, accept, dataFile }) => {
     }
 
     useEffect(() => {
-        if (dataFile) {
+        if (!dataFile) {
+            setFileName('')
+        } else if (dataFile instanceof File) {
+            setFileName(dataFile.name)
+        } else if (typeof dataFile === 'string') {
             setFileName(dataFile)
         }
     }, [dataFile])

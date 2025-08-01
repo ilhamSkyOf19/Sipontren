@@ -1,6 +1,9 @@
 import React from 'react'
 import { capitalCase } from 'change-case'
-import Modal from 'react-modal'
+import ContainerData from '../../../fragments/ContainerData'
+import ComponentDataText from '../../../components/ComponentDataText'
+import ComponentDataFile from '../../../components/ComponentDataFIle'
+import ComponentAction from '../../../components/ComponentAction'
 // layout
 
 import LayoutDataPages from '../../../layouts/LayoutDataPages'
@@ -20,13 +23,9 @@ import { useEffect } from 'react'
 
 
 // json 
-import dataCalonSantri from '../../../jsons/dataCalonSantri.json'
-import ContainerData from '../../../fragments/ContainerData'
-import ComponentDataText from '../../../components/ComponentDataText'
-import ComponentDataFile from '../../../components/ComponentDataFIle'
-import ComponentAction from '../../../components/ComponentAction'
+import dataUstad from '../../../jsons/dataUstad.json'
 
-const CalonSantri = () => {
+const UstadUstadzah = () => {
     const [data, setData] = useState([]);
     const [id, setId] = useState(null);
     const path = useLocation().pathname
@@ -47,7 +46,7 @@ const CalonSantri = () => {
 
     //  fetch data 
     useEffect(() => {
-        setData(dataCalonSantri);
+        setData(dataUstad);
     }, [])
 
 
@@ -63,7 +62,7 @@ const CalonSantri = () => {
             <LayoutDataPages header={capitalCase(header)}>
                 <div className='min-h-[100vh] flex flex-col justify-start items-center pt-24 pb-12'>
                     <div className='w-full flex flex-row justify-start items-center gap-4 px-4 mb-6'>
-                        <ButtonCrud color={'#32CD32'} link={'calon-santri/add'}>Tambah</ButtonCrud>
+                        <ButtonCrud color={'#32CD32'} link={'ustad-ustadzah/add'}>Tambah</ButtonCrud>
                         <ButtonDownload color={'#212529'} handleClick={() => { }} />
                     </div>
                     <div className='w-full justify-center items-center px-4'>
@@ -73,7 +72,7 @@ const CalonSantri = () => {
                 </div>
 
             </LayoutDataPages>
-            <ModalPreviewImg show={show} handleShow={handleShow} id={id} />
+            <ModalPreviewImg show={show} handleShow={handleShow} id={id} type={"ustad"} />
         </>
     )
 }
@@ -91,30 +90,22 @@ const ContentData = ({ handleShow, handleShowModalDelete, data, handleSetId }) =
                 data.map((item, index) =>
                     <ContainerData
                         key={index}
-                        nama={item.nama_lengkap}
+                        nama={item.nama}
                         no={index + 1}
                         handleActive={() => handleActive(index)}
                         active={active === index}
                     >
-                        <ComponentDataText data={'Nama'} value={item.nama_lengkap} />
-                        <ComponentDataText data={'NISN'} value={item.nisn} />
-                        <ComponentDataText data={'NIK'} value={item.nik} />
-                        <ComponentDataText data={'Jenis Kelamin'} value={item.jenis_kelamin} />
-                        <ComponentDataText data={'Usia'} value={item.usia} />
-                        <ComponentDataText data={'Tempat Lahir'} value={item.tempat_lahir} />
-                        <ComponentDataText data={'Tanggal Lahir'} value={item.tanggal_lahir} />
+                        <ComponentDataText data={'Nama'} value={item.nama} />
+                        <ComponentDataText data={'Jenis Kelamin'} value={item.jenisKelamin} />
+                        <ComponentDataText data={'Tempat Lahir'} value={item.tempatLahir} />
+                        <ComponentDataText data={'Tanggal Lahir'} value={item.tanggalLahir} />
                         <ComponentDataText data={'Alamat'} value={item.alamat} />
-                        <ComponentDataText data={'Anak Ke'} value={item.anak_ke} />
-                        <ComponentDataText data={'Jumlah Saudara'} value={item.jumlah_saudara} />
-                        <ComponentDataText data={'No HP'} value={item.no_hp} />
-                        <ComponentDataText data={'Asal Sekolah'} value={item.asal_sekolah} />
-                        <ComponentDataText data={'Alamat Asal Sekolah'} value={item.alamat_sekolah_asal} />
-                        <ComponentDataText data={'Nama Ayah'} value={item.nama_lengkap_ayah} />
-                        <ComponentDataText data={'Nama Ibu'} value={item.nama_lengkap_ibu} />
-                        <ComponentDataText data={'Nama Wali'} value={item.nama_lengkap_wali} />
+                        <ComponentDataText data={'Nomor Telepon'} value={item.nomorTelepon} />
+                        <ComponentDataText data={'Jabatan'} value={item.jabatan} />
                         <ComponentDataFile data={'Dokumen'} handleShow={handleShow} id={item.id} handleSetId={handleSetId} />
-                        <ComponentAction handleShowModalDelete={handleShowModalDelete} id={item.id} link={'calon-santri'} />
+                        <ComponentAction handleShowModalDelete={handleShowModalDelete} id={item.id} link={'ustad-ustadzah'} />
                     </ContainerData>
+
                 )
             }
         </div>
@@ -123,5 +114,4 @@ const ContentData = ({ handleShow, handleShowModalDelete, data, handleSetId }) =
 
 
 
-
-export default CalonSantri
+export default UstadUstadzah;

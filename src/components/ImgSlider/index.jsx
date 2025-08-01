@@ -33,7 +33,7 @@ const index = () => {
             {
                 images && images.map((image, index) => (
                     <SwiperSlide key={index}>
-                        <img src={image} alt="" className='mx-auto w-full h-full object-cover bg-center' />
+                        <img src={image} alt="" className='mx-auto w-full h-full object-cover bg-center' loading='lazy' />
                     </SwiperSlide>
                 ))
             }

@@ -36,41 +36,41 @@ const index = ({ logo, person, title, ket, subJudul, bg, iconSize = '55%', id })
 
     const window = useWindowSize().width
     return (
-        <div className='w-[100%] h-[18rem] bg-white rounded-xl shadow-xl flex flex-col justify-between items-center overflow-hidden shrink-0 md:w-[65%] md:h-[26rem] md:mt-12 lg:w-[38%] lg:h-[20rem]'>
+        <div className='w-[100%] h-[18rem] bg-white rounded-xl shadow-xl flex flex-col justify-between items-center overflow-hidden shrink-0 md:w-[65%] md:h-[26rem] md:mt-12 lg:w-[24%] lg:h-[20rem]'>
             <div className={`w-full h-[65%] flex flex-row justify-between items-center bg-cover overflow-hidden`} style={{ backgroundImage: `url(${images[bg]})` }}>
                 {id === 2 ? (
                     <>
                         <div className='w-[80%] h-full flex flex-row justify-end items-center pt-4 relative'>
-                            <img src={images[person]} alt="logo" width={window > 1024 ? '45%' : '55%'} className='absolute left-5' />
-                            <img src={person3} alt="logo" width={window > 1024 ? '45%' : '55%'} className='mt-4 absolute right-4 bottom-0 lg:right-10' />
+                            <img src={images[person]} alt="logo" width={window > 1024 ? '45%' : '55%'} className='absolute left-5' loading='lazy' />
+                            <img src={person3} alt="logo" width={window > 1024 ? '45%' : '55%'} className='mt-4 absolute right-4 bottom-0 lg:right-10' loading='lazy' />
                         </div>
                         <div className='w-[50%] h-full flex justify-center items-center'>
-                            <img src={images[logo]} alt="logo" width={iconSize} />
+                            <img src={images[logo]} alt="logo" width={iconSize} loading='lazy' />
                         </div>
                     </>
                 ) : id === 1 ? (
                     <>
                         <div className='w-[50%] h-full flex justify-center items-center'>
-                            <img src={images[logo]} alt="logo" width={iconSize} />
+                            <img src={images[logo]} alt="logo" width={iconSize} loading='lazy' />
                         </div>
                         <div className='w-[50%] h-full flex justify-end items-center pt-4 relative'>
-                            <img src={images[person]} alt="logo" width={window > 1024 ? '70%' : '85%'} className='absolute bottom-0' />
+                            <img src={images[person]} alt="logo" width={window > 1024 ? '70%' : '85%'} className='absolute bottom-0' loading='lazy' />
                         </div>
                     </>
 
                 ) : id === 5 ? (
                     <>
                         <div className='w-[65%] h-full flex justify-start items-center pt-8 pl-2 relative'>
-                            <img src={images[person]} alt="logo" width={window > 1024 ? '80%' : '100%'} className='absolute bottom-0' />
+                            <img src={images[person]} alt="logo" width={window > 1024 ? '80%' : '100%'} className='absolute bottom-0' loading='lazy' />
                         </div>
                         <div className='w-[35%] h-full flex justify-start items-center'>
-                            <img src={images[logo]} alt="logo" width={iconSize} />
+                            <img src={images[logo]} alt="logo" width={iconSize} loading='lazy' />
                         </div>
                     </>
                 ) : (
                     <>
                         <div className='w-[60%] h-full flex justify-start items-center pt-4 pl-2'>
-                            <img src={images[person]} alt="logo" width={window > 1024 ? '75%' : '90%'} />
+                            <img src={images[person]} alt="logo" width={window > 1024 ? '75%' : '90%'} loading='lazy' />
                         </div>
                         <div className='w-[40%] h-full flex justify-center items-center'>
                         </div>
