@@ -2,7 +2,7 @@
 // Navbar
 // ===================
 
-import { FaBarsStaggered, FaXmark } from 'react-icons/fa6';
+import { FaBarsStaggered } from 'react-icons/fa6';
 
 
 const NavbarAdmin = ({ showNavbar, ref, handleNavbarAdmin, header }) => {

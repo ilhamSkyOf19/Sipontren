@@ -67,7 +67,7 @@ const UrlComponent = ({ showUrl, handleShowUrl }) => {
             <div className='flex w-[95%] flex-row justify-between items-center mt-4 active:bg-secondary-blue cursor-pointer rounded-lg py-3 pl-3.5 pr-1' onClick={handleShowUrl}>
                 <div className='flex flex-row justify-start items-center gap-2'>
                     <IoHome className={`text-white text-lg`} />
-                    <Link to={'/admin/home'} className='text-white text-sm'>Home</Link>
+                    <Link to={'/admin'} className='text-white text-sm'>Home</Link>
                 </div>
                 <RiArrowRightSLine className={`text-white text-xl transition duration-300 ${showUrl && 'rotate-90'}`} />
             </div>
