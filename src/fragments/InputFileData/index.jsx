@@ -30,7 +30,7 @@ const InputFileData = ({ label, register, error, clearErrors, setValue }) => {
         <div className="w-full flex flex-col justify-start items-start space-y-2 md:flex-1/3">
             <div className='w-full flex flex-row justify-start items-center gap-2'>
                 <p className='text-md md:text-[1.25rem] lg:text-lg'>
-                    {label}
+                    {label} <span className='text-red-500'>*</span>
                 </p>
 
                 {/* errror message */}

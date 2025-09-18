@@ -1,6 +1,4 @@
 import { useState, useEffect } from 'react'
-import Swal from 'sweetalert2'
-import xss from 'xss'
 // layout
 import LayoutDataPages from '../../../../layouts/LayoutDataPages'
 
@@ -24,7 +22,11 @@ import ButtonSubmit from '../../../../components/ButtonSubmit'
 
 // json
 import dataUstad from '../../../../jsons/dataUstad.json'
-import { handleConfirm } from '../../../../utils/confrimSubmit'
+import { UstadValidation } from '../../../../../validations/ustad-validation'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import InputFileData from '../../../../fragments/InputFileData'
+import InputData from '../../../../fragments/InputData'
 
 
 const InputUstadUstadzah = () => {
@@ -53,183 +55,138 @@ const InputUstadUstadzah = () => {
                 </h2>
 
                 {/* container input */}
-                <InputData data={data} />
+                <FormInput />
             </div>
         </LayoutDataPages>
     )
 }
 
 // input data
-const InputData = ({ data }) => {
+const FormInput = () => {
     const navigate = useNavigate()
-    // state 
-    const [input, setInput] = useState({
-        nama: '',
-        jenisKelamin: '',
-        tempatLahir: '',
-        tanggalLahir: '',
-        alamat: '',
-        nomorTelepon: '',
-        email: '',
-        jabatan: '',
-        img: '',
+
+    // use form 
+    const { register, handleSubmit, formState: { errors }, clearErrors, setValue } = useForm({
+        resolver: zodResolver(UstadValidation.CREATE)
     })
-    const [triger, setTriger] = useState({
-        nama: false,
-        jabatan: false,
-        tempatLahir: false,
-        tanggalLahir: false,
-        alamat: false,
-        nomorTelepon: false,
-        email: false
-    });
 
 
-    // set input 
-    useEffect(() => {
-        if (data) {
-            setInput((prev) => ({
-                ...prev,
-                ...data
-            }))
-        } else {
-            setInput(Object.fromEntries(Object.entries(input).map(key => [key, ''])));
-        }
-    }, [data])
+    // handle submit
+    const onSubmit = (data) => console.log(data);
 
-    // handle input 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-
-        const safeValue = xss(value);
-
-        // update value 
-        setInput((prev) => (
-            {
-                ...prev,
-                [name]: safeValue
-            }
-        ))
-
-
-        if (name === 'email' || name === 'tanggalLahir' || name === 'alamatLengkap' || name === 'jenisKelamin') return
-
-        // cek nomor telepone 
-        if (name === 'nomorTelepon') {
-            if (!(/^[0-9]+$/).test(value)) {
-                setTriger((prev) => ({
-                    ...prev,
-                    [name]: true
-                }))
-            } else {
-                setTriger((prev) => ({
-                    ...prev,
-                    [name]: false
-                }))
-            }
-        } else {
-            // cek input 
-            if (!(/^[A-Za-z\s]+$/).test(value)) {
-                setTriger((prev) => ({
-                    ...prev,
-                    [name]: true
-                }))
-            } else {
-                setTriger((prev) => ({
-                    ...prev,
-                    [name]: false
-                }))
-            }
-        }
-
-
-    }
-
-    // handle input file 
-    const handleInputFile = (file) => {
-        setInput((prev) => ({
-            ...prev,
-            img: file.name
-        }))
-    }
-
-    // handle submit 
-    const handleSubmit = () => {
-        const inputEmpety = Object.values(input).some(value => value === '');
-        const trigerEmpety = Object.values(triger).some(value => value === true);
-        if (inputEmpety) {
-            // alert
-            warningAlert('Data belum lengkap', 'Pastikan semua data sudah terisi dengan benar', 'Cek kembali')
-        } else if (trigerEmpety) {
-            // alert
-            warningAlert('Kesalahan Input', 'Pastikan semua input benar', 'Cek kembali')
-        } else {
-            const confirm = handleConfirm('/admin/ustad-ustadzah', navigate);
-            if (!confirm) return false
-
-            // reset
-            setInput(Object.fromEntries(Object.entries(input).map(key => [key, ''])));
-            return true
-        }
-    }
-
-
-    // confirm
-
-
-
-    // warning
-    const fields = Object.keys(triger)
-    const inputWarnings = fields.reduce((acc, key) => {
-        const { inputRef, borderStyle } = useInputWarning(triger[key])
-        acc[key] = { inputRef, borderStyle }
-        return acc
-    }, {})
 
 
 
 
     return (
         <div className='w-full flex flex-col justify-start items-center '>
-            {/* img old */}
-            <input
-                type="text"
-                readOnly
-                accept=".jpg, .jpeg, .png"
-                className='hidden'
-                value={data.img ?? ''}
-            />
+            <form
+                onSubmit={handleSubmit(onSubmit)}
+                className="w-full flex flex-col gap-4"
+            >
+                {/* Nama */}
+                <InputData
+                    register={register("nama")}
+                    error={errors.nama}
+                    placeholder="Masukan nama lengkap"
+                    nameInput="nama"
+                    tipe="text"
+                    label="Nama Lengkap"
+                    tipeKeyboard="text"
+                />
 
-            {/* input nama */}
-            <InputFormulir ref={inputWarnings.nama.inputRef} label={'Nama'} nameInput={'nama'} placeholder={'Masukkan Nama'} tipe={'text'} tipeKeyboard={'text'} handleChange={handleInputChange} value={input.nama} borderStyle={inputWarnings.nama.borderStyle} triger={triger.nama} />
-            {/* input jenis kelamin */}
-            <InputSelectGender nameInput={'jenisKelamin'} setGender={handleInputChange} gender={input.jenisKelamin.toLowerCase()} />
-            {/* input tempat lahir */}
-            <InputFormulir ref={inputWarnings.tempatLahir.inputRef} label={'Tempat Lahir'} nameInput={'tempatLahir'} placeholder={'Masukkan Tempat Lahir'} tipe={'text'} tipeKeyboard={'text'} handleChange={handleInputChange} value={input.tempatLahir} borderStyle={inputWarnings.tempatLahir.borderStyle} triger={triger.tempatLahir} />
-            {/* input tanggal lahir */}
-            <InputFormulir ref={inputWarnings.tanggalLahir.inputRef} label={'Tanggal Lahir'} nameInput={'tanggalLahir'} placeholder={'Masukkan Tanggal Lahir'} tipe={'date'} tipeKeyboard={'date'} handleChange={handleInputChange} value={input.tanggalLahir} borderStyle={inputWarnings.tanggalLahir.borderStyle} triger={triger.tanggalLahir} />
-            {/* input alamat */}
-            <InputFormulir ref={inputWarnings.alamat.inputRef} label={'Alamat'} nameInput={'alamat'} placeholder={'Masukkan Alamat'} tipe={'text'} tipeKeyboard={'text'} handleChange={handleInputChange} value={input.alamat} borderStyle={inputWarnings.alamat.borderStyle} triger={triger.alamat} />
-            {/* input nomor telepon */}
-            <InputFormulir ref={inputWarnings.nomorTelepon.inputRef} label={'Nomor Telepon'} nameInput={'nomorTelepon'} placeholder={'Masukkan Nomor Telepon'} tipe={'numeric'} tipeKeyboard={'numeric'} handleChange={handleInputChange} value={input.nomorTelepon} borderStyle={inputWarnings.nomorTelepon.borderStyle} triger={triger.nomorTelepon} />
-            {/* input email */}
-            <InputFormulir ref={inputWarnings.email.inputRef} label={'Email'} nameInput={'email'} placeholder={'Masukkan Email'} tipe={'email'} tipeKeyboard={'email'} handleChange={handleInputChange} value={input.email} borderStyle={inputWarnings.email.borderStyle} triger={triger.email} />
-            {/* input jabatan */}
-            <InputFormulir ref={inputWarnings.jabatan.inputRef} label={'Jabatan'} nameInput={'jabatan'} placeholder={'Masukan Jabatan'} tipe={'text'} tipeKeyboard={'text'} handleChange={handleInputChange} value={input.jabatan} borderStyle={inputWarnings.jabatan.borderStyle} triger={triger.jabatan} />
-            <InputFormulirFile label={'Foto'} fileAction={handleInputFile} accept={'.jpg, .jpeg, .png'} dataFile={input.img} />
+                {/* Jenis Kelamin */}
+                <InputSelectGender
+                    register={register("jenisKelamin")}
+                    error={errors.jenisKelamin} />
 
-            {/* button */}
-            <div className='w-full flex flex-row justify-between items-center gap-2 mt-10'>
-                {/* button kembali */}
-                <ButtonKembali url={'/admin/ustad-ustadzah'} />
+                {/* Tempat Lahir */}
+                <InputData
+                    register={register("tempatLahir")}
+                    error={errors.tempatLahir}
+                    placeholder="Masukan tempat lahir"
+                    nameInput="tempatLahir"
+                    tipe="text"
+                    label="Tempat Lahir"
+                    tipeKeyboard="text"
+                />
 
-                {/* button submit */}
-                <ButtonSubmit handleSubmit={handleSubmit} />
-            </div>
+                {/* Tanggal Lahir */}
+                <InputData
+                    register={register("tanggalLahir")}
+                    error={errors.tanggalLahir}
+                    placeholder="Masukan tanggal lahir"
+                    nameInput="tanggalLahir"
+                    tipe="date"
+                    label="Tanggal Lahir"
+                    tipeKeyboard="text"
+                />
 
+                {/* Alamat */}
+                <InputData
+                    register={register("alamat")}
+                    error={errors.alamat}
+                    placeholder="Masukan alamat"
+                    nameInput="alamat"
+                    tipe="text"
+                    label="Alamat"
+                    tipeKeyboard="text"
+                />
 
+                {/* Nomor Telepon */}
+                <InputData
+                    register={register("nomorTelepon")}
+                    error={errors.nomorTelepon}
+                    placeholder="Masukan nomor telepon aktif"
+                    nameInput="nomorTelepon"
+                    tipe="text"
+                    label="Nomor Telepon / WA"
+                    tipeKeyboard="numeric"
+                />
+
+                {/* Email */}
+                <InputData
+                    register={register("email")}
+                    error={errors.email}
+                    placeholder="Masukan alamat email"
+                    nameInput="email"
+                    tipe="email"
+                    label="Email"
+                    tipeKeyboard="text"
+                />
+
+                {/* Jabatan */}
+                <InputData
+                    register={register("jabatan")}
+                    error={errors.jabatan}
+                    placeholder="Masukan jabatan"
+                    nameInput="jabatan"
+                    tipe="text"
+                    label="Jabatan"
+                    tipeKeyboard="text"
+                />
+
+                {/* Foto (img) */}
+                <InputFileData
+                    label="Foto"
+                    register={register("img")}
+                    error={errors.img}
+                    setValue={setValue}
+                    clearErrors={clearErrors}
+                />
+
+                {/* button */}
+                <div className='w-full flex flex-row justify-between items-center gap-2 mt-10'>
+                    {/* button kembali */}
+                    <ButtonKembali url={'/admin/ustad-ustadzah'} />
+
+                    {/* button submit */}
+                    <ButtonSubmit handleSubmit={handleSubmit} />
+                </div>
+            </form>
         </div>
     )
+
 }
 
 export default InputUstadUstadzah;
