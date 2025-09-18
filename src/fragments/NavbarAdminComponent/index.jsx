@@ -22,38 +22,40 @@ const NavbarAdminComponent = ({ showNavbarAdmin, handleNavbarAdmin, navbarAdminR
 
 
     return (
-        <div ref={navbarAdminRef} className={`flex px-1.5 flex-col justify-start items-start fixed py-2 w-[70%] h-[100vh] bg-primary-blue transition duration-300 shadow-xs shadow-slate-400 z-50  ${showNavbarAdmin ? 'translate-x-0' : '-translate-x-full'} md:w-[40%] lg:w-[25%] xl:w-[30%]`}>
-            <div className='w-full flex flex-row justify-end items-center px-4 relative before:absolute before:w-[60%] before:h-0.5 before:left-3.5 before:bg-white'>
-                <IoClose className={`text-white text-5xl cursor-pointer transition duration-1000 py-2 px-2   ${showNavbarAdmin ? 'rotate-0 opacity-100' : '-rotate-90 opacity-0'}`} onClick={handleNavbarAdmin} />
+        <div ref={navbarAdminRef} className={`flex px-1.5 flex-col justify-start items-start fixed py-2 w-[70%] h-[100vh] bg-primary-blue transition duration-300 shadow-xs shadow-slate-400 z-50   ${showNavbarAdmin ? 'translate-x-0' : '-translate-x-full'} md:w-[40%] lg:w-[25%] xl:w-[30%]`}>
+            <div className='w-full h-auto flex flex-col justify-start items-start overflow-y-scroll'>
+                <div className='w-full flex flex-row justify-end items-center px-4 relative before:absolute before:w-[60%] before:h-0.5 before:left-3.5 before:bg-white'>
+                    <IoClose className={`text-white text-5xl cursor-pointer transition duration-1000 py-2 px-2   ${showNavbarAdmin ? 'rotate-0 opacity-100' : '-rotate-90 opacity-0'}`} onClick={handleNavbarAdmin} />
+                </div>
+                <div className='w-full flex flex-row justify-start items-center px-3.5'>
+                    <p className='text-2xl font-semibold text-white'>Dashboard</p>
+                </div>
+
+                {/* home */}
+                <UrlComponent showUrl={showUrl} handleShowUrl={handleShowUrl} />
+                {/* link url */}
+
+
+                {/* url dashboard */}
+                <UrlDashboard link={'/admin/calon-santri'} label={'Data Calon Santri'}>
+                    <FaListAlt className={`text-white text-lg`} />
+                </UrlDashboard>
+                <UrlDashboard link={'/admin/ustad-ustadzah'} label={'Data Ustad & Ustadzah'}>
+                    <FaListAlt className={`text-white text-lg`} />
+                </UrlDashboard>
+                <UrlDashboard link={'/admin/alumni'} label={'Data Alumni'}>
+                    <FaListAlt className={`text-white text-lg`} />
+                </UrlDashboard>
+                <UrlDashboard link={'/admin/berita'} label={'Data Berita'}>
+                    <FaListAlt className={`text-white text-lg`} />
+                </UrlDashboard>
+                <UrlDashboard link={'/admin/username'} label={'Ubah Username'}>
+                    <FaUser className={`text-white text-lg`} />
+                </UrlDashboard>
+                <UrlDashboard link={'/admin/password'} label={'Ubah Password'}>
+                    <FaLock className={`text-white text-lg`} />
+                </UrlDashboard>
             </div>
-            <div className='w-full flex flex-row justify-start items-center px-3.5'>
-                <p className='text-2xl font-semibold text-white'>Dashboard</p>
-            </div>
-
-            {/* home */}
-            <UrlComponent showUrl={showUrl} handleShowUrl={handleShowUrl} />
-            {/* link url */}
-
-
-            {/* url dashboard */}
-            <UrlDashboard link={'/admin/calon-santri'} label={'Data Calon Santri'}>
-                <FaListAlt className={`text-white text-lg`} />
-            </UrlDashboard>
-            <UrlDashboard link={'/admin/ustad-ustadzah'} label={'Data Ustad & Ustadzah'}>
-                <FaListAlt className={`text-white text-lg`} />
-            </UrlDashboard>
-            <UrlDashboard link={'/admin/alumni'} label={'Data Alumni'}>
-                <FaListAlt className={`text-white text-lg`} />
-            </UrlDashboard>
-            <UrlDashboard link={'/admin/berita'} label={'Data Berita'}>
-                <FaListAlt className={`text-white text-lg`} />
-            </UrlDashboard>
-            <UrlDashboard link={'/admin/username'} label={'Ubah Username'}>
-                <FaUser className={`text-white text-lg`} />
-            </UrlDashboard>
-            <UrlDashboard link={'/admin/password'} label={'Ubah Password'}>
-                <FaLock className={`text-white text-lg`} />
-            </UrlDashboard>
 
         </div>
     )
@@ -102,7 +104,7 @@ const LinkUrlComponent = ({ showUrl }) => {
         },
     ]
     return (
-        <div className={`w-full flex flex-col justify-start items-start gap-2 px-3.5 overflow-hidden transition-all duration-300 ease-in-out ${showUrl ? 'max-h-[20rem]' : 'max-h-0'}`}>
+        <div className={`w-full flex flex-col justify-start items-start gap-2 px-3.5  transition-all duration-300 ease-in-out ${showUrl ? 'max-h-[10rem] lg:max-h-[30rem]' : 'max-h-0 opacity-0 -z-10 '}`}>
             {
                 navbar.map((item, index) => (
                     <Link to={`/admin/${item.url}`} key={index} className='flex flex-row w-full justify-start items-center gap-2 pl-4.5 py-2 active:bg-secondary-blue cursor-pointer rounded-lg'>
