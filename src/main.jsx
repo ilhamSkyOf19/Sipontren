@@ -22,6 +22,7 @@ import Alumni from './pages/dahsboard/Alumni/index.jsx'
 import Berita from './pages/dahsboard/Berita/index.jsx'
 import InputCalonSantri from './pages/dahsboard/CalonSantri/InputCalonSantri/index.jsx'
 import InputUstadUstadzah from './pages/dahsboard/UstadUstadzah/InputUstadUstadzah/index.jsx'
+import InputBerita from './pages/dahsboard/Berita/InputBerita/index.jsx'
 
 
 Modal.setAppElement('#root')
@@ -110,6 +111,10 @@ const router = createBrowserRouter([
   {
     path: '/admin/berita',
     element: <Berita />
+  },
+  {
+    path: '/admin/berita/add',
+    element: <InputBerita />
   }
 
 

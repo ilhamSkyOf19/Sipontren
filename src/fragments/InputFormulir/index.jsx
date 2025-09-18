@@ -1,4 +1,3 @@
-import React from 'react'
 import BoxInput from '../../components/BoxInput'
 const InputFormulir = ({ value, handleChange, placeholder, nameInput, tipe, label, max, tipeKeyboard, borderStyle, triger }) => {
     return (
