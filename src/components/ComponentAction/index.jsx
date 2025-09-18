@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 
 // component action
-const ComponentAction = ({ handleShowModalDelete, id, link }) => {
+const ComponentAction = ({ handleShowModalDelete, id, link, text }) => {
     return (
         <div className='w-full flex flex-row justify-between items-start mt-2'>
             <p className='text-sm flex-1'>Action</p>

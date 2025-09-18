@@ -31,6 +31,10 @@ body {
   @apply font-poppins;
 }
 
+button {
+  cursor: pointer;
+}
+
 
 /* Custom utility: hilangkan spinner input number */
 input[type='number']::-webkit-inner-spin-button,

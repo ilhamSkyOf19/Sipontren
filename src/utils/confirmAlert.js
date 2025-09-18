@@ -11,7 +11,7 @@ const confirmDelete = (onConfirm) => {
         cancelButtonColor: '#3085d6',
         confirmButtonText: 'Ya, hapus!',
         cancelButtonText: 'Batal',
-        width: '90%',
+        width: '20rem',
     }).then((result) => {
         if (result.isConfirmed) {
             deleteSuccess(onConfirm);
