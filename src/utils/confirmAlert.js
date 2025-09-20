@@ -1,7 +1,7 @@
 // utils/confirmDelete.js
 import Swal from 'sweetalert2';
 
-const confirmDelete = (handleDelete) => {
+const confirmDelete = (handleDelete, id) => {
     Swal.fire({
         title: 'Yakin ingin menghapus?',
         text: 'Data ini akan dihapus permanen!',
@@ -14,7 +14,7 @@ const confirmDelete = (handleDelete) => {
         width: '20rem',
     }).then((result) => {
         if (result.isConfirmed) {
-            handleDelete();
+            handleDelete(id);
             deleteSuccess();
         }
     });

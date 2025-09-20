@@ -33,7 +33,7 @@ const CardAdminBerita = ({ id, img, judul, jenis, handleDelete }) => {
                 </ButtonCrud>
 
                 {/* delete button */}
-                <button type='button' className='text-sm py-2 px-3 bg-red-600 rounded-lg text-white active:bg-red-500' onClick={() => confirmDelete(handleDelete(id))}>Delete</button>
+                <button type='button' className='text-sm py-2 px-3 bg-red-600 rounded-lg text-white active:bg-red-500' onClick={() => confirmDelete(handleDelete, id)}>Delete</button>
 
             </div>
         </div>

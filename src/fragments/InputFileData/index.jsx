@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useRef } from 'react'
 import ErrorMessage from '../../components/ErroMessage';
 
-const InputFileData = ({ label, register, error, clearErrors, setValue }) => {
+const InputFileData = ({ label, register, error, clearErrors, setValue, type }) => {
     const fileInputRef = useRef();
     const [fileName, setFileName] = useState('');
 
@@ -19,8 +19,14 @@ const InputFileData = ({ label, register, error, clearErrors, setValue }) => {
         if (files && files.length > 0) {
             const file = files[0];
             setFileName(file.name);
-            setValue("thumbnail", files, { shouldValidate: true }); // set & cek validasi
-            clearErrors('thumbnail');
+            if (type === 'news') {
+                setValue("news", files, { shouldValidate: true }); // set & cek validasi
+                clearErrors('news');
+            } else {
+                setValue("thumbnail", files, { shouldValidate: true }); // set & cek validasi
+                clearErrors('thumbnail');
+
+            }
         }
     }
 

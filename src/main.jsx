@@ -139,6 +139,9 @@ const router = createBrowserRouter([
   },
   {
     path: '/admin/berita/update/:id',
+    loader: async ({ params }) => {
+      return await UseLoaderNews.detail(params.id);
+    },
     element: <InputBerita />
   }
 

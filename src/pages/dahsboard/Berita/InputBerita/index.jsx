@@ -8,19 +8,94 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { BeritaValidation } from '../../../../../validations/berita-validation'
 import InputCategoryBerita from '../../../../fragments/InputCategoryBerita'
 import InputFileData from '../../../../fragments/InputFileData'
+import { useMutation } from '@tanstack/react-query'
+import { NewsService } from '../../../../services/news.service'
+import { useLoaderData, useNavigate } from 'react-router-dom'
+import { AxiosError } from 'axios'
 
 const InputBerita = () => {
 
 
+    // loader 
+    const news = useLoaderData();
+
+    console.log(news)
+
 
     // use form 
     const { register, handleSubmit, formState: { errors }, clearErrors, setValue } = useForm({
-        resolver: zodResolver(BeritaValidation.CREATE)
+        values: {
+            title: news?.title || '',
+            category: news?.category || '',
+            content: news?.content || '',
+            news: undefined,
+        },
+        resolver: zodResolver(news ? BeritaValidation.UPDATE : BeritaValidation.CREATE)
     })
 
 
+    // navigate 
+    const navigate = useNavigate()
+
+
+
+    // mutatation 
+    const { isPending, mutateAsync } = useMutation({
+        mutationFn: (data) => {
+            if (!news) {
+                return NewsService.create(data)
+            } else {
+                return NewsService.update(data, news.id)
+            }
+        },
+        onError: (errors) => {
+            if (errors instanceof AxiosError) {
+
+                console.log(errors.response)
+                console.log(errors)
+                return console.log(errors.response)
+            }
+
+            return console.log(errors)
+        },
+        onSuccess: (data) => {
+            console.log(data)
+            return navigate('/admin/berita')
+
+        }
+    })
+
+
+
     // handle submit
-    const onSubmit = (data) => console.log(data);
+    const onSubmit = async (data) => {
+        try {
+
+            // cek data 
+            if (!data) return;
+
+            // form data 
+            const formData = new FormData();
+
+            formData.append('title', data.title);
+            formData.append('category', data.category);
+            formData.append('content', data.content);
+
+            // cek news
+            if (data.news && data.news.length > 0) {
+                // User upload file baru
+                formData.append("news", data.news[0]);
+            }
+
+
+            // mutate 
+            await mutateAsync(formData);
+
+        } catch (error) {
+            console.log(error)
+        }
+
+    };
 
 
 
@@ -70,10 +145,11 @@ const InputBerita = () => {
                     {/* thumbnail */}
                     <InputFileData
                         label={'Thumbnail Berita'}
-                        register={register('thumbnail')}
-                        error={errors.thumbnail}
+                        register={register('news')}
+                        error={errors.news}
                         clearErrors={clearErrors}
                         setValue={setValue}
+                        type={'news'}
 
                     />
 
@@ -85,7 +161,7 @@ const InputBerita = () => {
                         <ButtonKembali url={'/admin/berita'} />
 
                         {/* submit */}
-                        <ButtonSubmit handleSubmit={() => { }} />
+                        <ButtonSubmit disable={isPending} handleSubmit={() => { }} />
                     </div>
 
                 </form>
