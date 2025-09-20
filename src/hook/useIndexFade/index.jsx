@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react';
 import { useEffect } from 'react';
 
-const useIndexFade = ({ data, duration }) => {
+const UseIndexFade = ({ data, duration }) => {
     const [index, setIndex] = useState(0);
 
     // Ganti index setiap 4 detik (sesuaikan durasi animasi)
@@ -17,4 +17,4 @@ const useIndexFade = ({ data, duration }) => {
     return index;
 }
 
-export default useIndexFade
+export default UseIndexFade

@@ -2,7 +2,7 @@
 // Import
 // =================
 import React, { memo, useState, useEffect } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import useWindowSize from '../hook/UseWindowSize';
 import { AnimatePresence, motion } from 'framer-motion';
 // Component
@@ -32,10 +32,9 @@ import LayoutSectionBg from '../layouts/LayoutSectionBg';
 import ScrollX from '../layouts/ScrollX';
 
 import ScrollXDesktop from '../layouts/ScrollXDesktop';
+import UseIndexFade from '../hook/UseIndexFade';
 
 
-// hooks
-import useIndexFade from '../hook/UseIndexFade';
 
 
 
@@ -45,6 +44,19 @@ import useIndexFade from '../hook/UseIndexFade';
 
 
 const Home = () => {
+
+
+  // use loader 
+  const news = useLoaderData();
+
+  // cek news
+  // if (!news.success) {
+  //   console.log(news);
+  // }
+
+
+
+
   const widthDevice = useWindowSize().width;
 
   // ===============
@@ -73,7 +85,7 @@ const Home = () => {
       <SectionTwo />
       <SectionThree />
       <SectionFour width={widthDevice} />
-      <SectionFive width={widthDevice} data={data} />
+      <SectionFive width={widthDevice} data={data} news={news?.data ?? []} />
       <SectionMaps width={widthDevice} />
     </LayoutPages>
   )
@@ -191,11 +203,12 @@ const SectionFour = ({ width }) => {
 // Section Five
 // =================
 
-const SectionFive = memo(({ width, data }) => {
+const SectionFive = memo(({ width, data, news = [] }) => {
+
 
 
   // useIndexFade
-  const index = useIndexFade({ data, duration: 4000 });
+  const index = UseIndexFade({ data: news, duration: 4000 });
 
   return (
     <LayoutSectionBg pb={12} minH={'100'} pt={10} noBg={true} >
@@ -209,24 +222,31 @@ const SectionFive = memo(({ width, data }) => {
             exit={{ opacity: 0 }}
             transition={{ duration: 1, ease: 'easeInOut' }}
           >
-            <CardBeritaLarge img={data[index]?.img} jenis={data[index]?.jenis} judul={data[index]?.judul} deskripsi={data[index]?.deskripsi} />
+            <CardBeritaLarge img={news[index]?.url_thumbnail} jenis={news[index]?.category} judul={news[index]?.title} deskripsi={news[index]?.content} />
           </motion.div>
         </AnimatePresence>
       </div>
       {width > 700 && (<div className='w-[90%] h-[1px] bg-secondary-blue mb-12 opacity-55'></div>)}
-      {width > 0 && width < 1024 ? (
-        <ScrollX slidesToScroll={2}>
-          {data.slice(0, 5).map((item, index) => (
-            <CardBeritaSmall key={index} img={item.img} jenis={item.jenis} judul={item.judul} deskripsi={item.deskripsi} />
-          ))}
-        </ScrollX>
-      ) : (
-        <ScrollXDesktop>
-          {data.slice(0, 5).map((item, index) => (
-            <CardBeritaSmall key={index} img={item.img} jenis={item.jenis} judul={item.judul} deskripsi={item.deskripsi} />
-          ))}
-        </ScrollXDesktop>
-      )}
+      {
+        news ? (
+          width > 0 && width < 1024 ? (
+            <ScrollX slidesToScroll={2}>
+              {
+                news.map((item, index) => (
+                  <CardBeritaSmall key={index} img={item.url_thumbnail} jenis={item.category} judul={item.title} deskripsi={item.content} />
+                ))}
+            </ScrollX>
+          ) : (
+            <ScrollXDesktop>
+              {news.map((item, index) => (
+                <CardBeritaSmall key={index} img={item.url_thumbnail} jenis={item.category} judul={item.title} deskripsi={item.content} />
+              ))}
+            </ScrollXDesktop>
+          )
+        ) : (
+          <p>No Data</p>
+        )
+      }
       <div className='w-full flex justify-center items-center lg:pt-12'>
         <ButtonMore />
       </div>

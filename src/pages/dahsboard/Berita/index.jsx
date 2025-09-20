@@ -3,8 +3,33 @@ import LayoutDataPages from '../../../layouts/LayoutDataPages'
 import ButtonCrud from '../../../components/ButtonCrud'
 import CardBeritaSmall from '../../../fragments/CardBerita/CardBeritaSmall'
 import CardAdminBerita from '../../../fragments/CardAdminBerita'
+import { useLoaderData, useRevalidator } from 'react-router-dom'
+import { NewsService } from '../../../services/news.service'
 
 const Berita = () => {
+
+    // loader 
+    const news = useLoaderData();
+
+    // revalidate 
+    const revalidate = useRevalidator();
+
+
+    // cek news 
+    if (!news.success) {
+        console.log(news);
+    }
+
+
+    // handle delete 
+    const handleDelete = async (id) => {
+        await NewsService.delete(id);
+
+        // revalidate 
+        revalidate.revalidate();
+
+    }
+
     return (
         <LayoutDataPages header={'Berita'}>
             <div className="w-full pt-24 flex flex-col justify-start items-start">
@@ -21,15 +46,21 @@ const Berita = () => {
 
                     {/* card berita */}
                     {
-                        [0, 1, 2, 3, 4, 5, 6].map((_, index) => (
+                        news && news.data.length > 0 ? (
+                            news.data.map((item, index) => (
 
-                            <CardAdminBerita
-                                key={index}
-                                jenis={'Berita'}
-                                judul={'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'}
-                                img={'../berita/5.jpg'}
-                            />
-                        ))
+                                <CardAdminBerita
+                                    key={index}
+                                    id={item.id}
+                                    jenis={item.category}
+                                    judul={item.title}
+                                    img={item.url_thumbnail}
+                                    handleDelete={handleDelete}
+                                />
+                            ))
+                        ) : (
+                            <p>No Data</p>
+                        )
                     }
 
                 </div>

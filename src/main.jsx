@@ -23,12 +23,18 @@ import Berita from './pages/dahsboard/Berita/index.jsx'
 import InputCalonSantri from './pages/dahsboard/CalonSantri/InputCalonSantri/index.jsx'
 import InputUstadUstadzah from './pages/dahsboard/UstadUstadzah/InputUstadUstadzah/index.jsx'
 import InputBerita from './pages/dahsboard/Berita/InputBerita/index.jsx'
+import { UseLoaderNews } from './contexts/useLoaderNews.js'
+import { UseLoaderAuth } from './contexts/useLoaderAuth.js'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 
 Modal.setAppElement('#root')
 const router = createBrowserRouter([
   {
     path: "/",
+    loader: () => {
+      return UseLoaderNews.read();
+    },
     element: <Home />,
   },
   {
@@ -57,6 +63,18 @@ const router = createBrowserRouter([
   },
   {
     path: "/admin",
+    loader: async () => {
+
+      // cek auth 
+      const auth = await UseLoaderAuth.cek();
+
+      if (!auth.success) return auth
+
+      const news = await UseLoaderNews.read();
+
+
+      return news;
+    },
     element: <HomeAdmin />,
   },
   {
@@ -110,10 +128,17 @@ const router = createBrowserRouter([
   },
   {
     path: '/admin/berita',
+    loader: () => {
+      return UseLoaderNews.read();
+    },
     element: <Berita />
   },
   {
     path: '/admin/berita/add',
+    element: <InputBerita />
+  },
+  {
+    path: '/admin/berita/update/:id',
     element: <InputBerita />
   }
 
@@ -123,6 +148,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <QueryClientProvider client={new QueryClient()}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
   </StrictMode>,
 )

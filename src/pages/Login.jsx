@@ -4,6 +4,13 @@ import BlobSvg from '../assets/svg/blobSvg'
 import TextSpace from '../components/text/TextSpace'
 import BoxInputAuth from '../fragments/BoxInputAuth'
 import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useMutation } from '@tanstack/react-query'
+import { AuthValidation } from '../../validations/auth-validation'
+import { AuthService } from '../services/auth.service'
+import { AxiosError } from 'axios'
+import { redirect, useNavigate } from 'react-router-dom'
 const Login = () => {
 
 
@@ -50,33 +57,88 @@ const Thumb = () => {
 // container form input 
 const ContainerForm = () => {
     const [hide, setHite] = useState(true)
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
+
+
+    // navigate 
+    const navigate = useNavigate()
 
     const handleHide = () => {
         setHite((prev) => !prev)
     }
 
+    // use form 
+    const { register, handleSubmit, formState: { errors }, setError } = useForm({
+        resolver: zodResolver(AuthValidation.LOGIN)
+    })
 
-    // handle username 
-    const handleUsername = (e) => {
-        const { value } = e.target
-        setUsername(value)
-    }
 
-    // handle password 
-    const handlePassword = (e) => {
-        const { value } = e.target
-        setPassword(value)
-    }
+    // handle mutation 
+    const { isPending, mutateAsync } = useMutation({
+        mutationFn: (data) => {
+            return AuthService.login(data)
+        },
+        onError: (errors) => {
+            if (errors instanceof AxiosError) {
+                console.log(errors.response)
+
+                // set error 
+                setError('password', { message: errors.response.data.message })
+                setError('email', { message: errors.response.data.message })
+
+                return console.log(errors.response)
+            }
+        },
+        onSuccess: (data) => {
+            console.log(data)
+
+            // redirect
+            return navigate('/admin')
+        }
+    })
+
+
+    // handle submit 
+    const onSubmit = async (data) => {
+        try {
+            // cek data 
+            if (!data) return
+
+
+            // mutate 
+            await mutateAsync(data)
+
+        } catch (error) {
+            console.log(error)
+        }
+    };
+
+
+
     return (
-        <div className='w-full flex flex-col justify-start items-center z-10 bg-white min-h-[60vh] shadow-2xl rounded-3xl px-7 py-8'>
+        <form onSubmit={handleSubmit(onSubmit)} className='w-full flex flex-col justify-start items-center z-10 bg-white min-h-[60vh] shadow-2xl rounded-3xl px-7 py-8'>
             <p className='relative text-3xl font-semibold text-primary-blue w-full text-center mb-9  before:absolute before:bg-primary-yellow before:w-[28%] before:h-[0.8px] before:left-1 before:top-1/2 after:absolute after:bg-primary-yellow after:w-[28%] after:h-[0.8px] after:right-1 after:top-1/2'>Login</p>
             {/* username */}
-            <BoxInputAuth tipe={'text'} placeholder={'Username'} nameInput={'username'} value={username} handleChange={handleUsername} max={100} tipeKeyboard={'default'} borderStyle={'border-secondary-blue'} />
+            <BoxInputAuth
+                tipe={'email'}
+                placeholder={'Email'}
+                nameInput={'email'}
+                tipeKeyboard={'default'}
+                register={register("email")}
+                error={errors?.email}
+            />
 
             {/* password */}
-            <BoxInputAuth tipe={hide ? 'password' : 'text'} placeholder={'Password'} nameInput={'password'} value={password} handleChange={handlePassword} max={100} tipeKeyboard={'default'} borderStyle={'border-secondary-blue'} hide={hide} handleHide={handleHide} password={true} />
+            <BoxInputAuth
+                tipe={hide ? 'password' : 'text'}
+                placeholder={'Password'}
+                nameInput={'password'}
+                tipeKeyboard={'default'}
+                hide={hide}
+                handleHide={handleHide}
+                password={true}
+                register={register("password")}
+                error={errors?.password}
+            />
 
             <ButtonLogin />
 
@@ -92,16 +154,16 @@ const ContainerForm = () => {
             <div className='w-[100%] mt-6 flex justify-center items-center flex-row relative before:absolute before:bg-primary-yellow before:w-[20%] before:h-[0.7px] before:left-12 before:top-1/2 after:absolute after:bg-primary-yellow after:w-[20%] after:h-[0.7px] after:right-12 after:top-1/2'>
                 <img src={logo} alt="" className='w-[13%] h-[13%]' loading='lazy' />
             </div>
-        </div>
+        </form>
     )
 }
 
 
 const ButtonLogin = () => {
     return (
-        <div className='w-full flex flex-row justify-center items-center bg-primary-blue rounded-lg cursor-pointer active:bg-secondary-blue' onClick={() => { }}>
+        <button type='submit' className='w-full flex flex-row justify-center items-center bg-primary-blue rounded-lg cursor-pointer active:bg-secondary-blue' onClick={() => { }}>
             <p className='text-lg font-semibold text-white py-2 px-6 rounded-xl'>Log in</p>
-        </div>
+        </button>
     )
 }
 

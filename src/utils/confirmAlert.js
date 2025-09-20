@@ -1,7 +1,7 @@
 // utils/confirmDelete.js
 import Swal from 'sweetalert2';
 
-const confirmDelete = (onConfirm) => {
+const confirmDelete = (handleDelete) => {
     Swal.fire({
         title: 'Yakin ingin menghapus?',
         text: 'Data ini akan dihapus permanen!',
@@ -14,11 +14,12 @@ const confirmDelete = (onConfirm) => {
         width: '20rem',
     }).then((result) => {
         if (result.isConfirmed) {
-            deleteSuccess(onConfirm);
+            handleDelete();
+            deleteSuccess();
         }
     });
 };
-const deleteSuccess = (onConfirm) => {
+const deleteSuccess = () => {
     Swal.fire({
         title: 'Sukses!',
         text: 'Data berhasil dihapus',
@@ -28,7 +29,7 @@ const deleteSuccess = (onConfirm) => {
         width: '90%',
     }).then((result) => {
         if (result.isConfirmed) {
-            console.log('onConfirm', onConfirm);
+            console.log('onConfirm');
         }
     });
 };
