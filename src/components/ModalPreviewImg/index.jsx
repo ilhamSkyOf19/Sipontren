@@ -6,12 +6,12 @@ import { useState } from 'react';
 
 // json
 import dataCalonSantri from '../../jsons/dataCalonSantri.json'
-import dataUstad from '../../jsons/dataUstad.json'
 
 
 // icon
 import { IoIosClose } from "react-icons/io";
 import { useEffect } from 'react';
+import { UstadService } from '../../services/ustad.service';
 
 const ModalPreviewImg = ({ show, handleShow, id, type }) => {
 
@@ -25,18 +25,25 @@ const ModalPreviewImg = ({ show, handleShow, id, type }) => {
         setActive(index);
     }
 
+
+
     // fetch
     useEffect(() => {
         if (type === "ustad") {
             if (id) {
-                const result = dataUstad.find(item => item.id === Number(id))
-                if (result) {
-                    const datasImg = Object.entries(result)
-                        .filter(([key, _]) => ["img"].includes(key)).map(([_, value]) => value);
-                    if (datasImg) {
-                        setDatas(datasImg)
+                const handleFetch = async () => {
+                    const result = await UstadService.detail(id);
+
+                    // console.log(result)
+                    if (result) {
+                        const datasImg = Object.entries(result.data)
+                            .filter(([key, _]) => ["url_ustad_img"].includes(key)).map(([_, value]) => value);
+                        if (datasImg) {
+                            setDatas(datasImg)
+                        }
                     }
                 }
+                handleFetch();
             }
         } else {
             if (id) {
@@ -52,6 +59,8 @@ const ModalPreviewImg = ({ show, handleShow, id, type }) => {
             }
         }
     }, [id, type])
+
+    // console.log(datas)
 
 
     // show close button
@@ -101,14 +110,14 @@ const ModalPreviewImg = ({ show, handleShow, id, type }) => {
             <div className='flex justify-center items-center h-[65%] mt-10'>
                 <Zoom
                 >
-                    <img src={`/dokumen/${datas[active]}`} alt="" className='object-contain mx-auto w-[85%] lg:w-[45%] cursor-zoom-in' loading='lazy' />
+                    <img src={`${datas[active]}`} alt="" className='object-contain mx-auto w-[85%] lg:w-[45%] cursor-zoom-in' loading='lazy' />
                 </Zoom>
             </div>
             <div className='flex flex-row justify-center items-center w-full h-[10%] px-4 mt-12 gap-3'>
                 {
                     datas.map((item, index) => (
                         <button type='button' key={index} className={`h-[100%] transition-all duration-150 ease-in-out opacity-70 hover:scale-105   ${active === index ? 'opacity-100' : ''}`} onClick={() => handleActive(index)}>
-                            <img src={`/dokumen/${item}`} alt="" className='object-contain mx-auto w-[100%] h-[100%]' loading='lazy' />
+                            <img src={`${item}`} alt="" className='object-contain mx-auto w-[100%] h-[100%]' loading='lazy' />
                         </button>
                     ))
                 }

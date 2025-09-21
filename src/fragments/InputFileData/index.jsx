@@ -22,6 +22,10 @@ const InputFileData = ({ label, register, error, clearErrors, setValue, type }) 
             if (type === 'news') {
                 setValue("news", files, { shouldValidate: true }); // set & cek validasi
                 clearErrors('news');
+            } else if (type === 'ustad') {
+                setValue("ustad_img", files, { shouldValidate: true }); // set & cek validasi
+                clearErrors('ustad_img');
+
             } else {
                 setValue("thumbnail", files, { shouldValidate: true }); // set & cek validasi
                 clearErrors('thumbnail');

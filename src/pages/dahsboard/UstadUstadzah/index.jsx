@@ -7,7 +7,7 @@ import ComponentAction from '../../../components/ComponentAction'
 // layout
 
 import LayoutDataPages from '../../../layouts/LayoutDataPages'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLoaderData, useLocation } from 'react-router-dom'
 import { headerDashboard } from '../../../utils/utils'
 import ButtonCrud from '../../../components/ButtonCrud'
 import ButtonDownload from '../../../components/ButtonDownload'
@@ -19,14 +19,16 @@ import { IoIosArrowDropdownCircle } from "react-icons/io";
 import { useState } from 'react'
 import ModalPreviewImg from '../../../components/ModalPreviewImg'
 import confirmDelete from '../../../utils/confirmAlert'
-import { useEffect } from 'react'
-
-
-// json 
-import dataUstad from '../../../jsons/dataUstad.json'
 
 const UstadUstadzah = () => {
-    const [data, setData] = useState([]);
+
+    // loader 
+    const data = useLoaderData();
+
+    // cek error 
+    if (!data.success) return console.log(data.message);
+
+
     const [id, setId] = useState(null);
     const path = useLocation().pathname
     const header = headerDashboard(path)
@@ -44,10 +46,6 @@ const UstadUstadzah = () => {
         confirmDelete(1);
     }
 
-    //  fetch data 
-    useEffect(() => {
-        setData(dataUstad);
-    }, [])
 
 
     // handle set id 
@@ -68,7 +66,7 @@ const UstadUstadzah = () => {
                     <div className='w-full justify-center items-center px-4'>
                         <BoxSearch />
                     </div>
-                    <ContentData handleShow={handleShow} handleShowModalDelete={handleShowModalDelete} data={data} handleSetId={handleSetId} />
+                    <ContentData handleShow={handleShow} handleShowModalDelete={handleShowModalDelete} data={data.data} handleSetId={handleSetId} />
                 </div>
 
             </LayoutDataPages>
@@ -79,6 +77,7 @@ const UstadUstadzah = () => {
 
 const ContentData = ({ handleShow, handleShowModalDelete, data, handleSetId }) => {
 
+
     const [active, setActive] = useState(null);
 
     const handleActive = (index) => {
@@ -87,25 +86,29 @@ const ContentData = ({ handleShow, handleShowModalDelete, data, handleSetId }) =
     return (
         <div className='w-full flex flex-col justify-start items-center mt-12 px-4'>
             {
-                data.map((item, index) =>
-                    <ContainerData
-                        key={index}
-                        nama={item.nama}
-                        no={index + 1}
-                        handleActive={() => handleActive(index)}
-                        active={active === index}
-                    >
-                        <ComponentDataText data={'Nama'} value={item.nama} />
-                        <ComponentDataText data={'Jenis Kelamin'} value={item.jenisKelamin} />
-                        <ComponentDataText data={'Tempat Lahir'} value={item.tempatLahir} />
-                        <ComponentDataText data={'Tanggal Lahir'} value={item.tanggalLahir} />
-                        <ComponentDataText data={'Alamat'} value={item.alamat} />
-                        <ComponentDataText data={'Nomor Telepon'} value={item.nomorTelepon} />
-                        <ComponentDataText data={'Jabatan'} value={item.jabatan} />
-                        <ComponentDataFile data={'Dokumen'} handleShow={handleShow} id={item.id} handleSetId={handleSetId} />
-                        <ComponentAction handleShowModalDelete={handleShowModalDelete} id={item.id} link={'ustad-ustadzah'} />
-                    </ContainerData>
+                data && data.length > 0 ? (
+                    data.map((item, index) =>
+                        <ContainerData
+                            key={index}
+                            nama={item.name}
+                            no={index + 1}
+                            handleActive={() => handleActive(index)}
+                            active={active === index}
+                        >
+                            <ComponentDataText data={'Nama'} value={item.name} />
+                            <ComponentDataText data={'Jenis Kelamin'} value={item.jenis_kelamin} />
+                            <ComponentDataText data={'Tempat Lahir'} value={item.tempat_lahir} />
+                            <ComponentDataText data={'Tanggal Lahir'} value={item.tanggal_lahir} />
+                            <ComponentDataText data={'Alamat'} value={item.alamat} />
+                            <ComponentDataText data={'Nomor Telepon'} value={item.no_telepon} />
+                            <ComponentDataText data={'Jabatan'} value={item.jabatan} />
+                            <ComponentDataFile data={'Dokumen'} handleShow={handleShow} id={item.id} handleSetId={handleSetId} />
+                            <ComponentAction handleShowModalDelete={handleShowModalDelete} id={item.id} link={'ustad-ustadzah'} />
+                        </ContainerData>
 
+                    )
+                ) : (
+                    <p>Tidak ada data</p>
                 )
             }
         </div>

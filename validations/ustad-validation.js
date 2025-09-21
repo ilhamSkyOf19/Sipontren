@@ -1,38 +1,75 @@
 import z from "zod";
 
 export class UstadValidation {
-    // create 
-    static CREATE = z.object({
-        nama: z
-            .string()
-            .regex(/^[a-zA-Z\s]+$/, "Nama hanya boleh huruf dan spasi")
-            .min(3, "Nama minimal 3 karakter"),
 
-        jenisKelamin: z.enum(["Laki-laki", "Perempuan"], {
-            required_error: "Jenis kelamin wajib dipilih",
+    // create
+    static CREATE = z.object({
+        name: z.string({
+            error: (val) => val.input === undefined ? 'nama harus diisi' : 'nama harus berupa string'
         }),
 
-        tempatLahir: z
-            .string()
-            .regex(/^[a-zA-Z\s]+$/, "Tempat lahir hanya boleh huruf")
-            .min(2, "Tempat lahir minimal 2 karakter"),
+        jenis_kelamin: z.enum(['laki_laki', 'perempuan'], {
+            error: (val) => val.input === undefined ? 'jenis kelamin harus diisi' : 'jenis kelamin tidak sesuai'
+        }),
 
-        tanggalLahir: z.string().min(1, "Tanggal lahir wajib diisi"),
+        tempat_lahir: z.string({
+            error: (val) => val.input === undefined ? 'tempat lahir harus diisi' : 'tempat lahir harus berupa string'
+        }),
 
-        alamat: z.string().min(5, "Alamat minimal 5 karakter"),
+        tanggal_lahir: z.string({
+            error: (val) => val.input === undefined ? 'tanggal lahir harus diisi' : 'tanggal lahir harus berupa string'
+        }),
 
-        nomorTelepon: z
-            .string()
-            .regex(/^\d+$/, "Nomor telepon hanya boleh angka")
-            .min(10, "Nomor telepon minimal 10 digit")
-            .max(15, "Nomor telepon maksimal 15 digit"),
+        alamat: z.string({
+            error: (val) => val.input === undefined ? 'alamat harus diisi' : 'alamat harus berupa string'
+        }),
 
-        email: z.string().email("Format email tidak valid"),
+        no_telepon: z.string({
+            error: (val) => val.input === undefined ? 'nomor telepon harus diisi' : 'nomor telepon harus berupa string'
+        })
+            .trim()
+            .regex(/^[0-9]+$/, { message: 'nomor telepon hanya boleh angka' }),
 
-        jabatan: z.string().min(2, "Jabatan wajib diisi"),
+        jabatan: z.string({
+            error: (val) => val.input === undefined ? 'jabatan harus diisi' : 'jabatan harus berupa string'
+        }),
+        ustad_img: z.refine((files) => files?.length > 0, { message: 'Img Ustad harus diisi' }),
+    }).strict()
 
-        img: z
-            .any()
-            .refine((files) => files?.length > 0, "Foto wajib diupload"),
+    // update
+    static UPDATE = z.object({
+        name: z.string({
+            error: (val) => val.input === undefined ? 'nama harus diisi' : 'nama harus berupa string'
+        })
+            .min(3, { message: 'nama minimal 3 karakter' })
+            .optional(),
+
+        jenis_kelamin: z.enum(['laki_laki', 'perempuan'], {
+            error: (val) => val.input === undefined ? 'jenis kelamin harus diisi' : 'jenis kelamin tidak sesuai'
+        }).optional(),
+
+        tempat_lahir: z.string({
+            error: (val) => val.input === undefined ? 'tempat lahir harus diisi' : 'tempat lahir harus berupa string'
+        }).optional(),
+
+        tanggal_lahir: z.string({
+            error: (val) => val.input === undefined ? 'tanggal lahir harus diisi' : 'tanggal lahir harus berupa string'
+        })
+            .optional(),
+
+        alamat: z.string({
+            error: (val) => val.input === undefined ? 'alamat harus diisi' : 'alamat harus berupa string'
+        }).optional(),
+
+        no_telepon: z.string({
+            error: (val) => val.input === undefined ? 'nomor telepon harus diisi' : 'nomor telepon harus berupa string'
+        })
+            .regex(/^[0-9]+$/, { message: 'nomor telepon hanya boleh angka' })
+            .optional(),
+
+        jabatan: z.string({
+            error: (val) => val.input === undefined ? 'jabatan harus diisi' : 'jabatan harus berupa string'
+        }).optional(),
+        ustad_img: z.refine((files) => files?.length > 0, { message: 'Img Ustad harus diisi' }).optional(),
     }).strict()
 }

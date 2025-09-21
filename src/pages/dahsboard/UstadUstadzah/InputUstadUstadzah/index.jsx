@@ -5,14 +5,9 @@ import LayoutDataPages from '../../../../layouts/LayoutDataPages'
 // route
 import { useNavigate, useParams } from 'react-router-dom'
 
-// hook
-import useInputWarning from '../../../../hook/useInputWarning'
 
 // fragments
-import InputFormulir from '../../../../fragments/InputFormulir'
-import InputFormulirFile from '../../../../fragments/InputFormulirFile'
 import InputSelectGender from '../../../../fragments/InputSelectGender'
-import { warningAlert } from '../../../../utils/warningAlert'
 
 
 // component 
@@ -27,6 +22,8 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import InputFileData from '../../../../fragments/InputFileData'
 import InputData from '../../../../fragments/InputData'
+import { useMutation } from '@tanstack/react-query'
+import { UstadService } from '../../../../services/ustad.service'
 
 
 const InputUstadUstadzah = () => {
@@ -71,9 +68,68 @@ const FormInput = () => {
     })
 
 
-    // handle submit
-    const onSubmit = (data) => console.log(data);
+    // mutation 
+    const { isPending, mutateAsync } = useMutation({
+        mutationFn: (data) => {
+            return UstadService.create(data)
+        },
+        onSuccess: (data) => {
+            console.log(data)
+            return navigate('/admin/ustad-ustadzah')
+        },
+        onError: (errors) => {
+            console.log(errors)
+            return;
+        }
+    })
 
+
+    // handle submit
+    const onSubmit = async (data) => {
+        try {
+            // cek data
+            if (!data) return;
+
+            console.log(data)
+
+            // form data 
+            const formData = new FormData();
+
+
+            // name 
+            formData.append('name', data.name);
+
+            // jenis kelamin 
+            formData.append('jenis_kelamin', data.jenis_kelamin);
+
+            // tempat lahir 
+            formData.append('tempat_lahir', data.tempat_lahir);
+
+            // tanggal lahir 
+            formData.append('tanggal_lahir', data.tanggal_lahir);
+
+            // alamat 
+            formData.append('alamat', data.alamat);
+
+            // no telepon 
+            formData.append('no_telepon', data.no_telepon);
+
+            // jabatan 
+            formData.append('jabatan', data.jabatan);
+
+            // foto 
+            if (data.ustad_img && data.ustad_img.length > 0) {
+                formData.append('ustad_img', data.ustad_img[0]);
+            }
+
+
+
+            // mutate 
+            await mutateAsync(formData);
+        } catch (error) {
+            console.log(error)
+        }
+    };
 
 
 
@@ -86,10 +142,10 @@ const FormInput = () => {
             >
                 {/* Nama */}
                 <InputData
-                    register={register("nama")}
-                    error={errors.nama}
+                    register={register("name")}
+                    error={errors.name}
                     placeholder="Masukan nama lengkap"
-                    nameInput="nama"
+                    nameInput="name"
                     tipe="text"
                     label="Nama Lengkap"
                     tipeKeyboard="text"
@@ -97,15 +153,15 @@ const FormInput = () => {
 
                 {/* Jenis Kelamin */}
                 <InputSelectGender
-                    register={register("jenisKelamin")}
-                    error={errors.jenisKelamin} />
+                    register={register("jenis_kelamin")}
+                    error={errors.jenis_kelamin} />
 
                 {/* Tempat Lahir */}
                 <InputData
-                    register={register("tempatLahir")}
-                    error={errors.tempatLahir}
+                    register={register("tempat_lahir")}
+                    error={errors.tempat_lahir}
                     placeholder="Masukan tempat lahir"
-                    nameInput="tempatLahir"
+                    nameInput="tempat_lahir"
                     tipe="text"
                     label="Tempat Lahir"
                     tipeKeyboard="text"
@@ -113,10 +169,10 @@ const FormInput = () => {
 
                 {/* Tanggal Lahir */}
                 <InputData
-                    register={register("tanggalLahir")}
-                    error={errors.tanggalLahir}
+                    register={register("tanggal_lahir")}
+                    error={errors.tanggal_lahir}
                     placeholder="Masukan tanggal lahir"
-                    nameInput="tanggalLahir"
+                    nameInput="tanggal_lahir"
                     tipe="date"
                     label="Tanggal Lahir"
                     tipeKeyboard="text"
@@ -135,25 +191,15 @@ const FormInput = () => {
 
                 {/* Nomor Telepon */}
                 <InputData
-                    register={register("nomorTelepon")}
-                    error={errors.nomorTelepon}
+                    register={register("no_telepon")}
+                    error={errors.no_telepon}
                     placeholder="Masukan nomor telepon aktif"
-                    nameInput="nomorTelepon"
+                    nameInput="no_telepon"
                     tipe="text"
                     label="Nomor Telepon / WA"
                     tipeKeyboard="numeric"
                 />
 
-                {/* Email */}
-                <InputData
-                    register={register("email")}
-                    error={errors.email}
-                    placeholder="Masukan alamat email"
-                    nameInput="email"
-                    tipe="email"
-                    label="Email"
-                    tipeKeyboard="text"
-                />
 
                 {/* Jabatan */}
                 <InputData
@@ -169,10 +215,11 @@ const FormInput = () => {
                 {/* Foto (img) */}
                 <InputFileData
                     label="Foto"
-                    register={register("img")}
-                    error={errors.img}
+                    register={register("ustad_img")}
+                    error={errors.ustad_img}
                     setValue={setValue}
                     clearErrors={clearErrors}
+                    type={'ustad'}
                 />
 
                 {/* button */}
@@ -181,7 +228,7 @@ const FormInput = () => {
                     <ButtonKembali url={'/admin/ustad-ustadzah'} />
 
                     {/* button submit */}
-                    <ButtonSubmit handleSubmit={handleSubmit} />
+                    <ButtonSubmit handleSubmit={handleSubmit} disable={isPending} />
                 </div>
             </form>
         </div>

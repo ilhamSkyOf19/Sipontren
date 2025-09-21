@@ -26,6 +26,7 @@ import InputBerita from './pages/dahsboard/Berita/InputBerita/index.jsx'
 import { UseLoaderNews } from './contexts/useLoaderNews.js'
 import { UseLoaderAuth } from './contexts/useLoaderAuth.js'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { UseLoaderUstad } from './contexts/useLoaderUstad.js'
 
 
 Modal.setAppElement('#root')
@@ -109,9 +110,13 @@ const router = createBrowserRouter([
     path: "/admin/calon-santri/update/:id",
     element: <InputCalonSantri />,
   },
+
   // ustad ustadzah
   {
     path: "/admin/ustad-ustadzah",
+    loader: () => {
+      return UseLoaderUstad.read();
+    },
     element: <UstadUstadzah />,
   },
   {

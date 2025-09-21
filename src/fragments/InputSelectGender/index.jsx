@@ -15,8 +15,8 @@ const InputSelectGender = ({ register, error }) => {
                 )}
             >
                 <option value="">Pilih jenis kelamin</option>
-                <option value="Laki-laki">Laki-laki</option>
-                <option value="Perempuan">Perempuan</option>
+                <option value="laki_laki">Laki-laki</option>
+                <option value="perempuan">Perempuan</option>
             </select>
 
 
