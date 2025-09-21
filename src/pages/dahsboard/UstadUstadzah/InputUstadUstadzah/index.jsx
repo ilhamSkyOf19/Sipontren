@@ -33,8 +33,8 @@ const InputUstadUstadzah = () => {
 
 
 
-    // cek data 
-    if (!data.success) {
+    // cek data
+    if (data && !data.success) {
         console.log(data.message)
     }
 
@@ -47,7 +47,7 @@ const InputUstadUstadzah = () => {
                 </h2>
 
                 {/* container input */}
-                <FormInput ustad={data.data} />
+                <FormInput ustad={data?.data} />
             </div>
         </LayoutDataPages>
     )
