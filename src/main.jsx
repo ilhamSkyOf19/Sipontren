@@ -125,6 +125,9 @@ const router = createBrowserRouter([
   },
   {
     path: "/admin/ustad-ustadzah/update/:id",
+    loader: async ({ params }) => {
+      return await UseLoaderUstad.detail(params.id);
+    },
     element: <InputUstadUstadzah />,
   },
   {

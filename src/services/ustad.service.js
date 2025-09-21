@@ -47,4 +47,15 @@ export class UstadService {
         // return 
         return response
     }
+
+
+    // delete 
+    static async delete(id) {
+        // get response 
+        const response = await AXIOS.delete(`/ustad/delete/${id}`).then(res => res.data);
+
+
+        // return 
+        return response
+    }
 }

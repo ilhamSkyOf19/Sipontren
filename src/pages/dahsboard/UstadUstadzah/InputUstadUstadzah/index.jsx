@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import LayoutDataPages from '../../../../layouts/LayoutDataPages'
 
 // route
-import { useNavigate, useParams } from 'react-router-dom'
+import { useLoaderData, useNavigate, useParams } from 'react-router-dom'
 
 
 // fragments
@@ -27,21 +27,16 @@ import { UstadService } from '../../../../services/ustad.service'
 
 
 const InputUstadUstadzah = () => {
-    // state 
-    const [data, setData] = useState({});
-    // get id
-    const { id } = useParams();
 
-    useEffect(() => {
-        if (id) {
-            const result = dataUstad.find(item => item.id === Number(id));
-            if (result) {
-                setData(result);
-            }
-        } else {
-            setData({});
-        }
-    }, [id])
+    // loader 
+    const data = useLoaderData();
+
+
+
+    // cek data 
+    if (!data.success) {
+        console.log(data.message)
+    }
 
 
     return (
@@ -52,26 +47,42 @@ const InputUstadUstadzah = () => {
                 </h2>
 
                 {/* container input */}
-                <FormInput />
+                <FormInput ustad={data.data} />
             </div>
         </LayoutDataPages>
     )
 }
 
 // input data
-const FormInput = () => {
+const FormInput = ({ ustad }) => {
     const navigate = useNavigate()
+
+    console.log(ustad)
 
     // use form 
     const { register, handleSubmit, formState: { errors }, clearErrors, setValue } = useForm({
-        resolver: zodResolver(UstadValidation.CREATE)
+        values: {
+            name: ustad?.name || '',
+            jenis_kelamin: ustad?.jenis_kelamin || '',
+            tempat_lahir: ustad?.tempat_lahir || '',
+            tanggal_lahir: ustad?.tanggal_lahir || '',
+            alamat: ustad?.alamat || '',
+            jabatan: ustad?.jabatan || '',
+            no_telepon: ustad?.no_telepon || '',
+            ustad_img: undefined,
+        },
+        resolver: zodResolver(ustad ? UstadValidation.UPDATE : UstadValidation.CREATE)
     })
 
 
     // mutation 
     const { isPending, mutateAsync } = useMutation({
         mutationFn: (data) => {
-            return UstadService.create(data)
+            if (ustad) {
+                return UstadService.update(data, ustad.id)
+            } else {
+                return UstadService.create(data)
+            }
         },
         onSuccess: (data) => {
             console.log(data)
@@ -88,7 +99,7 @@ const FormInput = () => {
     const onSubmit = async (data) => {
         try {
             // cek data
-            if (!data) return;
+            // if (!data) return;
 
             console.log(data)
 
@@ -117,10 +128,16 @@ const FormInput = () => {
             // jabatan 
             formData.append('jabatan', data.jabatan);
 
+
             // foto 
             if (data.ustad_img && data.ustad_img.length > 0) {
                 formData.append('ustad_img', data.ustad_img[0]);
             }
+
+
+            console.log(formData);
+
+
 
 
 

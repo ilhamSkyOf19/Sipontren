@@ -7,7 +7,7 @@ import ComponentAction from '../../../components/ComponentAction'
 // layout
 
 import LayoutDataPages from '../../../layouts/LayoutDataPages'
-import { Link, useLoaderData, useLocation } from 'react-router-dom'
+import { Link, useLoaderData, useLocation, useRevalidator } from 'react-router-dom'
 import { headerDashboard } from '../../../utils/utils'
 import ButtonCrud from '../../../components/ButtonCrud'
 import ButtonDownload from '../../../components/ButtonDownload'
@@ -19,11 +19,15 @@ import { IoIosArrowDropdownCircle } from "react-icons/io";
 import { useState } from 'react'
 import ModalPreviewImg from '../../../components/ModalPreviewImg'
 import confirmDelete from '../../../utils/confirmAlert'
+import { UstadService } from '../../../services/ustad.service'
 
 const UstadUstadzah = () => {
 
     // loader 
     const data = useLoaderData();
+
+    // revalidatade 
+    const revalidate = useRevalidator();
 
     // cek error 
     if (!data.success) return console.log(data.message);
@@ -40,10 +44,20 @@ const UstadUstadzah = () => {
         setShow((prev) => !prev);
     }
 
+    // handle delete data 
+    const handleDelete = async (id) => {
+        const response = await UstadService.delete(id);
+
+        if (!response.success) return console.log(response.message);
+
+        // revalidate 
+        revalidate.revalidate();
+    }
+
 
     // handle show modal delete
-    const handleShowModalDelete = () => {
-        confirmDelete(1);
+    const handleShowModalDelete = (id) => {
+        confirmDelete(handleDelete, id);
     }
 
 
@@ -103,7 +117,7 @@ const ContentData = ({ handleShow, handleShowModalDelete, data, handleSetId }) =
                             <ComponentDataText data={'Nomor Telepon'} value={item.no_telepon} />
                             <ComponentDataText data={'Jabatan'} value={item.jabatan} />
                             <ComponentDataFile data={'Dokumen'} handleShow={handleShow} id={item.id} handleSetId={handleSetId} />
-                            <ComponentAction handleShowModalDelete={handleShowModalDelete} id={item.id} link={'ustad-ustadzah'} />
+                            <ComponentAction handleShowModalDelete={() => handleShowModalDelete(item.id)} id={item.id} link={'ustad-ustadzah'} />
                         </ContainerData>
 
                     )
