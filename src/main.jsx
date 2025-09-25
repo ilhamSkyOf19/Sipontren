@@ -27,6 +27,7 @@ import { UseLoaderNews } from './contexts/useLoaderNews.js'
 import { UseLoaderAuth } from './contexts/useLoaderAuth.js'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { UseLoaderUstad } from './contexts/useLoaderUstad.js'
+import { UseLoaderStudent } from './contexts/useLoaderStudent.js'
 
 
 Modal.setAppElement('#root')
@@ -100,6 +101,9 @@ const router = createBrowserRouter([
   },
   {
     path: "/admin/calon-santri",
+    loader: async () => {
+      return await UseLoaderStudent.read();
+    },
     element: <CalonSantri />,
   },
   {

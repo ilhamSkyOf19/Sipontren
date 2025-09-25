@@ -7,8 +7,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { StudentValidation } from "../../../validations/student-validation";
 import InputFileData from "../InputFileData";
 import InputSelectSekolah from "../../components/InputSelectSekolah";
+import { useMutation } from "@tanstack/react-query";
+import { StudentService } from "../../services/student.service";
+import { AxiosError } from "axios";
 
-const TamplateFormulir = ({ formulir, data }) => {
+const TamplateFormulir = ({ formulir }) => {
 
 
 
@@ -18,17 +21,86 @@ const TamplateFormulir = ({ formulir, data }) => {
         resolver: zodResolver(StudentValidation.CREATE)
     })
 
+    // mutation 
+    const { isPending, mutateAsync } = useMutation({
+        mutationFn: (data) => {
+            return StudentService.create(data)
+        },
+        onSuccess: (data) => {
+            console.log(data)
+        },
+        onError: (error) => {
+            // cek error zod 
+            if (error instanceof AxiosError) {
+                console.log(error.response)
+            }
+            console.log(error)
+        }
+    })
+
+    console.log("Form errors:", errors);
+
 
 
     // console.log(data.fc_ktp)
 
 
     // width 
-    const windowSize = useWindowSize();
+    // const windowSize = useWindowSize();
 
 
     // handle submit 
-    const onSubmit = (data) => console.log(data);
+    const onSubmit = async (data) => {
+        try {
+            // if (!data) return;
+
+            console.log(data)
+
+            const formData = new FormData();
+
+            // field string / enum
+            formData.append("jenis_sekolah", data.jenis_sekolah);
+            formData.append("nisn", data.nisn);
+            formData.append("nik", data.nik);
+            formData.append("nama_lengkap", data.nama_lengkap);
+            formData.append("usia", data.usia);
+            formData.append("jenis_kelamin", data.jenis_kelamin);
+            formData.append("tempat_lahir", data.tempat_lahir);
+            formData.append("tanggal_lahir", data.tanggal_lahir);
+            formData.append("alamat", data.alamat);
+            formData.append("anak_ke", data.anak_ke);
+            formData.append("jumlah_saudara", data.jumlah_saudara);
+            formData.append("no_telepon", data.no_telepon);
+            formData.append("asal_sekolah", data.asal_sekolah);
+            formData.append("alamat_sekolah_asal", data.alamat_sekolah_asal);
+            formData.append("nama_lengkap_ayah", data.nama_lengkap_ayah);
+            formData.append("nama_lengkap_ibu", data.nama_lengkap_ibu);
+            formData.append("nama_lengkap_wali", data.nama_lengkap_wali);
+
+            // field file (ambil file pertama dari FileList)
+            if (data.foto_formal?.[0]) {
+                formData.append("foto_formal", data.foto_formal[0]);
+            }
+            if (data.fc_akta_kelahiran?.[0]) {
+                formData.append("fc_akta_kelahiran", data.fc_akta_kelahiran[0]);
+            }
+            if (data.foto_kk?.[0]) {
+                formData.append("foto_kk", data.foto_kk[0]);
+            }
+            if (data.fc_ktp?.[0]) {
+                formData.append("fc_ktp", data.fc_ktp[0]);
+            }
+            if (data.fc_kis_kip?.[0]) {
+                formData.append("fc_kis_kip", data.fc_kis_kip[0]);
+            }
+
+            // kirim ke backend
+            await mutateAsync(formData);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
 
 
 
@@ -162,10 +234,10 @@ const TamplateFormulir = ({ formulir, data }) => {
 
                 {/* Nomor Telepon */}
                 <InputData
-                    register={register("no_hp")}
-                    error={errors.no_hp}
+                    register={register("no_telepon")}
+                    error={errors.no_telepon}
                     placeholder="Masukan nomor telepon aktif"
-                    nameInput="no_hp"
+                    nameInput="no_telepon"
                     tipe="text"
                     label="Nomor Telepon / WA"
                     tipeKeyboard="numeric"
@@ -233,6 +305,7 @@ const TamplateFormulir = ({ formulir, data }) => {
                     error={errors.foto_formal}
                     setValue={setValue}
                     clearErrors={clearErrors}
+                    type={'foto_formal'}
                 />
 
                 {/* FC Akta Kelahiran */}
@@ -242,6 +315,7 @@ const TamplateFormulir = ({ formulir, data }) => {
                     error={errors.fc_akta_kelahiran}
                     setValue={setValue}
                     clearErrors={clearErrors}
+                    type={'fc_akta_kelahiran'}
                 />
 
                 {/* Foto KK */}
@@ -251,6 +325,7 @@ const TamplateFormulir = ({ formulir, data }) => {
                     error={errors.foto_kk}
                     setValue={setValue}
                     clearErrors={clearErrors}
+                    type={'foto_kk'}
                 />
 
                 {/* FC KTP */}
@@ -260,21 +335,23 @@ const TamplateFormulir = ({ formulir, data }) => {
                     error={errors.fc_ktp}
                     setValue={setValue}
                     clearErrors={clearErrors}
+                    type={'fc_ktp'}
                 />
 
                 {/* FC KIP/KIS */}
                 <InputFileData
                     label="Fotokopi KIP/KIS"
-                    register={register("fc_kip_kis")}
-                    error={errors.fc_kip_kis}
+                    register={register("fc_kis_kip")}
+                    error={errors.fc_kis_kip}
                     setValue={setValue}
                     clearErrors={clearErrors}
+                    type={'fc_kis_kip'}
                 />
 
 
                 <div className='w-full flex flex-col justify-start items-start gap-4 mt-4'>
                     <p className='text-xs md:text-lg lg:text-sm'>*Pastikan data yang anda masukan sudah benar</p>
-                    <button type="submit" className="w-full py-3 bg-primary-blue text-white rounded-lg hover:bg-secondary-blue hover:duration-200 text-md md:text-2xl md:py-4.5 cursor-pointer">Kirim</button>
+                    <button type="submit" disabled={isPending} className="w-full py-3 bg-primary-blue text-white rounded-lg hover:bg-secondary-blue hover:duration-200 text-md md:text-2xl md:py-4.5 cursor-pointer" onClick={() => console.log('klik')}>Kirim</button>
                 </div>
             </form>
 

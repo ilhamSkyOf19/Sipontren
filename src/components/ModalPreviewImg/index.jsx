@@ -12,6 +12,7 @@ import dataCalonSantri from '../../jsons/dataCalonSantri.json'
 import { IoIosClose } from "react-icons/io";
 import { useEffect } from 'react';
 import { UstadService } from '../../services/ustad.service';
+import { StudentService } from '../../services/student.service';
 
 const ModalPreviewImg = ({ show, handleShow, id, type }) => {
 
@@ -47,20 +48,22 @@ const ModalPreviewImg = ({ show, handleShow, id, type }) => {
             }
         } else {
             if (id) {
-                const result = dataCalonSantri.find(item => item.id === Number(id))
-                if (result) {
-                    const datasImg = Object.entries(result)
-                        .filter(([key, _]) => ["foto_formal", "fc_akta_kelah", "foto_kk", "fc_ktp", "fc_kip_kis"].includes(key)).map(([_, value]) => value);
+                const handleFetch = async () => {
+                    const result = await StudentService.detail(id)
+                    if (result) {
+                        const datasImg = Object.entries(result.data)
+                            .filter(([key, _]) => ["foto_formal", "fc_akta_kelahiran", "foto_kk", "fc_ktp", "fc_kis_kip"].includes(key)).map(([_, value]) => import.meta.env.VITE_API_IMG_URL + value);
 
-                    if (datasImg) {
-                        setDatas(datasImg)
+                        if (datasImg) {
+                            setDatas(datasImg)
+                        }
                     }
                 }
+                handleFetch();
             }
         }
     }, [id, type])
 
-    // console.log(datas)
 
 
     // show close button

@@ -16,9 +16,9 @@ const InputSelectSekolah = ({ register, error }) => {
                 )}
             >
                 <option value="">Pilih jenis sekolah</option>
-                <option value="sd">SD / Sederajat </option>
-                <option value="smp">SMP / Sederajat</option>
-                <option value="sma">SMA / Sederajat</option>
+                <option value="SD">SD / Sederajat </option>
+                <option value="SMP">SMP / Sederajat</option>
+                <option value="SMA">SMA / Sederajat</option>
             </select>
 
 

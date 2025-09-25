@@ -4,7 +4,7 @@ import Modal from 'react-modal'
 // layout
 
 import LayoutDataPages from '../../../layouts/LayoutDataPages'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLoaderData, useLocation, useRevalidator } from 'react-router-dom'
 import { headerDashboard } from '../../../utils/utils'
 import ButtonCrud from '../../../components/ButtonCrud'
 import ButtonDownload from '../../../components/ButtonDownload'
@@ -25,9 +25,21 @@ import ContainerData from '../../../fragments/ContainerData'
 import ComponentDataText from '../../../components/ComponentDataText'
 import ComponentDataFile from '../../../components/ComponentDataFIle'
 import ComponentAction from '../../../components/ComponentAction'
+import { StudentService } from '../../../services/student.service'
 
 const CalonSantri = () => {
-    const [data, setData] = useState([]);
+
+    // loader 
+    const data = useLoaderData();
+
+
+    // use revalidate 
+    const revalidate = useRevalidator();
+
+    // cek 
+    // console.log(data)
+
+
     const [id, setId] = useState(null);
     const path = useLocation().pathname
     const header = headerDashboard(path)
@@ -39,16 +51,20 @@ const CalonSantri = () => {
         setShow((prev) => !prev);
     }
 
+    // handle delete 
+    const handleDelete = async (id) => {
+        await StudentService.delete(id);
 
-    // handle show modal delete
-    const handleShowModalDelete = () => {
-        confirmDelete(1);
+        // revalidate 
+        revalidate.revalidate();
     }
 
-    //  fetch data 
-    useEffect(() => {
-        setData(dataCalonSantri);
-    }, [])
+
+    // handle show modal delete
+    const handleShowModalDelete = (id) => {
+        confirmDelete(handleDelete, id);
+    }
+
 
 
     // handle set id 
@@ -69,7 +85,7 @@ const CalonSantri = () => {
                     <div className='w-full justify-center items-center px-4'>
                         <BoxSearch />
                     </div>
-                    <ContentData handleShow={handleShow} handleShowModalDelete={handleShowModalDelete} data={data} handleSetId={handleSetId} />
+                    <ContentData handleShow={handleShow} handleShowModalDelete={handleShowModalDelete} data={data.data} handleSetId={handleSetId} />
                 </div>
 
             </LayoutDataPages>
@@ -106,7 +122,7 @@ const ContentData = ({ handleShow, handleShowModalDelete, data, handleSetId }) =
                         <ComponentDataText data={'Alamat'} value={item.alamat} />
                         <ComponentDataText data={'Anak Ke'} value={item.anak_ke} />
                         <ComponentDataText data={'Jumlah Saudara'} value={item.jumlah_saudara} />
-                        <ComponentDataText data={'No HP'} value={item.no_hp} />
+                        <ComponentDataText data={'No HP'} value={item.no_telepon} />
                         <ComponentDataText data={'Asal Sekolah'} value={item.asal_sekolah} />
                         <ComponentDataText data={'Alamat Asal Sekolah'} value={item.alamat_sekolah_asal} />
                         <ComponentDataText data={'Nama Ayah'} value={item.nama_lengkap_ayah} />

@@ -27,9 +27,8 @@ const InputFileData = ({ label, register, error, clearErrors, setValue, type }) 
                 clearErrors('ustad_img');
 
             } else {
-                setValue("thumbnail", files, { shouldValidate: true }); // set & cek validasi
-                clearErrors('thumbnail');
-
+                setValue(type, files, { shouldValidate: true }); // set & cek validasi
+                clearErrors(type);
             }
         }
     }

@@ -104,7 +104,7 @@ const LinkUrlComponent = ({ showUrl }) => {
         },
     ]
     return (
-        <div className={`w-full flex flex-col justify-start items-start gap-2 px-3.5  transition-all duration-300 ease-in-out ${showUrl ? 'max-h-[10rem] lg:max-h-[30rem]' : 'max-h-0 opacity-0 -z-10 '}`}>
+        <div className={`w-full flex flex-col justify-start items-start gap-2 px-3.5  transition-all duration-300 ease-in-out ${showUrl ? 'max-h-[30rem] lg:max-h-[30rem]' : 'max-h-0 opacity-0 -z-10 '}`}>
             {
                 navbar.map((item, index) => (
                     <Link to={`/admin/${item.url}`} key={index} className='flex flex-row w-full justify-start items-center gap-2 pl-4.5 py-2 active:bg-secondary-blue cursor-pointer rounded-lg'>

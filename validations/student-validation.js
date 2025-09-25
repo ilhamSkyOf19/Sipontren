@@ -5,7 +5,7 @@ export class StudentValidation {
 
     // create 
     static CREATE = z.object({
-        jenis_sekolah: z.enum(['sd', 'sma', 'smk'], 'Pilih jenis sekolah'),
+        jenis_sekolah: z.enum(['SD', 'SMP', 'SMA'], 'Pilih jenis sekolah'),
 
 
         nisn: z
@@ -31,7 +31,6 @@ export class StudentValidation {
 
         jenis_kelamin: z.enum(["laki-laki", "perempuan"], 'Pilih jenis kelamin'),
 
-        email: z.email("Format email tidak valid"),
 
         tempat_lahir: z
             .string()
@@ -50,7 +49,7 @@ export class StudentValidation {
             .string()
             .regex(/^\d+$/, "Jumlah saudara hanya boleh angka"),
 
-        no_hp: z
+        no_telepon: z
             .string()
             .min(10, "Nomor HP minimal 10 digit")
             .regex(/^\d+$/, "Nomor HP hanya boleh angka")
@@ -91,10 +90,10 @@ export class StudentValidation {
             .any()
             .refine((files) => files?.length > 0, "FC KTP wajib diupload"),
 
-        fc_kip_kis: z
+        fc_kis_kip: z
             .any()
             .refine((files) => files?.length > 0, "FC KIP/KIS wajib diupload"),
 
 
-    }).strict();
+    })
 }
