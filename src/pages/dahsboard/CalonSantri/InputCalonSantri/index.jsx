@@ -4,39 +4,21 @@ import TamplateFormulir from "../../../../fragments/TamplateFormulir";
 
 // icons 
 import { FaArrowLeft } from "react-icons/fa6";
-import { useParams } from 'react-router-dom';
+import { useLoaderData, useParams } from 'react-router-dom';
 
 
-// json 
-import dataCalonSantri from '../../../../jsons/dataCalonSantri.json'
-import { useState } from 'react';
 const InputCalonSantri = () => {
 
-    const [data, setData] = useState(undefined)
-    // params 
-    const { id } = useParams()
+    // loader data 
+    const data = useLoaderData();
 
-    // handle back
-    const handleBack = () => {
-        window.history.back()
+    // cek status
+    if (data && !data.success) {
+        console.log(data.message);
+        return;
     }
 
-    // scroll to top
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
-
-
-    // fetch data 
-    useEffect(() => {
-        if (id) {
-            const result = dataCalonSantri.find(item => item.id === Number(id))
-
-            if (result) {
-                setData(result)
-            }
-        }
-    }, [id])
+    console.log(data?.data);
 
 
     return (
@@ -48,7 +30,7 @@ const InputCalonSantri = () => {
                         kembali
                     </p>
                 </div>
-                <TamplateFormulir formulir={'update'} data={data} />
+                <TamplateFormulir formulir={'update'} student={data?.data} />
             </div>
         </LayoutDataPages>
     )

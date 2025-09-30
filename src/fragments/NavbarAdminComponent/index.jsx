@@ -1,23 +1,42 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 // icon
 import { RiArrowRightSLine } from 'react-icons/ri'
 import { BsThreeDots } from "react-icons/bs";
 import { IoClose, IoHome } from 'react-icons/io5';
-import { FaListAlt, FaLock, FaUser } from 'react-icons/fa'
+import { FaListAlt } from 'react-icons/fa'
+import { FiLogOut } from "react-icons/fi";
+import ButtonDashboard from '../../components/Logout';
+import { AuthService } from '../../services/auth.service';
 
 const NavbarAdminComponent = ({ showNavbarAdmin, handleNavbarAdmin, navbarAdminRef }) => {
 
     const [showUrl, setShowUrl] = useState(false)
 
 
+    // navigation 
+    const navigation = useNavigate();
+
 
 
     // handle show url 
     const handleShowUrl = () => {
         setShowUrl((prev) => !prev)
+    }
+
+
+    // handle logout 
+    const handleLogOut = async () => {
+        const logout = await AuthService.logout();
+
+        // cek logout
+        if (!logout) {
+            return;
+        } else {
+            return navigation('/login');
+        }
     }
 
 
@@ -49,12 +68,15 @@ const NavbarAdminComponent = ({ showNavbarAdmin, handleNavbarAdmin, navbarAdminR
                 <UrlDashboard link={'/admin/berita'} label={'Data Berita'}>
                     <FaListAlt className={`text-white text-lg`} />
                 </UrlDashboard>
-                <UrlDashboard link={'/admin/username'} label={'Ubah Username'}>
+                {/* <UrlDashboard link={'/admin/username'} label={'Ubah Username'}>
                     <FaUser className={`text-white text-lg`} />
                 </UrlDashboard>
                 <UrlDashboard link={'/admin/password'} label={'Ubah Password'}>
                     <FaLock className={`text-white text-lg`} />
-                </UrlDashboard>
+                </UrlDashboard> */}
+                <ButtonDashboard handleOnClick={handleLogOut} label={'Logout'}>
+                    <FiLogOut className={`text-white text-lg`} />
+                </ButtonDashboard>
             </div>
 
         </div>

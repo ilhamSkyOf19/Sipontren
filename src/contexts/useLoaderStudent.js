@@ -17,4 +17,22 @@ export class UseLoaderStudent {
             return
         }
     }
+
+
+    // detail 
+    static async detail(id) {
+        try {
+            // get response
+            const response = await StudentService.detail(id);
+
+            // return
+            return response
+
+        } catch (error) {
+            // cek console;
+            console.log(error);
+            return;
+
+        }
+    }
 }

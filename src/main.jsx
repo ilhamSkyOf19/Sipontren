@@ -112,6 +112,9 @@ const router = createBrowserRouter([
   },
   {
     path: "/admin/calon-santri/update/:id",
+    loader: async ({ params }) => {
+      return await UseLoaderStudent.detail(params.id);
+    },
     element: <InputCalonSantri />,
   },
 

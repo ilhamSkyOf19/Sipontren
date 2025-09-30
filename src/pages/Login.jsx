@@ -17,14 +17,12 @@ const Login = () => {
 
 
     return (
-        <div className='flex flex-col justify-start items-center w-full px-4 py-12 relative max-h-[100vh] overflow-hidden'>
-            <div className='w-[240%] absolute -top-100'>
+        <div className='flex flex-col justify-start items-center w-full px-4 py-12 relative max-h-[100vh] overflow-hidden lg:min-h-[100vh] lg:overflow-auto lg:flex-row lg:gap-12 lg:pr-32'>
+            <div className='w-[240%] absolute -top-100 lg:hidden'>
                 <BlobSvg />
             </div>
             <Thumb />
             <ContainerForm />
-
-
         </div>
     )
 }
@@ -35,9 +33,9 @@ const Login = () => {
 
 const Thumb = () => {
     return (
-        <div className='w-[100%] flex flex-row items-center justify-center h-full z-20 gap-5 mb-12'>
+        <div className='w-[100%] flex flex-row items-center justify-center h-full z-20 gap-5 mb-12 lg:flex-2'>
 
-            <div className='w-[90%] flex flex-col justify-center items-start'>
+            <div className='w-[90%] flex flex-col justify-center items-start lg:hidden'>
                 <div className='w-[100%] flex flex-row justify-start items-center gap-3 mb-2.5'>
                     <div className='w-[20%]'>
                         <img src={logo} alt="" className='w-[100%] h-[100%]' loading='lazy' />
@@ -48,6 +46,11 @@ const Thumb = () => {
                 <TextSpace text={'Sistem Informasi Pondok Pesantren'} />
                 {/* <TextSpace text={'Pondok Pesantren'} /> */}
                 <TextSpace text={'Muhammadiyah Al-Amin Seputih Banyak'} custom={{ color: '#fff', fontWeight: 'normal', fontStyle: 'normal' }} />
+            </div>
+
+            {/* logo */}
+            <div className='w-full flex flex-col justify-center items-center sm:hidden lg:flex'>
+                <img src={logo} alt="" className='w-[20rem]' loading='lazy' />
             </div>
         </div>
     )
@@ -97,7 +100,7 @@ const ContainerForm = () => {
     })
 
 
-    // handle submit 
+    // handle submit
     const onSubmit = async (data) => {
         try {
             // cek data 
@@ -115,7 +118,7 @@ const ContainerForm = () => {
 
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className='w-full flex flex-col justify-start items-center z-10 bg-white min-h-[60vh] shadow-2xl rounded-3xl px-7 py-8'>
+        <form onSubmit={handleSubmit(onSubmit)} className='w-full flex flex-col justify-start items-center z-10 bg-white min-h-[60vh] shadow-2xl rounded-3xl px-7 py-8 lg:min-h-[70vh] lg:flex-1'>
             <p className='relative text-3xl font-semibold text-primary-blue w-full text-center mb-9  before:absolute before:bg-primary-yellow before:w-[28%] before:h-[0.8px] before:left-1 before:top-1/2 after:absolute after:bg-primary-yellow after:w-[28%] after:h-[0.8px] after:right-1 after:top-1/2'>Login</p>
             {/* username */}
             <BoxInputAuth

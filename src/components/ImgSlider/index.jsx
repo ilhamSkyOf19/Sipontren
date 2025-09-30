@@ -1,5 +1,3 @@
-import React from 'react'
-import { dataGallery } from '../../data/galleryData';
 
 
 // Swiper

@@ -1,4 +1,3 @@
-import React from 'react'
 import { memo } from 'react';
 import TextSmBlue from '../text/TextSmBlue';
 

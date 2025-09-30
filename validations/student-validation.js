@@ -29,7 +29,7 @@ export class StudentValidation {
             .min(1, "Usia wajib diisi")
             .regex(/^\d+$/, "Usia hanya boleh angka"),
 
-        jenis_kelamin: z.enum(["laki-laki", "perempuan"], 'Pilih jenis kelamin'),
+        jenis_kelamin: z.enum(["laki_laki", "perempuan"], 'Pilih jenis kelamin'),
 
 
         tempat_lahir: z
@@ -71,9 +71,8 @@ export class StudentValidation {
 
         nama_lengkap_wali: z
             .string()
-            .min(1, "Nama wali minimal 1 karakter")
-            .regex(/^[a-zA-Z\s]+$/, "Nama wali hanya boleh huruf"),
-
+            .optional()
+        ,
         foto_formal: z
             .any()
             .refine((files) => files?.length > 0, "Foto formal wajib diupload"),
@@ -96,4 +95,108 @@ export class StudentValidation {
 
 
     })
+
+    // update 
+    static UPDATE = z.object({
+        jenis_sekolah: z.enum(['SD', 'SMP', 'SMA']).optional(),
+
+        nisn: z
+            .string()
+            .min(10, "NISN minimal 10 digit")
+            .regex(/^\d+$/, "NISN hanya boleh angka")
+            .max(10, "NISN maksimal 10 digit")
+            .optional(),
+
+        nik: z
+            .string()
+            .regex(/^\d+$/, "NIK hanya boleh angka")
+            .length(16, "NIK harus 16 digit")
+            .optional(),
+
+        nama_lengkap: z
+            .string()
+            .min(1, "Nama minimal 1 karakter")
+            .regex(/^[a-zA-Z\s]+$/, "Nama hanya boleh huruf dan spasi")
+            .optional(),
+
+        usia: z
+            .string()
+            .min(1, "Usia wajib diisi")
+            .regex(/^\d+$/, "Usia hanya boleh angka")
+            .optional(),
+
+        jenis_kelamin: z.enum(["laki_laki", "perempuan"]).optional(),
+
+        tempat_lahir: z
+            .string()
+            .min(1, "Tempat lahir wajib diisi")
+            .regex(/^[a-zA-Z\s]+$/, "Tempat lahir hanya boleh huruf")
+            .optional(),
+
+        tanggal_lahir: z.string().min(1, "Tanggal lahir wajib diisi").optional(),
+
+        alamat: z.string().min(5, "Alamat minimal 5 karakter").optional(),
+
+        anak_ke: z
+            .string()
+            .regex(/^\d+$/, "Anak ke hanya boleh angka")
+            .optional(),
+
+        jumlah_saudara: z
+            .string()
+            .regex(/^\d+$/, "Jumlah saudara hanya boleh angka")
+            .optional(),
+
+        no_telepon: z
+            .string()
+            .min(10, "Nomor HP minimal 10 digit")
+            .regex(/^\d+$/, "Nomor HP hanya boleh angka")
+            .max(15, "Nomor HP maksimal 15 digit")
+            .optional(),
+
+        asal_sekolah: z.string().min(2, "Asal sekolah wajib diisi").optional(),
+
+        alamat_sekolah_asal: z.string().min(5, "Alamat sekolah wajib diisi").optional(),
+
+        nama_lengkap_ayah: z
+            .string()
+            .min(1, "Nama ayah minimal 1 karakter")
+            .regex(/^[a-zA-Z\s]+$/, "Nama ayah hanya boleh huruf")
+            .optional(),
+
+        nama_lengkap_ibu: z
+            .string()
+            .min(1, "Nama ibu minimal 1 karakter")
+            .regex(/^[a-zA-Z\s]+$/, "Nama ibu hanya boleh huruf")
+            .optional(),
+
+        nama_lengkap_wali: z
+            .string()
+            .optional(),
+        foto_formal: z
+            .any()
+            .refine((files) => files?.length > 0, "Foto formal wajib diupload")
+            .optional(),
+
+        fc_akta_kelahiran: z
+            .any()
+            .refine((files) => files?.length > 0, "FC Akta wajib diupload")
+            .optional(),
+
+        foto_kk: z
+            .any()
+            .refine((files) => files?.length > 0, "Foto KK wajib diupload")
+            .optional(),
+
+        fc_ktp: z
+            .any()
+            .refine((files) => files?.length > 0, "FC KTP wajib diupload")
+            .optional(),
+
+        fc_kis_kip: z
+            .any()
+            .refine((files) => files?.length > 0, "FC KIP/KIS wajib diupload")
+            .optional(),
+    });
+
 }

@@ -14,6 +14,10 @@ export class UseLoaderAuth {
             // get service
             const response = await AuthService.cekAuth();
 
+
+            // cek response 
+            console.log(response);
+
             // return
             return response
 

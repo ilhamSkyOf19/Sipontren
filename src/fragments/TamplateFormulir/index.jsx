@@ -10,24 +10,57 @@ import InputSelectSekolah from "../../components/InputSelectSekolah";
 import { useMutation } from "@tanstack/react-query";
 import { StudentService } from "../../services/student.service";
 import { AxiosError } from "axios";
+import { useNavigate } from "react-router-dom";
 
-const TamplateFormulir = ({ formulir }) => {
+const TamplateFormulir = ({ formulir, student }) => {
 
-
-
-
+    // navigate 
+    const naviigate = useNavigate();
     // use form 
     const { register, handleSubmit, formState: { errors }, clearErrors, setValue } = useForm({
-        resolver: zodResolver(StudentValidation.CREATE)
+        values: {
+            jenis_sekolah: student?.jenis_sekolah || '',
+            nisn: student?.nisn || '',
+            nik: student?.nik || '',
+            nama_lengkap: student?.nama_lengkap || '',
+            usia: String(student?.usia) || '',
+            jenis_kelamin: student?.jenis_kelamin || '',
+            tempat_lahir: student?.tempat_lahir || '',
+            tanggal_lahir: student?.tanggal_lahir || '',
+            alamat: student?.alamat || '',
+            anak_ke: String(student?.anak_ke) || '',
+            jumlah_saudara: String(student?.jumlah_saudara) || '',
+            no_telepon: student?.no_telepon || '',
+            asal_sekolah: student?.asal_sekolah || '',
+            alamat_sekolah_asal: student?.alamat_sekolah_asal || '',
+            nama_lengkap_ayah: student?.nama_lengkap_ayah || '',
+            nama_lengkap_ibu: student?.nama_lengkap_ibu || '',
+            pekerjaan_ayah: student?.pekerjaan_ayah || '',
+            pekerjaan_ibu: student?.pekerjaan_ibu || '',
+            alamat_ayah: student?.alamat_ayah || '',
+            alamat_ibu: student?.alamat_ibu || '',
+            nama_lengkap_wali: student?.nama_lengkap_wali || '',
+            foto_formal: undefined,
+            fc_akta_kelahiran: undefined,
+            foto_kk: undefined,
+            fc_ktp: undefined,
+            fc_kis_kip: undefined,
+        },
+        resolver: zodResolver(formulir && student ? StudentValidation.UPDATE : StudentValidation.CREATE),
     })
 
     // mutation 
     const { isPending, mutateAsync } = useMutation({
         mutationFn: (data) => {
-            return StudentService.create(data)
+            if (formulir === 'update' && student) {
+                return StudentService.update(data, student.id)
+            } else {
+                return StudentService.create(data)
+            }
         },
         onSuccess: (data) => {
             console.log(data)
+            return naviigate('/admin/calon-santri')
         },
         onError: (error) => {
             // cek error zod 
@@ -75,7 +108,8 @@ const TamplateFormulir = ({ formulir }) => {
             formData.append("alamat_sekolah_asal", data.alamat_sekolah_asal);
             formData.append("nama_lengkap_ayah", data.nama_lengkap_ayah);
             formData.append("nama_lengkap_ibu", data.nama_lengkap_ibu);
-            formData.append("nama_lengkap_wali", data.nama_lengkap_wali);
+
+            formData.append("nama_lengkap_wali", data.nama_lengkap_wali || 'tidak ada');
 
             // field file (ambil file pertama dari FileList)
             if (data.foto_formal?.[0]) {
@@ -294,8 +328,9 @@ const TamplateFormulir = ({ formulir }) => {
                     placeholder="Masukan nama lengkap wali"
                     nameInput="nama_lengkap_wali"
                     tipe="text"
-                    label="Nama Lengkap Wali"
+                    label="Nama Lengkap Wali (jika ada)"
                     tipeKeyboard="text"
+                    wali={true}
                 />
 
                 {/* Foto Formal */}

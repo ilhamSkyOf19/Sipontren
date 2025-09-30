@@ -115,7 +115,7 @@ const ContentData = ({ handleShow, handleShowModalDelete, data, handleSetId }) =
                         <ComponentDataText data={'Nama'} value={item.nama_lengkap} />
                         <ComponentDataText data={'NISN'} value={item.nisn} />
                         <ComponentDataText data={'NIK'} value={item.nik} />
-                        <ComponentDataText data={'Jenis Kelamin'} value={item.jenis_kelamin} />
+                        <ComponentDataText data={'Jenis Kelamin'} value={item.jenis_kelamin === 'laki_laki' ? 'Laki-Laki' : 'Perempuan'} />
                         <ComponentDataText data={'Usia'} value={item.usia} />
                         <ComponentDataText data={'Tempat Lahir'} value={item.tempat_lahir} />
                         <ComponentDataText data={'Tanggal Lahir'} value={item.tanggal_lahir} />
@@ -127,7 +127,7 @@ const ContentData = ({ handleShow, handleShowModalDelete, data, handleSetId }) =
                         <ComponentDataText data={'Alamat Asal Sekolah'} value={item.alamat_sekolah_asal} />
                         <ComponentDataText data={'Nama Ayah'} value={item.nama_lengkap_ayah} />
                         <ComponentDataText data={'Nama Ibu'} value={item.nama_lengkap_ibu} />
-                        <ComponentDataText data={'Nama Wali'} value={item.nama_lengkap_wali} />
+                        <ComponentDataText data={'Nama Wali'} value={item.nama_lengkap_wali === 'tidak ada' ? '-' : item.nama_lengkap_wali} />
                         <ComponentDataFile data={'Dokumen'} handleShow={handleShow} id={item.id} handleSetId={handleSetId} />
                         <ComponentAction handleShowModalDelete={handleShowModalDelete} id={item.id} link={'calon-santri'} />
                     </ContainerData>

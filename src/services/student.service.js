@@ -35,7 +35,7 @@ export class StudentService {
     }
 
 
-    // updat e
+    // update
     static async update(req, id) {
         // get response 
         const response = await AXIOS.patch(`/student/update/${id}`, req, {

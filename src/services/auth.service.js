@@ -22,4 +22,15 @@ export class AuthService {
         // return
         return response
     }
+
+    // logout 
+    static async logout() {
+        // get response 
+        const response = await AXIOS.post('/auth/logout', {}, {
+            withCredentials: true
+        }).then(res => res.data);
+
+        // return 
+        return response
+    }
 }
