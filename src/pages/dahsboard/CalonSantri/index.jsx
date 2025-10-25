@@ -1,10 +1,8 @@
-import React from 'react'
 import { capitalCase } from 'change-case'
-import Modal from 'react-modal'
 // layout
 
 import LayoutDataPages from '../../../layouts/LayoutDataPages'
-import { Link, useLoaderData, useLocation, useRevalidator } from 'react-router-dom'
+import { useLoaderData, useLocation, useRevalidator } from 'react-router-dom'
 import { headerDashboard } from '../../../utils/utils'
 import ButtonCrud from '../../../components/ButtonCrud'
 import ButtonDownload from '../../../components/ButtonDownload'
@@ -12,20 +10,19 @@ import BoxSearch from '../../../components/BoxSearch'
 
 
 // icons
-import { IoIosArrowDropdownCircle } from "react-icons/io";
 import { useState } from 'react'
 import ModalPreviewImg from '../../../components/ModalPreviewImg'
 import confirmDelete from '../../../utils/confirmAlert'
-import { useEffect } from 'react'
 
 
 // json 
-import dataCalonSantri from '../../../jsons/dataCalonSantri.json'
 import ContainerData from '../../../fragments/ContainerData'
 import ComponentDataText from '../../../components/ComponentDataText'
 import ComponentDataFile from '../../../components/ComponentDataFIle'
 import ComponentAction from '../../../components/ComponentAction'
 import { StudentService } from '../../../services/student.service'
+import { useForm } from 'react-hook-form'
+import { useMutation } from '@tanstack/react-query'
 
 const CalonSantri = () => {
 
@@ -73,6 +70,22 @@ const CalonSantri = () => {
     }
 
 
+    // use form 
+    const { register, handleSubmit } = useForm();
+    const [students, setStudents] = useState([]);
+
+    const mutation = useMutation({
+        mutationFn: (name) => StudentService.search(name),
+        onSuccess: (res) => {
+            setStudents(res.data); // simpan data hasil fetch
+        },
+    });
+
+    const handleSearch = (data) => {
+        mutation.mutate(data.name); // trigger fetch
+    };
+
+
 
     return (
         <>
@@ -83,9 +96,18 @@ const CalonSantri = () => {
                         <ButtonDownload color={'#212529'} handleClick={() => { }} />
                     </div>
                     <div className='w-full justify-center items-center px-4'>
-                        <BoxSearch />
+                        <BoxSearch register={register('name')} handleSubmit={handleSubmit} handleSearch={handleSearch} />
                     </div>
-                    <ContentData handleShow={handleShow} handleShowModalDelete={handleShowModalDelete} data={data.data} handleSetId={handleSetId} />
+                    {students.length > 0 ? (
+                        <ContentData
+                            data={students}
+                            handleShow={handleShow}
+                            handleShowModalDelete={handleShowModalDelete}
+                            handleSetId={handleSetId}
+                        />
+                    ) : (
+                        <ContentData handleShow={handleShow} handleShowModalDelete={handleShowModalDelete} data={data.data} handleSetId={handleSetId} />
+                    )}
                 </div>
 
             </LayoutDataPages>

@@ -31,6 +31,8 @@ const NavbarAdminComponent = ({ showNavbarAdmin, handleNavbarAdmin, navbarAdminR
     const handleLogOut = async () => {
         const logout = await AuthService.logout();
 
+        console.log('cek', logout);
+
         // cek logout
         if (!logout) {
             return;

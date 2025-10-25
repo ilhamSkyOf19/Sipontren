@@ -12,7 +12,9 @@ import { StudentService } from "../../services/student.service";
 import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 
-const TamplateFormulir = ({ formulir, student }) => {
+
+
+const TamplateFormulir = ({ formulir, student, user }) => {
 
     // navigate 
     const naviigate = useNavigate();
@@ -60,7 +62,13 @@ const TamplateFormulir = ({ formulir, student }) => {
         },
         onSuccess: (data) => {
             console.log(data)
-            return naviigate('/admin/calon-santri')
+
+            if (user) {
+                return naviigate('/')
+            } else {
+
+                return naviigate('/admin/calon-santri')
+            }
         },
         onError: (error) => {
             // cek error zod 

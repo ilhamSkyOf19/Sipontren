@@ -81,38 +81,88 @@ const router = createBrowserRouter([
   },
   {
     path: "/admin/profile",
+    loader: async () => {
+      // cek auth 
+      const auth = await UseLoaderAuth.cek();
+
+      if (!auth.success) return auth
+
+    },
     element: <Profile />,
   },
   {
     path: "/admin/psb",
+    loader: async () => {
+      // cek auth 
+      const auth = await UseLoaderAuth.cek();
+
+      if (!auth.success) return auth
+
+    },
     element: <Psb />,
   },
   {
     path: "/admin/faq",
+    loader: async () => {
+      // cek auth 
+      const auth = await UseLoaderAuth.cek();
+
+      if (!auth.success) return auth
+
+    },
     element: <Faq />,
   },
   {
     path: "/admin/kemahadan",
+    loader: async () => {
+      // cek auth 
+      const auth = await UseLoaderAuth.cek();
+
+      if (!auth.success) return auth
+
+    },
     element: <Kemahadan />,
   },
   {
     path: "/admin/formulir",
+    loader: async () => {
+      // cek auth 
+      const auth = await UseLoaderAuth.cek();
+
+      if (!auth.success) return auth
+
+    },
     element: <Formulir />,
   },
   {
     path: "/admin/calon-santri",
     loader: async () => {
+      // cek auth 
+      const auth = await UseLoaderAuth.cek();
+
+      if (!auth.success) return auth
       return await UseLoaderStudent.read();
     },
     element: <CalonSantri />,
   },
   {
     path: "/admin/calon-santri/add",
+    loader: async () => {
+      // cek auth 
+      const auth = await UseLoaderAuth.cek();
+
+      if (!auth.success) return auth
+
+    },
     element: <InputCalonSantri />,
   },
   {
     path: "/admin/calon-santri/update/:id",
     loader: async ({ params }) => {
+      // cek auth 
+      const auth = await UseLoaderAuth.cek();
+
+      if (!auth.success) return auth
       return await UseLoaderStudent.detail(params.id);
     },
     element: <InputCalonSantri />,
@@ -121,40 +171,74 @@ const router = createBrowserRouter([
   // ustad ustadzah
   {
     path: "/admin/ustad-ustadzah",
-    loader: () => {
+    loader: async () => {
+      // cek auth 
+      const auth = await UseLoaderAuth.cek();
+
+      if (!auth.success) return auth
       return UseLoaderUstad.read();
     },
     element: <UstadUstadzah />,
   },
   {
     path: "/admin/ustad-ustadzah/add",
+    loader: async () => {
+      // cek auth 
+      const auth = await UseLoaderAuth.cek();
+
+      if (!auth.success) return auth
+    },
     element: <InputUstadUstadzah />,
   },
   {
     path: "/admin/ustad-ustadzah/update/:id",
     loader: async ({ params }) => {
+      // cek auth 
+      const auth = await UseLoaderAuth.cek();
+
+      if (!auth.success) return auth
       return await UseLoaderUstad.detail(params.id);
     },
     element: <InputUstadUstadzah />,
   },
   {
     path: "/admin/alumni",
+    loader: async () => {
+      // cek auth 
+      const auth = await UseLoaderAuth.cek();
+
+      if (!auth.success) return auth
+    },
     element: <Alumni />,
   },
   {
     path: '/admin/berita',
-    loader: () => {
+    loader: async () => {
+      // cek auth 
+      const auth = await UseLoaderAuth.cek();
+
+      if (!auth.success) return auth
       return UseLoaderNews.read();
     },
     element: <Berita />
   },
   {
     path: '/admin/berita/add',
+    loader: async () => {
+      // cek auth 
+      const auth = await UseLoaderAuth.cek();
+
+      if (!auth.success) return auth
+    },
     element: <InputBerita />
   },
   {
     path: '/admin/berita/update/:id',
     loader: async ({ params }) => {
+      // cek auth 
+      const auth = await UseLoaderAuth.cek();
+
+      if (!auth.success) return auth
       return await UseLoaderNews.detail(params.id);
     },
     element: <InputBerita />

@@ -7,7 +7,7 @@ import useWindowSize from '../hook/UseWindowSize';
 import { AnimatePresence, motion } from 'framer-motion';
 // Component
 import IconArab from '../components/IconArab';
-import ImgSlider from '../components/ImgSlider';
+// import ImgSlider from '../components/ImgSlider';
 import ButtonMore from '../components/ButtonMore';
 // fragment
 import HeaderSection from '../fragments/HeaderSection';
@@ -162,7 +162,7 @@ const SectionThree = memo(() => {
         </p>
       </div>
       <div className='w-screen h-[20rem] flex justify-center items-center md:h-[30rem] lg:w-[40%] lg:h-[18rem]'>
-        <ImgSlider />
+        {/* <ImgSlider /> */}
       </div>
     </div>
   )

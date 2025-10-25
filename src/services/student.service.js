@@ -25,6 +25,17 @@ export class StudentService {
         return response
     }
 
+    // search 
+    static async search(name) {
+        // get response 
+        const response = await AXIOS.get("/student/search", {
+            params: { name }, // kirim query param
+        }).then((res) => res.data);
+
+        // return
+        return response;
+    }
+
 
     // detail
     static async detail(id) {
