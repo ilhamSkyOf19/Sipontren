@@ -6,7 +6,7 @@ const CardBeritaLarge = ({ img, judul, deskripsi, jenis }) => {
         <>
             <div className='w-full min-h-[47rem] flex flex-col justify-start items-start overflow-hidden gap-6 md:mb-12 md:flex-row md:min-h-[19vh]'>
                 <div className='w-full h-[15rem] bg-black rounded-[2.5rem] overflow-hidden shrink-0 md:h-[21rem] md:flex-1/12 lg:flex-[2%]'>
-                    <img src={`${img}`} alt="thumbnail" className='w-full h-full object-cover' loading='lazy' />
+                    <img src={`${import.meta.env.VITE_API_BASE_IMG_URL}/news/${img}`} alt="thumbnail" className='w-full h-full object-cover' loading='lazy' />
                 </div>
                 <div className='flex-1 flex flex-col justify-start items-start gap-3'>
                     <p className='px-7 py-2 bg-white rounded-md border border-secondary-blue text-md md:text-lg lg:text-xs capitalize'>{jenis || ''}</p>

@@ -64,7 +64,7 @@ const TamplateFormulir = ({ formulir, student, user }) => {
             console.log(data)
 
             if (user) {
-                return naviigate('/')
+                return naviigate('/success')
             } else {
 
                 return naviigate('/admin/calon-santri')

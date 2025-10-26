@@ -5,7 +5,9 @@ export class AuthService {
     static async login(req) {
 
         // get response 
-        const response = await AXIOS.post('/auth/login', req).then(res => res.data);
+        const response = await AXIOS.post('/auth/login', req, {
+            withCredentials: true
+        }).then(res => res.data);
 
         // return 
         return response

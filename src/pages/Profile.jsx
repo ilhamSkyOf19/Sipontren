@@ -30,16 +30,12 @@ import AnimationThreeImg from '../fragments/AnimationThreeImg'
 import dataUstad from '../jsons/dataUstad.json'
 import useWindowSize from '../hook/UseWindowSize'
 import ScrollXDesktop from '../layouts/ScrollXDesktop'
+import { useLoaderData } from 'react-router-dom'
 
 const Profile = () => {
 
     // Data Ustad
-    const [dataUstads, setDataUstads] = useState([])
-
-    useEffect(() => {
-        setDataUstads(dataUstad);
-    }, [])
-
+    const dataUstads = useLoaderData()
     // Window Size
     const widthDevice = useWindowSize().width
 
@@ -49,6 +45,10 @@ const Profile = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
+
+
+    console.log(dataUstads)
+
     return (
         <LayoutPages>
             <LayoutSectionBg minH={100} pt={0} size={'contain'}>
@@ -58,7 +58,7 @@ const Profile = () => {
                 <SectionProgramUnggulan />
                 <SectionFasilitas widthDevice={widthDevice} />
                 <SectionPrestasi />
-                <SectionProfleUstad data={dataUstads} widthDevice={widthDevice} />
+                <SectionProfleUstad data={dataUstads?.data} widthDevice={widthDevice} />
                 <SectionAlumni widthDevice={widthDevice} />
             </LayoutSectionBg>
         </LayoutPages>
@@ -219,13 +219,13 @@ const SectionProfleUstad = ({ data, widthDevice }) => {
             {widthDevice < 1024 ? (
                 <ScrollX slidesToScroll={widthDevice < 700 ? 1 : 2} gap={widthDevice < 700 ? 4 : 4}>
                     {data.map((item) => (
-                        <CardProfileUstad key={item.id} img={item.img} nama={item.nama} jabatan={item.jabatan} />
+                        <CardProfileUstad key={item.id} img={item.ustad_img} nama={item.name} jabatan={item.jabatan} />
                     ))}
                 </ScrollX>
             ) : (
                 <ScrollXDesktop>
                     {data.map((item) => (
-                        <CardProfileUstad key={item.id} img={item.img} nama={item.nama} jabatan={item.jabatan} />
+                        <CardProfileUstad key={item.id} img={item.ustad_img} nama={item.name} jabatan={item.jabatan} />
                     ))}
                 </ScrollXDesktop>
             )}

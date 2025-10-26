@@ -29,8 +29,6 @@ const UstadUstadzah = () => {
     // revalidatade 
     const revalidate = useRevalidator();
 
-    // cek error 
-    if (!data.success) return console.log(data.message);
 
 
     const [id, setId] = useState(null);
@@ -75,12 +73,8 @@ const UstadUstadzah = () => {
                 <div className='min-h-[100vh] flex flex-col justify-start items-center pt-24 pb-12'>
                     <div className='w-full flex flex-row justify-start items-center gap-4 px-4 mb-6'>
                         <ButtonCrud color={'#32CD32'} link={'ustad-ustadzah/add'}>Tambah</ButtonCrud>
-                        <ButtonDownload color={'#212529'} handleClick={() => { }} />
                     </div>
-                    <div className='w-full justify-center items-center px-4'>
-                        <BoxSearch />
-                    </div>
-                    <ContentData handleShow={handleShow} handleShowModalDelete={handleShowModalDelete} data={data.data} handleSetId={handleSetId} />
+                    <ContentData handleShow={handleShow} handleShowModalDelete={handleShowModalDelete} data={data?.data} handleSetId={handleSetId} />
                 </div>
 
             </LayoutDataPages>

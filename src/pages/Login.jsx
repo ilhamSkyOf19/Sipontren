@@ -143,7 +143,7 @@ const ContainerForm = () => {
                 error={errors?.password}
             />
 
-            <ButtonLogin />
+            <ButtonLogin disabled={isPending} />
 
             {/* highlight */}
             <p className='text-xs text-primary-blue mt-6 text-center'>
@@ -162,9 +162,9 @@ const ContainerForm = () => {
 }
 
 
-const ButtonLogin = () => {
+const ButtonLogin = ({ disabled }) => {
     return (
-        <button type='submit' className='w-full flex flex-row justify-center items-center bg-primary-blue rounded-lg cursor-pointer active:bg-secondary-blue' onClick={() => { }}>
+        <button type='submit' disabled={disabled} className='w-full flex flex-row justify-center items-center bg-primary-blue rounded-lg cursor-pointer active:bg-secondary-blue' onClick={() => { }}>
             <p className='text-lg font-semibold text-white py-2 px-6 rounded-xl'>Log in</p>
         </button>
     )

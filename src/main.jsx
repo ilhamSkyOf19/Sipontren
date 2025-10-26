@@ -28,6 +28,8 @@ import { UseLoaderAuth } from './contexts/useLoaderAuth.js'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { UseLoaderUstad } from './contexts/useLoaderUstad.js'
 import { UseLoaderStudent } from './contexts/useLoaderStudent.js'
+import BeritaDetail from './pages/dahsboard/Berita/BeritaDetail/index.jsx'
+import Success from './pages/Success.jsx'
 
 
 Modal.setAppElement('#root')
@@ -82,11 +84,15 @@ const router = createBrowserRouter([
   {
     path: "/admin/profile",
     loader: async () => {
+
+
+
       // cek auth 
       const auth = await UseLoaderAuth.cek();
 
       if (!auth.success) return auth
 
+      return await UseLoaderUstad.read();
     },
     element: <Profile />,
   },
@@ -242,6 +248,23 @@ const router = createBrowserRouter([
       return await UseLoaderNews.detail(params.id);
     },
     element: <InputBerita />
+  },
+
+
+  // berita
+  {
+    path: '/berita-detail/:id',
+    loader: async ({ params }) => {
+      return await UseLoaderNews.detail(params.id);
+    },
+    element: <BeritaDetail />
+  },
+
+
+  // success
+  {
+    path: '/success',
+    element: <Success />
   }
 
 

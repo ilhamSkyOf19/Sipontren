@@ -11,7 +11,7 @@ import NavbarUser from '../../fragments/NavbarUser';
 // icon
 
 import NavbarAdminComponent from '../../fragments/NavbarAdminComponent';
-const index = ({ children }) => {
+const index = ({ children, noFooter }) => {
     // ====================
     // State
     // ====================
@@ -166,7 +166,12 @@ const index = ({ children }) => {
             {/* Navbar admin */}
             <NavbarAdminComponent showNavbarAdmin={showNavbarAdmin} handleNavbarAdmin={handleNavbarAdmin} navbarAdminRef={navbarAdminRef} />
             {children}
-            <Footer widthDevice={useWindowSize().width} />
+
+            {
+                !noFooter && (
+                    <Footer widthDevice={useWindowSize().width} />
+                )
+            }
         </div>
     )
 }

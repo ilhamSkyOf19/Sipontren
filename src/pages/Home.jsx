@@ -74,7 +74,8 @@ const Home = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  console.log(widthDevice)
+  // console.log(news)
+
 
 
 
@@ -154,14 +155,14 @@ const SectionTwo = memo(() => {
 
 const SectionThree = memo(() => {
   return (
-    <div className='w-screen min-h-[75vh] bg-primary-blue flex flex-col justify-start items-center py-6 overflow-hidden lg:flex-row lg:pr-12 lg:min-h-[30vh]'>
+    <div className='w-screen bg-primary-blue flex flex-col justify-start items-center py-6 overflow-hidden lg:flex-row lg:pr-12 lg:min-h-[30vh]'>
       <div className='flex flex-col justify-center items-center lg:w-[60%] lg:justify-start lg:items-start lg:px-11'>
         <p className='text-4xl font-semibold text-white py-5 md:text-[2.5rem] lg:text-3xl'>Tujuan</p>
         <p className='text-sm font-[300] text-white text-center px-11 mb-12 md:text-lg lg:text-left lg:px-0 lg:pr-36'>
           Terselenggaranya lembaga pendidikan Muhammadiyah yang berkualitas dalam membentuk kader utama, pemimpin, dan pendidik yang mendukung gerak langkah dan tujuan Muhammadiyah.
         </p>
       </div>
-      <div className='w-screen h-[20rem] flex justify-center items-center md:h-[30rem] lg:w-[40%] lg:h-[18rem]'>
+      <div className='w-screen flex justify-center items-center '>
         {/* <ImgSlider /> */}
       </div>
     </div>
@@ -211,21 +212,8 @@ const SectionFive = memo(({ width, data, news = [] }) => {
   const index = UseIndexFade({ data: news, duration: 4000 });
 
   return (
-    <LayoutSectionBg pb={12} minH={'100'} pt={10} noBg={true} >
+    <LayoutSectionBg pb={12} minH={'70'} pt={10} noBg={true} >
       <HeaderSection judul={'Berita Terkini'} ket={'Informasi Terkait Pondok Persantren Muhammadiyah Al-Amin Seputih Banyak'} />
-      <div className='w-full px-5 lg:w-[80%]'>
-        <AnimatePresence mode='wait'>
-          <motion.div
-            key={index}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1, ease: 'easeInOut' }}
-          >
-            <CardBeritaLarge img={news[index]?.url_thumbnail} jenis={news[index]?.category} judul={news[index]?.title} deskripsi={news[index]?.content} />
-          </motion.div>
-        </AnimatePresence>
-      </div>
       {width > 700 && (<div className='w-[90%] h-[1px] bg-secondary-blue mb-12 opacity-55'></div>)}
       {
         news ? (
@@ -233,13 +221,13 @@ const SectionFive = memo(({ width, data, news = [] }) => {
             <ScrollX slidesToScroll={2}>
               {
                 news.map((item, index) => (
-                  <CardBeritaSmall key={index} img={item.url_thumbnail} jenis={item.category} judul={item.title} deskripsi={item.content} />
+                  <CardBeritaSmall key={index} id={item.id} img={item.thumbnail} jenis={item.category} judul={item.title} deskripsi={item.content} />
                 ))}
             </ScrollX>
           ) : (
             <ScrollXDesktop>
               {news.map((item, index) => (
-                <CardBeritaSmall key={index} img={item.url_thumbnail} jenis={item.category} judul={item.title} deskripsi={item.content} />
+                <CardBeritaSmall key={index} id={item.id} img={item.thumbnail} jenis={item.category} judul={item.title} deskripsi={item.content} />
               ))}
             </ScrollXDesktop>
           )

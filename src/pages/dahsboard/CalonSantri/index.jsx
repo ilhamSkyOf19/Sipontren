@@ -93,7 +93,6 @@ const CalonSantri = () => {
                 <div className='min-h-[100vh] flex flex-col justify-start items-center pt-24 pb-12'>
                     <div className='w-full flex flex-row justify-start items-center gap-4 px-4 mb-6'>
                         <ButtonCrud color={'#32CD32'} link={'calon-santri/add'}>Tambah</ButtonCrud>
-                        <ButtonDownload color={'#212529'} handleClick={() => { }} />
                     </div>
                     <div className='w-full justify-center items-center px-4'>
                         <BoxSearch register={register('name')} handleSubmit={handleSubmit} handleSearch={handleSearch} />
