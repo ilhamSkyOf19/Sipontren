@@ -42,7 +42,7 @@ const Berita = () => {
 
 
                 {/* preview berita */}
-                <div className='w-full flex flex-row justify-center items-start gap-8 flex-wrap py-12 px-2 '>
+                <div className='w-full flex flex-row justify-center items-start gap-4 flex-wrap py-12 px-2 '>
 
                     {/* card berita */}
                     {
@@ -54,7 +54,7 @@ const Berita = () => {
                                     id={item.id}
                                     jenis={item.category}
                                     judul={item.title}
-                                    img={item.url_thumbnail}
+                                    img={item.thumbnail}
                                     handleDelete={handleDelete}
                                 />
                             ))

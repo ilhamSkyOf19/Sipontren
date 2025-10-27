@@ -105,7 +105,7 @@ const CalonSantri = () => {
                             handleSetId={handleSetId}
                         />
                     ) : (
-                        <ContentData handleShow={handleShow} handleShowModalDelete={handleShowModalDelete} data={data.data} handleSetId={handleSetId} />
+                        <p className='text-center mt-12'>Tidak ada data calon santri.</p>
                     )}
                 </div>
 
@@ -149,6 +149,7 @@ const ContentData = ({ handleShow, handleShowModalDelete, data, handleSetId }) =
                         <ComponentDataText data={'Nama Ayah'} value={item.nama_lengkap_ayah} />
                         <ComponentDataText data={'Nama Ibu'} value={item.nama_lengkap_ibu} />
                         <ComponentDataText data={'Nama Wali'} value={item.nama_lengkap_wali === 'tidak ada' ? '-' : item.nama_lengkap_wali} />
+                        <ComponentDataText data={'Mendaftar '} value={item.jenis_sekolah === 'tidak ada' ? '-' : item.jenis_sekolah} />
                         <ComponentDataFile data={'Dokumen'} handleShow={handleShow} id={item.id} handleSetId={handleSetId} />
                         <ComponentAction handleShowModalDelete={handleShowModalDelete} id={item.id} link={'calon-santri'} />
                     </ContainerData>

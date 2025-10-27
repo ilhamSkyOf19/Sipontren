@@ -23,10 +23,14 @@ import pamflet3 from '../assets/pamflet/pamflet-3.jpg'
 import pamflet4 from '../assets/pamflet/pamflet-4.jpg'
 import thumbnailProfile from '../assets/thumbnails/thumbnail_profile.png'
 import { memo } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLoaderData } from 'react-router-dom'
 import { useEffect } from 'react'
 import useWindowSize from '../hook/UseWindowSize'
 const Psb = () => {
+    // loader pamflet 
+    const pamflet = useLoaderData();
+
+
     // scroll to top
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -38,8 +42,7 @@ const Psb = () => {
             <HeaderPage whiteText1={'Penerimaan Santri Baru'} whiteText2={''} YellowText={'Tahun Ajaran 2025/2026'} deskripsi={'Kunjungi website PSB Pondok Pesantren Muhammadiyah Al-Amin Seputih Banyak, lengkapi setiap persyaratan, ikuti semua alur pendaftaran dan jadilan bagian dari Pondok Pesantren Muhammadiyah Al-Alim Seputih Banyak.'} />
             <LayoutSectionBg pt={12} size={'cover'}>
                 <SectionService />
-
-                <SectionPamflet />
+                <SectionPamflet pamflet={pamflet?.data} />
                 <SectionInfo width={widthDevice} />
             </LayoutSectionBg>
         </LayoutPages>
@@ -98,22 +101,22 @@ const SectionService = () => {
 // Section Pamflet
 // ==================
 
-const SectionPamflet = () => {
+const SectionPamflet = ({ pamflet }) => {
+
+    console.log(pamflet)
+
+
     return (
         <div className='w-full flex flex-col justify-start items-center pt-4 pb-4 overflow-hidden'>
             <div className='w-full py-12 flex flex-col justify-center items-center gap-4 px-4 lg:grid lg:grid-cols-2 lg:grid-rows-2 lg:w-[70%]'>
-                <div className='flex-1 overflow-hidden'>
-                    <img src={pamflet1} alt="" className='w-full h-full object-contain' loading='lazy' />
-                </div>
-                <div className='flex-1 overflow-hidden'>
-                    <img src={pamflet2} alt="" className='w-full h-full object-contain' loading='lazy' />
-                </div>
-                <div className='flex-1 overflow-hidden'>
-                    <img src={pamflet3} alt="" className='w-full h-full object-contain' loading='lazy' />
-                </div>
-                <div className='flex-1 overflow-hidden'>
-                    <img src={pamflet4} alt="" className='w-full h-full object-contain' loading='lazy' />
-                </div>
+                {
+                    pamflet ? pamflet.map((item, index) => (
+
+                        <div key={index} className='w-full h-[45vh]  overflow-hidden'>
+                            <img src={`${import.meta.env.VITE_API_BASE_IMG_URL}/pamflet/${item.img}`} alt="pamflet" className='w-full h-full object-contain rounded-xl' loading='lazy' />
+                        </div>
+                    )) : null
+                }
             </div>
         </div>
     )

@@ -70,6 +70,9 @@ const NavbarAdminComponent = ({ showNavbarAdmin, handleNavbarAdmin, navbarAdminR
                 <UrlDashboard link={'/admin/berita'} label={'Data Berita'}>
                     <FaListAlt className={`text-white text-lg`} />
                 </UrlDashboard>
+                <UrlDashboard link={'/admin/pamflet'} label={'Data Pamflet'}>
+                    <FaListAlt className={`text-white text-lg`} />
+                </UrlDashboard>
                 {/* <UrlDashboard link={'/admin/username'} label={'Ubah Username'}>
                     <FaUser className={`text-white text-lg`} />
                 </UrlDashboard>

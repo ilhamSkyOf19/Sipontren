@@ -1,11 +1,8 @@
-import React from 'react'
 import Modal from 'react-modal'
 import Zoom from 'react-medium-image-zoom'
 import 'react-medium-image-zoom/dist/styles.css'
 import { useState } from 'react';
 
-// json
-import dataCalonSantri from '../../jsons/dataCalonSantri.json'
 
 
 // icon
@@ -13,6 +10,7 @@ import { IoIosClose } from "react-icons/io";
 import { useEffect } from 'react';
 import { UstadService } from '../../services/ustad.service';
 import { StudentService } from '../../services/student.service';
+import { AlumniService } from '../../services/alumni.service';
 
 const ModalPreviewImg = ({ show, handleShow, id, type }) => {
 
@@ -38,7 +36,23 @@ const ModalPreviewImg = ({ show, handleShow, id, type }) => {
                     // console.log(result)
                     if (result) {
                         const datasImg = Object.entries(result.data)
-                            .filter(([key, _]) => ["url_ustad_img"].includes(key)).map(([_, value]) => value);
+                            .filter(([key, _]) => ["ustad_img"].includes(key)).map(([_, value]) => import.meta.env.VITE_API_BASE_IMG_URL + '/ustad_img/' + value);
+                        if (datasImg) {
+                            setDatas(datasImg)
+                        }
+                    }
+                }
+                handleFetch();
+            }
+        } else if (type === "alumni") {
+            if (id) {
+                const handleFetch = async () => {
+                    const result = await AlumniService.detail(id);
+
+                    // console.log(result)
+                    if (result) {
+                        const datasImg = Object.entries(result.data)
+                            .filter(([key, _]) => ["img_alumni"].includes(key)).map(([_, value]) => import.meta.env.VITE_API_BASE_IMG_URL + '/img_alumni/' + value);
                         if (datasImg) {
                             setDatas(datasImg)
                         }
@@ -52,7 +66,7 @@ const ModalPreviewImg = ({ show, handleShow, id, type }) => {
                     const result = await StudentService.detail(id)
                     if (result) {
                         const datasImg = Object.entries(result.data)
-                            .filter(([key, _]) => ["foto_formal", "fc_akta_kelahiran", "foto_kk", "fc_ktp", "fc_kis_kip"].includes(key)).map(([_, value]) => import.meta.env.VITE_API_IMG_URL + value);
+                            .filter(([key, _]) => ["foto_formal", "fc_akta_kelahiran", "foto_kk", "fc_ktp", "fc_kis_kip"].includes(key)).map(([_, value]) => import.meta.env.VITE_API_BASE_IMG_URL + '/student/' + value);
 
                         if (datasImg) {
                             setDatas(datasImg)

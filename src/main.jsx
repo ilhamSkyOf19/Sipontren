@@ -20,6 +20,7 @@ import Modal from 'react-modal'
 import UstadUstadzah from './pages/dahsboard/UstadUstadzah'
 import Alumni from './pages/dahsboard/Alumni/index.jsx'
 import Berita from './pages/dahsboard/Berita/index.jsx'
+import Pamflet from './pages/dahsboard/Pamflet/index.jsx'
 import InputCalonSantri from './pages/dahsboard/CalonSantri/InputCalonSantri/index.jsx'
 import InputUstadUstadzah from './pages/dahsboard/UstadUstadzah/InputUstadUstadzah/index.jsx'
 import InputBerita from './pages/dahsboard/Berita/InputBerita/index.jsx'
@@ -30,6 +31,10 @@ import { UseLoaderUstad } from './contexts/useLoaderUstad.js'
 import { UseLoaderStudent } from './contexts/useLoaderStudent.js'
 import BeritaDetail from './pages/dahsboard/Berita/BeritaDetail/index.jsx'
 import Success from './pages/Success.jsx'
+import { UseLoaderAlumni } from './contexts/useLoaderAlumni.js'
+import InputAlumni from './pages/dahsboard/Alumni/InputAlumni/index.jsx'
+import { UseLoaderPamflet } from './contexts/useLoaderPamflet.js'
+import InputPamflet from './pages/dahsboard/Pamflet/InputPamflet/index.jsx'
 
 
 Modal.setAppElement('#root')
@@ -43,10 +48,17 @@ const router = createBrowserRouter([
   },
   {
     path: "/profile",
+
     element: <Profile />,
   },
   {
     path: "/psb",
+    loader: async () => {
+
+      // return pamflet 
+      return await UseLoaderPamflet.read();
+
+    },
     element: <Psb />,
   },
   {
@@ -85,14 +97,31 @@ const router = createBrowserRouter([
     path: "/admin/profile",
     loader: async () => {
 
+      try {
+        // 🔹 1. Cek Auth terlebih dahulu
+        const auth = await UseLoaderAuth.cek();
 
+        if (!auth.success) {
+          return auth; // Jika gagal auth, langsung return
+        }
 
-      // cek auth 
-      const auth = await UseLoaderAuth.cek();
+        // 🔹 2. Ambil data ustad setelah auth valid
+        const dataUstads = await UseLoaderUstad.read();
+        const dataAlumni = await UseLoaderAlumni.read();
 
-      if (!auth.success) return auth
+        // 🔹 3. Return gabungan datanya
+        return {
+          dataUstads,
+          dataAlumni,
+        };
 
-      return await UseLoaderUstad.read();
+      } catch (error) {
+        console.log("Error di loader:", error);
+        return {
+          success: false,
+          message: "Terjadi kesalahan saat memuat data"
+        };
+      }
     },
     element: <Profile />,
   },
@@ -103,6 +132,9 @@ const router = createBrowserRouter([
       const auth = await UseLoaderAuth.cek();
 
       if (!auth.success) return auth
+
+      // return pamflet 
+      return await UseLoaderPamflet.read();
 
     },
     element: <Psb />,
@@ -214,8 +246,33 @@ const router = createBrowserRouter([
       const auth = await UseLoaderAuth.cek();
 
       if (!auth.success) return auth
+
+      return UseLoaderAlumni.read();
     },
     element: <Alumni />,
+  },
+  {
+    path: "/admin/alumni/add",
+    loader: async () => {
+      // cek auth 
+      const auth = await UseLoaderAuth.cek();
+
+      if (!auth.success) return auth
+    },
+    element: <InputAlumni />,
+  },
+  {
+    path: "/admin/alumni/update/:id",
+    loader: async ({ params }) => {
+      // cek auth 
+      const auth = await UseLoaderAuth.cek();
+
+      if (!auth.success) return auth
+
+
+      return await UseLoaderAlumni.detail(params.id);
+    },
+    element: <InputAlumni />,
   },
   {
     path: '/admin/berita',
@@ -260,6 +317,44 @@ const router = createBrowserRouter([
     element: <BeritaDetail />
   },
 
+  {
+    path: '/admin/pamflet',
+    loader: async () => {
+      // cek auth 
+      const auth = await UseLoaderAuth.cek();
+
+      if (!auth.success) return auth
+
+      // return pamflet
+      return await UseLoaderPamflet.read();
+    },
+    element: <Pamflet />
+  },
+  {
+    path: '/admin/pamflet/add',
+    loader: async () => {
+      // cek auth 
+      const auth = await UseLoaderAuth.cek();
+
+      if (!auth.success) return auth
+
+    },
+    element: <InputPamflet />
+  },
+  {
+    path: '/admin/pamflet/update/:id',
+
+    loader: async ({ params }) => {
+      // cek auth 
+      const auth = await UseLoaderAuth.cek();
+
+      if (!auth.success) return auth
+
+
+      return await UseLoaderPamflet.detail(params.id);
+    },
+    element: <InputPamflet />
+  },
 
   // success
   {

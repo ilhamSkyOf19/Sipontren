@@ -7,9 +7,9 @@ const CardAdminBerita = ({ id, img, judul, jenis, handleDelete }) => {
     const window = useWindowSize().width;
 
     return (
-        <div className='w-[10rem] h-[24rem] flex flex-col justify-start items-start overflow-hidden gap-4 shrink-0 md:w-[17rem] md:h-[34rem] md:mr-4 lg:h-[26rem] lg:w-[19rem] lg:gap-2'>
+        <div className='w-[9rem] h-[24rem] flex flex-col justify-start items-start overflow-hidden gap-4 shrink-0 md:w-[17rem] md:h-[34rem] md:mr-4 lg:h-[26rem] lg:w-[19rem] lg:gap-2'>
             <div className='w-full h-[8rem] bg-black rounded-2xl overflow-hidden shrink-0 md:h-[13rem] lg:mb-2 lg:rounded-4xl lg:h-[12rem]'>
-                <img src={`${img}`} alt="" className='w-full h-full object-cover' loading='lazy' />
+                <img src={`${import.meta.env.VITE_API_BASE_IMG_URL}/news/${img}`} alt="" className='w-full h-full object-cover' loading='lazy' />
             </div>
             <p className='px-4 py-1 bg-white rounded-lg border border-secondary-blue text-xs md:text-[1.1rem] lg:text-xs'>{jenis || ''}</p>
             <div className='flex flex-col justify-start items-start gap-3'>

@@ -27,7 +27,6 @@ import HeaderPage from '../fragments/HeaderPage'
 import AnimationThreeImg from '../fragments/AnimationThreeImg'
 
 // json 
-import dataUstad from '../jsons/dataUstad.json'
 import useWindowSize from '../hook/UseWindowSize'
 import ScrollXDesktop from '../layouts/ScrollXDesktop'
 import { useLoaderData } from 'react-router-dom'
@@ -35,7 +34,7 @@ import { useLoaderData } from 'react-router-dom'
 const Profile = () => {
 
     // Data Ustad
-    const dataUstads = useLoaderData()
+    const { dataAlumni, dataUstads } = useLoaderData();
     // Window Size
     const widthDevice = useWindowSize().width
 
@@ -47,7 +46,9 @@ const Profile = () => {
     }, []);
 
 
-    console.log(dataUstads)
+    useEffect(() => {
+        console.log(dataUstads)
+    }, [dataUstads])
 
     return (
         <LayoutPages>
@@ -59,7 +60,7 @@ const Profile = () => {
                 <SectionFasilitas widthDevice={widthDevice} />
                 <SectionPrestasi />
                 <SectionProfleUstad data={dataUstads?.data} widthDevice={widthDevice} />
-                <SectionAlumni widthDevice={widthDevice} />
+                <SectionAlumni widthDevice={widthDevice} data={dataAlumni?.data} />
             </LayoutSectionBg>
         </LayoutPages>
     )
@@ -218,13 +219,13 @@ const SectionProfleUstad = ({ data, widthDevice }) => {
             <SubJudulCenter title="Profile Asatid/Ustadzah" />
             {widthDevice < 1024 ? (
                 <ScrollX slidesToScroll={widthDevice < 700 ? 1 : 2} gap={widthDevice < 700 ? 4 : 4}>
-                    {data.map((item) => (
+                    {data && data.map((item) => (
                         <CardProfileUstad key={item.id} img={item.ustad_img} nama={item.name} jabatan={item.jabatan} />
                     ))}
                 </ScrollX>
             ) : (
                 <ScrollXDesktop>
-                    {data.map((item) => (
+                    {data && data.map((item) => (
                         <CardProfileUstad key={item.id} img={item.ustad_img} nama={item.name} jabatan={item.jabatan} />
                     ))}
                 </ScrollXDesktop>
@@ -242,25 +243,25 @@ const SectionProfleUstad = ({ data, widthDevice }) => {
 // ===========
 
 
-const SectionAlumni = ({ widthDevice }) => {
+const SectionAlumni = ({ widthDevice, data }) => {
     return (
         <div className='w-full min-h-[40vh] bg-transparent flex flex-col justify-start items-center py-12 gap-14'>
             <SubJudulCenter title="Apa Kata Lulusan" />
             {widthDevice < 1024 ? (
                 <ScrollX>
-                    <CardAlumni img={'sample.jpg'} nama={'Khoirul Farid'} angkatan={'1'} deskripsi={'Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat, accusantium lorem ipsum dolor sit amet lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat, accusantium'} />
-                    <CardAlumni img={'sample.jpg'} nama={'Khoirul Farid'} angkatan={'1'} deskripsi={'Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat, accusantium lorem ipsum dolor sit amet.'} />
-                    <CardAlumni img={'sample.jpg'} nama={'Khoirul Farid'} angkatan={'1'} deskripsi={'Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat, accusantium lorem ipsum dolor sit amet.'} />
-                    <CardAlumni img={'sample.jpg'} nama={'Khoirul Farid'} angkatan={'1'} deskripsi={'Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat, accusantium lorem ipsum dolor sit amet.'} />
-                    <CardAlumni img={'sample.jpg'} nama={'Khoirul Farid'} angkatan={'1'} deskripsi={'Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat, accusantium lorem ipsum dolor sit amet.'} />
+                    {
+                        data && data.map((item) => (
+                            <CardAlumni key={item.id} img={item.img_alumni} nama={item.name} angkatan={item.angkatan} deskripsi={item.description} />
+                        ))
+                    }
                 </ScrollX>
             ) : (
                 <ScrollXDekstop>
-                    <CardAlumni img={'sample.jpg'} nama={'Khoirul Farid'} angkatan={'1'} deskripsi={'Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat, accusantium lorem ipsum dolor sit amet lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat, accusantium'} />
-                    <CardAlumni img={'sample.jpg'} nama={'Khoirul Farid'} angkatan={'1'} deskripsi={'Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat, accusantium lorem ipsum dolor sit amet.'} />
-                    <CardAlumni img={'sample.jpg'} nama={'Khoirul Farid'} angkatan={'1'} deskripsi={'Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat, accusantium lorem ipsum dolor sit amet.'} />
-                    <CardAlumni img={'sample.jpg'} nama={'Khoirul Farid'} angkatan={'1'} deskripsi={'Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat, accusantium lorem ipsum dolor sit amet.'} />
-                    <CardAlumni img={'sample.jpg'} nama={'Khoirul Farid'} angkatan={'1'} deskripsi={'Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat, accusantium lorem ipsum dolor sit amet.'} />
+                    {
+                        data && data.map((item) => (
+                            <CardAlumni key={item.id} img={item.img_alumni} nama={item.name} angkatan={item.angkatan} deskripsi={item.description} />
+                        ))
+                    }
                 </ScrollXDekstop>
             )}
 
